@@ -5,16 +5,6 @@ function pause() {
 }
 
 
-# echo "1. Checking dependencies..."
-#sudo dnf install autoconf automake mingw32-filesystem cmake mingw32-gcc-c++ maven mingw32-boost gettext-devel bison flex mingw32-glib2 mingw32-orc mingw32-libtheora mingw32-libvorbis mingw32-opus mingw32-libsigc++20 mingw32-glibmm24 yasm mingw32-openssl mingw32-libtiff mingw32-libpng mingw32-OpenEXR mingw32-jasper libtool glib2-devel gtk-doc mingw32-atk mingw32-cairo mingw32-gtk3 mingw32-speex mingw32-wavpack mingw32-libsoup
-#
-#echo "2. Optional dependency..."
-#sudo dnf install indent astyle
-
-# echo "Preparing build root directory..."
-# mkdir kms
-# cd kms
-
 echo "3.1 kms-cmake-utils"
 git clone https://github.com/Kurento/kms-cmake-utils.git
 mkdir kms-cmake-utils-build
@@ -92,7 +82,7 @@ cd ..
 
 
 echo "3.8 kms-core"
-echo "Wenn dieser Schritt komplett unter root ausgeführt wird, findet cmake den kurentocreator nicht ..."
+# if this is executed using root, cmake will not find the kurentocreator
 git clone https://github.com/ESTOS/kms-core.git
 mkdir kms-core-build
 cd kms-core-build/
