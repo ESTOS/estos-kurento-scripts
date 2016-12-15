@@ -83,6 +83,10 @@ cd ..
 
 echo "3.8 kms-core"
 # if this is executed using root, cmake will not find the kurentocreator
+if [[ $EUID == 0 ]]; then
+	echo "Build this step as root will lead to troubles later! (e.g. kurentocreator will not be found) Stop here now."
+	exit
+fi
 git clone https://github.com/ESTOS/kms-core.git
 mkdir kms-core-build
 cd kms-core-build/
