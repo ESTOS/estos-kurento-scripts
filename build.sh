@@ -5,9 +5,9 @@ function pause() {
 }
 
 # if [ -d /usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.5 ]; then echo "hallo"; fi;
-cmakemodules=/usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.5
+cmakemodules=/usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.5/Modules/
 if [ -d /usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.6 ]; then
-	cmakemodules=/usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.6
+	cmakemodules=/usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.6/Modules/
 fi
 
 echo "cmake module path: " $cmakemodules
@@ -69,7 +69,7 @@ echo "3.6 kms-jsonrpc"
 git clone https://github.com/ESTOS/kms-jsonrpc.git -b wip/premerge
 mkdir kms-jsonrpc-build
 cd kms-jsonrpc-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=/usr/i686-w64-mingw32/sys-root/mingw/share/$cmakemodules/Modules/ ../kms-jsonrpc
+mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules ../kms-jsonrpc
 pause
 sudo mingw32-make install
 cd ..
@@ -97,7 +97,7 @@ fi
 git clone https://github.com/ESTOS/kms-core.git
 mkdir kms-core-build
 cd kms-core-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=/usr/i686-w64-mingw32/sys-root/mingw/share/$cmakemodules/Modules/ -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ ../kms-core
+mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ ../kms-core
 mingw32-make
 pause
 sudo mingw32-make install
@@ -119,7 +119,7 @@ echo "3.10 kurento-media-server"
 git clone https://github.com/ESTOS/kurento-media-server.git
 mkdir kurento-media-server-build
 cd kurento-media-server-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=/usr/i686-w64-mingw32/sys-root/mingw/share/$cmakemodules/Modules/ ../kurento-media-server
+mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
 mingw32-make
 pause
 sudo mingw32-make install
@@ -164,7 +164,7 @@ echo "3.14 kms-elements"
 git clone https://github.com/ESTOS/kms-elements.git
 mkdir kms-elements-build
 cd kms-elements-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=/usr/i686-w64-mingw32/sys-root/mingw/share/$cmakemodules/Modules/ -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ ../kms-elements
+mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ ../kms-elements
 mingw32-make
 pause
 sudo mingw32-make install
@@ -222,7 +222,7 @@ git clone https://github.com/ESTOS/kms-filters.git
 mkdir kms-filters-build
 cd kms-filters-build/
 mingw32-cmake -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_MODULE_PATH=/usr/i686-w64-mingw32/sys-root/mingw/share/$cmakemodules/Modules/ \
+  -DCMAKE_MODULE_PATH=$cmakemodules \
   -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw \
   -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ \
   -DCMAKE_C_FLAGS="-Wno-error=deprecated-declarations" \
