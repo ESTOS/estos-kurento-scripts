@@ -83,7 +83,11 @@ cp $PREF/bin/libkmsjsoncpp.dll bin/
 cp $PREF/bin/libkmsrtpsync.dll bin/
 cp $PREF/bin/libkmssdpagent.dll bin/
 cp $PREF/bin/libkmswebrtcendpointlib.dll bin/
-cp $PREF/bin/libnettle-6-2.dll bin/
+if [ -f $PREF/bin/libnettle-6-2.dll ]; then
+	cp $PREF/bin/libnettle-6-2.dll bin/
+else
+	cp $PREF/bin/libnettle-6.dll bin/
+fi
 cp $PREF/bin/libnice-10.dll bin/
 cp $PREF/bin/libogg-0.dll bin/
 cp $PREF/bin/libopencv_core2413.dll bin/
@@ -290,8 +294,13 @@ sed -i 's/\/\/.*//' etc/kurento/kurento.conf.json
 cp $PREF/etc/kurento/modules/kurento/*.* etc/kurento/modules/kurento/
 sed -i 's/\/\/.*//' etc/kurento/modules/kurento/SdpEndpoint.conf.json
 
+zipfilename=kurento_`date "+%Y%m%d_%H%M%S_%N"`.zip
+if [ -d ../../build ]; then
+	zip -r ../../build/$zipfilename *
+else
+	zip -r ../$zipfilename *
+fi
 cd ..
-zip -r kurento.zip dist
 
 
 
