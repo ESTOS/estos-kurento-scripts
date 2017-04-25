@@ -10,7 +10,7 @@ Use this software at your own risc.
 ## Usage
 Checkout these scripts in a new Directory. Running first time, execute the **initsystem.sh** script, which will check and install system dependencies (like mingw32 and such) needed for cross compiling the Kurento Media Server. This have to be done only once (or later for possible updates on these dependencies).
 
-To Compile the Media Server and its DLLs, call **build.sh** in the same directory. This will fetch and compile all Module needed.
+To Compile the Media Server and its DLLs, call **build.sh** in the same directory. This will fetch and compile all Module needed. DO NOT RUN WITH ROOT-PRIVILIGES! The Scripts are asking for them when needed.
 
 To get a distribution package call **makedist.sh**, which will assemble all parts generated with build.sh into a subdirectory and compress it into a zip file named *kurento.zip*.
 Copy this file to a Windows machine, unzip it into a own Directory and start the kurento media server in the bin directory.
