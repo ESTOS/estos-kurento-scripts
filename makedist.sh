@@ -216,7 +216,7 @@ cp $PREF/lib/gstreamer-1.5/libgstnice15.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstopenexr.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstopengl.dll lib/gstreamer-1.5/
 cp $PREF/lib/gstreamer-1.5/libgstopus.dll lib/gstreamer-1.5/
-#cp $PREF/lib/gstreamer-1.5/libgstopusparse.dll lib/gstreamer-1.5/
+cp $PREF/lib/gstreamer-1.5/libgstopusparse.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstpango.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstpcapparse.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstplayback.dll lib/gstreamer-1.5/
