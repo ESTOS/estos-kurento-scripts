@@ -296,8 +296,13 @@ sed -i 's/"resources": {/"resources": {\n"exceptionLimit": 0.99,/' etc/kurento/k
 cp $PREF/etc/kurento/modules/kurento/*.* etc/kurento/modules/kurento/
 
 cp ../etc/SdpEndpoint.conf.json etc/kurento/modules/kurento/
+cp ../etc/README.md .
+cp ../etc/LICENSE-2.0.txt .
 
-zipfilename=kurento_`date "+%Y%m%d_%H%M%S_%N"`.zip
+rm kurento_*
+touch kmswindows_`date "+%Y%m%d_%H%M%S_%N"`
+
+zipfilename=kmswindows_`date "+%Y%m%d_%H%M%S_%N"`.zip
 if [ -d ../../build ]; then
 	zip -r ../../build/$zipfilename *
 else
