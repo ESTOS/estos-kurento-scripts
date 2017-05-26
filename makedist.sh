@@ -295,20 +295,30 @@ sed -i 's/"resources": {/"resources": {\n"exceptionLimit": 0.99,/' etc/kurento/k
 
 cp $PREF/etc/kurento/modules/kurento/*.* etc/kurento/modules/kurento/
 
+# replace configs and pack some additional files into the zip file
 cp ../etc/SdpEndpoint.conf.json etc/kurento/modules/kurento/
 cp ../etc/README.md .
 cp ../etc/LICENSE-2.0.txt .
+cp -R ../etc/liblicenses .
 
-rm kurento_*
+# safe build timestamp into zip-file
+rm kmswindows*
 touch kmswindows_`date "+%Y%m%d_%H%M%S_%N"`
 
+# zip filename
 zipfilename=kmswindows_`date "+%Y%m%d_%H%M%S_%N"`.zip
-if [ -d ../../build ]; then
-	zip -r ../../build/$zipfilename *
-else
-	zip -r ../$zipfilename *
-fi
+
+zip -r ../$zipfilename *
 cd ..
+
+# upload to buildserver if available
+if [ -f  localupload ]; then
+	echo "upload $zipfilename ..."
+	curl -F "kurentozip=@$zipfilename" build.estos.de/kurento
+fi
+
+# do a linefeed
+echo
 
 
 
