@@ -18,7 +18,7 @@ Copy this file to a Windows machine, unzip it into a own Directory and start the
 You can now test the server using the [Kurento Tutorials](http://doc-kurento.readthedocs.io/en/stable/tutorials.html). The server will be reachable on localhost, port 8888. The Portnumber can be configured in kurento.conf.json, which is located in the etc/kurento directory.
 
 ## License
-Copyright 2016 estos GmbH
+These Scripts are Copyright 2016 estos GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31,3 +31,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+### Licenses of Kurento and used Libraries
+The Kurento Media Server ist [licensed under Apache 2.0 License](https://www.kurento.org/blog/kurento-650-released-all-freedom-apache-20-license).
+The licenses of the used libraries are listet under "liblicenses".
