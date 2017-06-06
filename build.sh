@@ -33,8 +33,8 @@ sudo make install
 cd ..
 
 
-echo "3.3 gstreamer-1.5"
-git clone https://github.com/Kurento/gstreamer.git
+echo "3.3 gstreamer-1.7.x/1.8.1 (Fork of github/kurento/gstreamer 06.06.2017"
+git clone https://github.com/estos/gstreamer.git
 cd gstreamer/
 ./autogen.sh ## Ignore configuration errors
 mingw32-configure --disable-tools --disable-tests --disable-benchmarks --disable-examples --disable-debug --libexec=/usr/i686-w64-mingw32/sys-root/mingw/libexec
