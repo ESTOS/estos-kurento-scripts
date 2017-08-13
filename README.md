@@ -1,3 +1,4 @@
+
 # estos-kurento-scripts
 Basic shell scripts for building all needed kurento modules for estos usage.
 These scripts are in a VERY basic form, but functional.
@@ -12,12 +13,14 @@ Checkout these scripts in a new Directory. Running first time, execute the **ini
 
 To Compile the Media Server and its DLLs, call **build.sh** in the same directory. This will fetch and compile all Module needed. DO NOT RUN WITH ROOT-PRIVILIGES! The Scripts are asking for them when needed.
 
-To get a distribution package call **makedist.sh**, which will assemble all parts generated with build.sh into a subdirectory and compress it into a zip file named *kurento.zip*.
-Copy this file to a Windows machine, unzip it into a own Directory and start the kurento media server in the bin directory.
+To get a distribution package call **makedist.sh**, which will assemble all parts generated with build.sh into a subdirectory and compress it into a zip file named *emswindows.zip*.
+Copy this file to a Windows machine, unzip it into a own Directory and start the estos uc media server in the bin directory.
 
 You can now test the server using the [Kurento Tutorials](http://doc-kurento.readthedocs.io/en/stable/tutorials.html). The server will be reachable on localhost, port 8888. The Portnumber can be configured in kurento.conf.json, which is located in the etc/kurento directory.
 
 ## License
+estos uc-media-service is based on the kurento media server.
+
 These Scripts are Copyright 2016 estos GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,5 +36,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ### Licenses of Kurento and used Libraries
-The Kurento Media Server ist [licensed under Apache 2.0 License](https://www.kurento.org/blog/kurento-650-released-all-freedom-apache-20-license).
+The Kurento Media Server is [licensed under Apache 2.0 License](https://www.kurento.org/blog/kurento-650-released-all-freedom-apache-20-license).
 The licenses of the used libraries are listet under "liblicenses".

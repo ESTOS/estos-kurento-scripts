@@ -1,6 +1,12 @@
 cd kms
 echo "4. Prepare distribution package"
 
+actualbuilddate=`date "+%Y%m%d_%H%M%S_%N"`
+actualcommitlogs=lastcommitlogs_$actualbuilddate
+
+source ./lastcommits.sh
+cp lastcommits_actual.txt $actualcommitlogs
+
 export PREF=/usr/i686-w64-mingw32/sys-root/mingw
 rm -rf dist
 mkdir dist
@@ -13,7 +19,7 @@ mkdir -p etc/kurento/modules/
 mkdir -p etc/kurento/modules/kurento
 
 export PREF=/usr/i686-w64-mingw32/sys-root/mingw
-cp $PREF/bin/kurento-media-server.exe bin/kurento-media-server.exe
+cp $PREF/bin/kurento-media-server.exe bin/uc-media-server.exe
 cp $PREF/bin/libpcre-1.dll bin/
 cp $PREF/bin/iconv.dll bin/
 # cp $PREF/bin/libatk-1.0-0.dll bin/
@@ -300,13 +306,15 @@ cp ../etc/SdpEndpoint.conf.json etc/kurento/modules/kurento/
 cp ../etc/README.md .
 cp ../etc/LICENSE-2.0.txt .
 cp -R ../etc/liblicenses .
+cp ../$actualcommitlogs .
+
 
 # safe build timestamp into zip-file
-rm kmswindows*
-touch kmswindows_`date "+%Y%m%d_%H%M%S_%N"`
+rm emswindows*
+touch emswindows_$actualbuilddate
 
 # zip filename
-zipfilename=kmswindows_`date "+%Y%m%d_%H%M%S_%N"`.zip
+zipfilename=emswindows_$actualbuilddate.zip
 
 zip -r ../$zipfilename *
 cd ..
