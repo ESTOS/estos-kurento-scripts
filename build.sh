@@ -188,7 +188,7 @@ cd ..
 
 
 echo "3.17 gst-plugins-good"
-git clone https://github.com/Kurento/gst-plugins-good.git
+git clone https://github.com/ESTOS/gst-plugins-good.git
 cd gst-plugins-good/
 ./autogen.sh
 mingw32-configure \

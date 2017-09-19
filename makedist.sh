@@ -1,3 +1,4 @@
+mkdir kms
 cd kms
 echo "4. Prepare distribution package"
 
