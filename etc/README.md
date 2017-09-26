@@ -20,7 +20,7 @@ You can now test the server using the [Kurento Tutorials](http://doc-kurento.rea
 
 Further builds shoud be made using either **rebuild.sh** (if you made local changes) or **update.sh + rebuild.sh** (if you need updates from the repositories).
 
-**lascommits.sh** is used by **makedist.sh** to get information about the last commits in the respositories to make it possible to reproduce each build.
+**lastcommits.sh** is used by **makedist.sh** to get information about the last commits in the respositories to make it possible to reproduce each build.
 
 
 ## License
