@@ -27,7 +27,7 @@ Further builds shoud be made using either **rebuild.sh** (if you made local chan
 estos uc-media-service is based on the kurento media server.
 Licensed under the Apache License, Version 2.0 (the "License");
 
-See **etc/NOTICE.txt** and **etc/LICENSE-2.0.txt** for Details.
+See **NOTICE.txt** and **LICENSE-2.0.txt** for Details.
 
 ### Licenses of Kurento and used Libraries
 The Kurento Media Server is [licensed under Apache 2.0 License](https://www.kurento.org/blog/kurento-650-released-all-freedom-apache-20-license).
