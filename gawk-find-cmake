@@ -1,0 +1,10 @@
+BEGIN {
+  FS = "=";
+  resstr1 = "";
+  resstr2 = "";
+}
+toupper($0) ~ /CMAKE_INSTALL_PREFIX/ { resstr1 = substr($2, 1, length($2)); }
+toupper($0) ~ /CMAKE_MODULES_INSTALL_DIR/ { resstr2 = substr($2, 1, length($2)); }
+END {
+  print resstr1 "/" resstr2;
+} 
