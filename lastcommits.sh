@@ -1,8 +1,6 @@
 #!/bin/bash
-function pause() {
-	echo -e "\e[30m\e[45m\e[5mPress ENTER to continue...\e[97m\e[49m"
-	read  
-}
+source common.sh
+getcmakemodules
 
 function gitcheck {
 cd $1
@@ -12,14 +10,6 @@ git log -n 1 >>../$lastcommitslog
 echo -e "\r\n\r\n------------------------------------------------------\r\n\r\n" >> ../$lastcommitslog
 cd ..
 }
-
-# if [ -d /usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.5 ]; then echo "hallo"; fi;
-cmakemodules=/usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.5/Modules/
-if [ -d /usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.6 ]; then
-	cmakemodules=/usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.6/Modules/
-fi
-
-echo "cmake module path: " $cmakemodules
 
 commitlogs_now=lastcommits_before_`date "+%Y%m%d_%H%M%S_%N"`.txt
 lastcommitslog=lastcommits_actual.txt
@@ -78,6 +68,9 @@ gitcheck libnice
 echo "3.14 kms-elements"
 gitcheck kms-elements
 
+echo "3.15 opencv"
+gitcheck opencv
+
 echo "3.16 kms-filters"
 gitcheck kms-filters
 
@@ -86,6 +79,9 @@ gitcheck gst-plugins-good
 
 echo "3.18 libsrtp"
 gitcheck libsrtp
+
+echo "3.19 gst-plugins-bad"
+gitcheck gst-plugins-bad
 
 diff $lastcommitslog $commitlogs_now
 ret=$?

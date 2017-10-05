@@ -1,5 +1,3 @@
-mkdir kms
-cd kms
 echo "4. Prepare distribution package"
 
 actualbuilddate=`date "+%Y%m%d_%H%M%S_%N"`
@@ -317,13 +315,14 @@ touch emswindows_$actualbuilddate
 # zip filename
 zipfilename=emswindows_$actualbuilddate.zip
 
+echo "zip -r ../$zipfilename *"
 zip -r ../$zipfilename *
 cd ..
 
 # upload to buildserver if available
 if [ -f  localupload ]; then
 	echo "upload $zipfilename ..."
-	curl -F "kurentozip=@$zipfilename" build.estos.de/kurento
+ 	curl -F "kurentozip=@$zipfilename" build.estos.de/kurento
 fi
 
 # do a linefeed

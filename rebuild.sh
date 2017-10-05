@@ -1,16 +1,6 @@
 #!/bin/bash
-function pause() {
-	echo -e "\e[30m\e[45m\e[5mPress ENTER to continue...\e[97m\e[49m"
-	read  
-}
-
-# if [ -d /usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.5 ]; then echo "hallo"; fi;
-cmakemodules=/usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.5/Modules/
-if [ -d /usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.6 ]; then
-	cmakemodules=/usr/i686-w64-mingw32/sys-root/mingw/share/cmake-3.6/Modules/
-fi
-
-echo "cmake module path: " $cmakemodules
+source common.sh
+getcmakemodules
 
 echo "3.1 kms-cmake-utils"
 mkdir kms-cmake-utils-build
@@ -20,6 +10,7 @@ mingw32-make
 pause
 sudo mingw32-make install
 cd ..
+
 
 
 echo "3.2 kurento-module-creator"
@@ -154,6 +145,49 @@ pause
 sudo mingw32-make install
 cd ..
 
+echo "3.15 opencv"              
+cd opencv/
+git checkout 2.4.13.1
+cd ../opencv-build/
+mingw32-cmake \
+  -DBUILD_PERF_TESTS=false \
+  -DBUILD_TESTS=false \
+  -DWITH_DSHOW=false \
+  -DWITH_WIN32UI=false \
+  -DWITH_OPENCL=false \
+  -DWITH_VFW=false \
+  -DBUILD_ZLIB=false \
+  -DBUILD_TIFF=false \
+  -DBUILD_JASPER=false \
+  -DBUILD_JPEG=false \
+  -DBUILD_PNG=false \
+  -DBUILD_OPENEXR=false \
+  -DWITH_FFMPEG=false \
+  -DBUILD_opencv_flann=OFF \
+  -DBUILD_opencv_photo=OFF \
+  -DBUILD_opencv_video=OFF \
+  -DBUILD_opencv_ml=OFF \
+  ../opencv
+sed -i 's/-isystem\ \/usr\/i686-w64-mingw32\/sys-root\/mingw\/include/ /g' \
+  modules/core/CMakeFiles/opencv_core.dir/includes_CXX.rsp
+sed -i 's/-isystem\ \/usr\/i686-w64-mingw32\/sys-root\/mingw\/include\ / /g' ./modules/highgui/CMakeFiles/opencv_highgui.dir/includes_CXX.rsp
+mingw32-make
+sudo mingw32-make install
+sudo cp unix-install/opencv.pc /usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_core2413.dll.a \
+  /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_core.a
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_highgui2413.dll.a \
+  /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_highgui.a
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_imgproc2413.dll.a \
+  /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_imgproc.a
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_objdetect2413.dll.a \
+  /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_objdetect.a
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_core2413.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_core2413.dll
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_highgui2413.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_highgui2413.dll
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_imgproc2413.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_imgproc2413.dll
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_objdetect2413.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_objdetect2413.dll
+cd ..
+
 
 echo "3.16 kms-filters"
 mkdir kms-filters-build
@@ -187,6 +221,20 @@ cd ..
 echo "3.18 libsrtp"
 cd libsrtp/
 mingw32-configure
+mingw32-make
+pause
+sudo mingw32-make install
+cd ..
+
+echo "3.18 gst-plugins-bad"
+cd gst-plugins-bad/
+./autogen.sh
+mingw32-configure \
+  --disable-directsound --disable-direct3d --disable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+sed -i 's/\buint\b/unsigned/g' ext/opencv/gstmotioncells.cpp ## We may need this later
+printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
 mingw32-make
 pause
 sudo mingw32-make install
