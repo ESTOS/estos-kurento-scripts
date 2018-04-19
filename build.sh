@@ -2,7 +2,7 @@
 source common.sh
 
 echo "3.1 kms-cmake-utils"
-git clone https://github.com/Kurento/kms-cmake-utils.git
+git clone https://github.com/ESTOS/kms-cmake-utils.git
 
 mkdir kms-cmake-utils-build
 cd kms-cmake-utils-build/
@@ -30,7 +30,7 @@ cd ..
 
 
 echo "3.3 gstreamer-1.7.x/1.8.1 (Fork of github/kurento/gstreamer 06.06.2017"
-git clone https://github.com/estos/gstreamer.git
+git clone https://github.com/ESTOS/gstreamer.git
 cd gstreamer/
 ./autogen.sh ## Ignore configuration errors
 mingw32-configure --disable-tools --disable-tests --disable-benchmarks --disable-examples --disable-debug --libexec=/usr/i686-w64-mingw32/sys-root/mingw/libexec
@@ -41,7 +41,7 @@ cd ..
 
 
 echo "3.4 gst-plugins-base-1.5"
-git clone https://github.com/Kurento/gst-plugins-base.git
+git clone https://github.com/ESTOS/gst-plugins-base.git
 cd gst-plugins-base/
 ./autogen.sh ## Ignore configuration errors
 mingw32-configure --disable-debug
@@ -62,7 +62,7 @@ cd ..
 
 
 echo "3.6 kms-jsonrpc"
-git clone https://github.com/ESTOS/kms-jsonrpc.git -b wip/premerge
+git clone https://github.com/ESTOS/kms-jsonrpc.git
 mkdir kms-jsonrpc-build
 cd kms-jsonrpc-build/
 mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules ../kms-jsonrpc
@@ -72,7 +72,7 @@ cd ..
 
 
 echo "3.7 libvpx"
-git clone https://github.com/webmproject/libvpx.git
+git clone https://github.com/ESTOS/libvpx.git
 cd libvpx/
 git checkout v1.5.0
 eval `rpm --eval %{mingw32_env}`
@@ -101,7 +101,7 @@ cd ..
 
 
 echo "3.9 libevent"
-git clone https://github.com/libevent/libevent.git
+git clone https://github.com/ESTOS/libevent.git
 cd libevent/
 ./autogen.sh ## However, you should not build using configured Makefile
 mingw32-configure
@@ -123,7 +123,7 @@ cd ..
 
 
 echo "3.11 usersctp"
-git clone https://github.com/ESTOS/usrsctp.git -b wip/premerge
+git clone https://github.com/ESTOS/usrsctp.git
 cd usrsctp/
 ./bootstrap
 mingw32-configure
@@ -134,7 +134,7 @@ cd ..
 
 
 echo "3.12 openwebrtc-gst-plugins"
-git clone https://github.com/ESTOS/openwebrtc-gst-plugins.git -b wip/premerge
+git clone https://github.com/ESTOS/openwebrtc-gst-plugins.git
 cd openwebrtc-gst-plugins/
 ./autogen.sh ## Ignore configuration errors
 mingw32-configure
@@ -167,7 +167,7 @@ sudo mingw32-make install
 cd ..
 
 echo "3.15 opencv"		
-git clone https://github.com/itseez/opencv.git		
+git clone https://github.com/ESTOS/opencv.git		
 cd opencv/		
 git checkout 2.4.13.1		
 mkdir ../opencv-build		
@@ -244,7 +244,7 @@ sudo mingw32-make install
 cd ..
 
 echo "3.18 libsrtp"
-git clone https://github.com/cisco/libsrtp.git
+git clone https://github.com/ESTOS/libsrtp.git
 cd libsrtp/
 git checkout v1.5.4
 mingw32-configure
@@ -254,7 +254,7 @@ sudo mingw32-make install
 cd ..
 
 echo "3.19 gst-plugins-bad"
-git clone https://github.com/Kurento/gst-plugins-bad.git
+git clone https://github.com/ESTOS/gst-plugins-bad.git
 cd gst-plugins-bad/
 ./autogen.sh
 mingw32-configure \
