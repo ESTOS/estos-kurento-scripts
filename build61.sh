@@ -23,7 +23,6 @@ pause
 echo "3.2 kurento-module-creator"
 git clone https://github.com/ESTOS/kurento-module-creator.git -b estos6.1
 cd kurento-module-creator/
-#git checkout fedora
 make
 pause
 sudo make install
