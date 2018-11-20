@@ -5,7 +5,7 @@ function pause() {
 }
 
 function getcmakemodules() {
-	cd kms-cmake-utils
+	cd kms-cmake-utils-build
 	cmakemodules=`cmake -L | awk -f ../gawk-find-cmake`
 	echo "cmake module path: " $cmakemodules
 	cd ..
