@@ -7,7 +7,7 @@ function pause() {
 
 echo "1. Checking dependencies..."
 sudo dnf install autoconf automake mingw32-filesystem cmake mingw32-gcc-c++ maven mingw32-boost gettext-devel bison flex mingw32-glib2 mingw32-orc mingw32-libtheora mingw32-libvorbis mingw32-opus mingw32-libsigc++20 mingw32-glibmm24 yasm mingw32-openssl mingw32-libtiff mingw32-libpng mingw32-OpenEXR mingw32-jasper libtool glib2-devel gtk-doc mingw32-atk mingw32-cairo mingw32-gtk3 mingw32-speex mingw32-wavpack mingw32-libsoup mingw32-gnutls mingw32-libidn2
-sudo dnf install openssl-devel gnutls-devel
+sudo dnf install openssl-devel gnutls-devel mingw32-libtasn1
 
 echo "2. Optional dependency..."
 sudo dnf install indent astyle

@@ -128,6 +128,7 @@ cp $PREF/bin/libgnutls-30.dll bin/
 cp $PREF/bin/libhogweed-4.dll bin/
 cp $PREF/bin/libnettle-6.dll bin/
 cp $PREF/bin/libp11-kit-0.dll bin/
+cp $PREF/bin/libtasn1-6.dll bin/
 #used for gnutls in libnice - mingw32-libidn2
 cp $PREF/bin/libidn2-0.dll bin/
 
