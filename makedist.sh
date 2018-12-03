@@ -121,6 +121,16 @@ cp $PREF/bin/libwebrtcdataproto.dll bin/
 cp $PREF/bin/libwinpthread-1.dll bin/
 cp $PREF/bin/libxml2-2.dll bin/
 cp $PREF/bin/zlib1.dll bin/
+
+#used for gnutls in libnice - mingw32-gnutls
+cp $PREF/bin/libgmp-10.dll bin/
+cp $PREF/bin/libgnutls-30.dll bin/
+cp $PREF/bin/libhogweed-4.dll bin/
+cp $PREF/bin/libnettle-6.dll bin/
+cp $PREF/bin/libp11-kit-0.dll bin/
+#used for gnutls in libnice - mingw32-libidn2
+cp $PREF/bin/libidn2-0.dll bin/
+
 # cp $PREF/lib/gstreamer-1.5/libfacedetector.dll lib/gstreamer-1.5/
 # cp $PREF/lib/gstreamer-1.5/libfaceoverlay.dll lib/gstreamer-1.5/
 # cp $PREF/lib/gstreamer-1.5/libgstaccurip.dll lib/gstreamer-1.5/
