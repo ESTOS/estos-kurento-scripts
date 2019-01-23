@@ -227,7 +227,10 @@ cp $PREF/lib/gstreamer-1.5/libgstmulaw.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstmxf.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstnavigationtest.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstnetsim.dll lib/gstreamer-1.5/
-cp $PREF/lib/gstreamer-1.5/libgstnice15.dll lib/gstreamer-1.5/
+#compatible to estos6.2
+cp $PREF/lib/gstreamer-1.5/libgstnice15.dll lib/gstreamer-1.5/libgstnice15.dll
+#for estos6.3
+cp $PREF/lib/gstreamer-1.5/libgstnice15.dll lib/gstreamer-1.5/libgstnice.dll
 #cp $PREF/lib/gstreamer-1.5/libgstogg.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstopenexr.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstopengl.dll lib/gstreamer-1.5/
@@ -254,7 +257,10 @@ cp $PREF/lib/gstreamer-1.5/libgstrtpmanager.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstsmooth.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstsmoothstreaming.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstsmpte.dll lib/gstreamer-1.5/
-cp $PREF/lib/gstreamer-1.5/libgstsouphttpsrc.dll lib/gstreamer-1.5/
+#compatible to estos6.2
+cp $PREF/lib/gstreamer-1.5/libgstsouphttpsrc.dll lib/gstreamer-1.5/libgstsouphttpsrc.dll
+#for estos6.3
+cp $PREF/lib/gstreamer-1.5/libgstsouphttpsrc.dll lib/gstreamer-1.5/libgstsoup.dll
 #cp $PREF/lib/gstreamer-1.5/libgstspectrum.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstspeed.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstspeex.dll lib/gstreamer-1.5/
@@ -292,16 +298,25 @@ cp $PREF/lib/gstreamer-1.5/libgstudp.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgsty4menc.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstyadif.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libimageoverlay.dll lib/gstreamer-1.5/
-cp $PREF/lib/gstreamer-1.5/libkmscoreplugins.dll lib/gstreamer-1.5/
+#compatible to estos6.2
+cp $PREF/lib/gstreamer-1.5/libkmscoreplugins.dll lib/gstreamer-1.5/libkmscoreplugins.dll
+#for estos6.3
+cp $PREF/lib/gstreamer-1.5/libkmscoreplugins.dll lib/gstreamer-1.5/libkmscore.dll
 #cp $PREF/lib/gstreamer-1.5/libkmselementsplugins.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/liblogooverlay.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libmovementdetector.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libopencvfilter.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/librecorderendpoint.dll lib/gstreamer-1.5/
 cp $PREF/lib/gstreamer-1.5/librtcpdemux.dll lib/gstreamer-1.5/
-cp $PREF/lib/gstreamer-1.5/librtpendpoint.dll lib/gstreamer-1.5/
+#compatible to estos6.2
+cp $PREF/lib/gstreamer-1.5/librtpendpoint.dll lib/gstreamer-1.5/librtpendpoint.dll
+#for estos6.3
+cp $PREF/lib/gstreamer-1.5/librtpendpoint.dll lib/gstreamer-1.5/libkmsrtpendpoint.dll
 #cp $PREF/lib/gstreamer-1.5/libvp8parse.dll lib/gstreamer-1.5/
-cp $PREF/lib/gstreamer-1.5/libwebrtcendpoint.dll lib/gstreamer-1.5/
+#compatible to estos6.2
+cp $PREF/lib/gstreamer-1.5/libwebrtcendpoint.dll lib/gstreamer-1.5/libwebrtcendpoint.dll
+#for estos6.3
+cp $PREF/lib/gstreamer-1.5/libwebrtcendpoint.dll lib/gstreamer-1.5/libkmswebrtcendpoint.dll
 cp $PREF/lib/kurento/modules/libkmscoremodule.dll lib/kurento/modules/
 cp $PREF/lib/kurento/modules/libkmselementsmodule.dll lib/kurento/modules/
 cp $PREF/lib/kurento/modules/libkmsfiltersmodule.dll lib/kurento/modules/
