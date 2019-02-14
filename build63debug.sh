@@ -72,9 +72,9 @@ cd ..
 
 
 echo "3.7 libvpx"
-git clone https://github.com/ESTOS/libvpx.git
+git clone https://github.com/ESTOS/libvpx.git -b estos6.3
 cd libvpx/
-git checkout v1.5.0
+#git checkout v1.5.0
 eval `rpm --eval %{mingw32_env}`
 export AS=yasm
 ./configure --target=x86-win32-gcc --prefix=/usr/i686-w64-mingw32/sys-root/mingw/
@@ -167,9 +167,9 @@ sudo mingw32-make install
 cd ..
 
 echo "3.15 opencv"		
-git clone https://github.com/ESTOS/opencv.git
+git clone https://github.com/ESTOS/opencv.git -b estos6.3
 cd opencv/		
-git checkout 2.4.13.1		
+#git checkout 2.4.13.1
 mkdir ../opencv-build		
 cd ../opencv-build/		
 mingw32-cmake \
@@ -245,9 +245,9 @@ sudo mingw32-make install
 cd ..
 
 echo "3.18 libsrtp"
-git clone https://github.com/ESTOS/libsrtp.git
+git clone https://github.com/ESTOS/libsrtp.git -b estos6.3
 cd libsrtp/
-git checkout v1.5.4
+#git checkout v1.5.4
 mingw32-configure --enable-debug
 mingw32-make
 pause
