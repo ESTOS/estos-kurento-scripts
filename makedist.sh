@@ -321,8 +321,9 @@ cp $PREF/lib/kurento/modules/libkmscoremodule.dll lib/kurento/modules/
 cp $PREF/lib/kurento/modules/libkmselementsmodule.dll lib/kurento/modules/
 cp $PREF/lib/kurento/modules/libkmsfiltersmodule.dll lib/kurento/modules/
 cp $PREF/etc/kurento/kurento.conf.json etc/kurento/
-sed -i 's/\/\/.*//' etc/kurento/kurento.conf.json
-sed -i 's/"resources": {/"resources": {\n"exceptionLimit": 0.99,/' etc/kurento/kurento.conf.json
+#sed -i 's/\/\/.*//' etc/kurento/kurento.conf.json
+#sed -i 's/"resources": {/"resources": {\n"exceptionLimit": 0.99,/' etc/kurento/kurento.conf.json
+sed -i 's/"\/\/exceptionLimit": "0.8"/"exceptionLimit": "0.99"/' etc/kurento/kurento.conf.json
 
 cp $PREF/etc/kurento/modules/kurento/*.* etc/kurento/modules/kurento/
 
