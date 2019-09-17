@@ -63,7 +63,7 @@ cp $PREF/bin/libgstnet-1.5-0.dll bin/
 cp $PREF/bin/libgstpbutils-1.5-0.dll bin/
 # cp $PREF/bin/libgstphotography-1.5-0.dll bin/
 cp $PREF/bin/libgstreamer-1.5-0.dll bin/
-# cp $PREF/bin/libgstriff-1.5-0.dll bin/
+cp $PREF/bin/libgstriff-1.5-0.dll bin/
 cp $PREF/bin/libgstrtp-1.5-0.dll bin/
 cp $PREF/bin/libgstrtsp-1.5-0.dll bin/
 cp $PREF/bin/libgstsctp-1.5.dll bin/
@@ -143,7 +143,7 @@ cp $PREF/lib/gstreamer-1.5/libgstalaw.dll lib/gstreamer-1.5/
 # cp $PREF/lib/gstreamer-1.5/libgstalpha.dll lib/gstreamer-1.5/
 # cp $PREF/lib/gstreamer-1.5/libgstalphacolor.dll lib/gstreamer-1.5/
 # cp $PREF/lib/gstreamer-1.5/libgstapetag.dll lib/gstreamer-1.5/
-# cp $PREF/lib/gstreamer-1.5/libgstapp.dll lib/gstreamer-1.5/
+cp $PREF/lib/gstreamer-1.5/libgstapp.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstasf.dll lib/gstreamer-1.5/
 # cp $PREF/lib/gstreamer-1.5/libgstasfmux.dll lib/gstreamer-1.5/
 cp $PREF/lib/gstreamer-1.5/libgstaudioconvert.dll lib/gstreamer-1.5/
@@ -208,14 +208,14 @@ cp $PREF/lib/gstreamer-1.5/libgstdtmf.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstinter.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstinterlace.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstinterleave.dll lib/gstreamer-1.5/
-#cp $PREF/lib/gstreamer-1.5/libgstisomp4.dll lib/gstreamer-1.5/
+cp $PREF/lib/gstreamer-1.5/libgstisomp4.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstivfparse.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstivtc.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstjp2kdecimator.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstjpeg.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstjpegformat.dll lib/gstreamer-1.5/
 cp $PREF/lib/gstreamer-1.5/libgstlevel.dll lib/gstreamer-1.5/
-#cp $PREF/lib/gstreamer-1.5/libgstmatroska.dll lib/gstreamer-1.5/
+cp $PREF/lib/gstreamer-1.5/libgstmatroska.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstmidi.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstmpegpsdemux.dll lib/gstreamer-1.5/
 #cp $PREF/lib/gstreamer-1.5/libgstmpegpsmux.dll lib/gstreamer-1.5/
@@ -317,6 +317,10 @@ cp $PREF/lib/gstreamer-1.5/librtpendpoint.dll lib/gstreamer-1.5/libkmsrtpendpoin
 cp $PREF/lib/gstreamer-1.5/libwebrtcendpoint.dll lib/gstreamer-1.5/libwebrtcendpoint.dll
 #for estos6.3
 cp $PREF/lib/gstreamer-1.5/libwebrtcendpoint.dll lib/gstreamer-1.5/libkmswebrtcendpoint.dll
+#compatible to estos6.2
+cp $PREF/lib/gstreamer-1.5/librecorderendpoint.dll lib/gstreamer-1.5/librecorderendpoint.dll
+#for estos6.3
+cp $PREF/lib/gstreamer-1.5/librecorderendpoint.dll lib/gstreamer-1.5/libkmsrecorderendpoint.dll
 cp $PREF/lib/kurento/modules/libkmscoremodule.dll lib/kurento/modules/
 cp $PREF/lib/kurento/modules/libkmselementsmodule.dll lib/kurento/modules/
 cp $PREF/lib/kurento/modules/libkmsfiltersmodule.dll lib/kurento/modules/

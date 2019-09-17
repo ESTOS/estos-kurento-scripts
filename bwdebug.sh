@@ -2,22 +2,24 @@
 source common.sh
 
 #here we can set what versions we want to clone
-sh ./$1
+#sh ./$1
 #sh ./buildclone-estos6.3.sh
 
+if false; then
 echo "3.1 kms-cmake-utils"
 
 mkdir kms-cmake-utils-build
 cd kms-cmake-utils-build/
-mingw32-cmake ../kms-cmake-utils/
+mingw32-cmake -DCMAKE_BUILD_TYPE=Debug ../kms-cmake-utils/
 mingw32-make
 pause
 sudo mingw32-make install
 
 cd ..
+fi
 # getcmakemodules needs 'cd kms-cmake-utils'
 getcmakemodules
-
+if false; then
 pwd
 pause 
 
@@ -33,7 +35,7 @@ cd ..
 echo "3.3 gstreamer-1.7.x/1.8.1 (Fork of github/kurento/gstreamer 06.06.2017"
 cd gstreamer/
 ./autogen.sh ## Ignore configuration errors
-mingw32-configure --disable-tools --disable-tests --disable-benchmarks --disable-examples --disable-debug --libexec=/usr/i686-w64-mingw32/sys-root/mingw/libexec
+mingw32-configure --disable-tools --disable-tests --disable-benchmarks --disable-examples --enable-debug --libexec=/usr/i686-w64-mingw32/sys-root/mingw/libexec
 make
 pause
 sudo make install
@@ -43,7 +45,7 @@ cd ..
 echo "3.4 gst-plugins-base-1.5"
 cd gst-plugins-base/
 ./autogen.sh ## Ignore configuration errors
-mingw32-configure --disable-debug
+mingw32-configure --enable-debug
 mingw32-make
 pause
 sudo mingw32-make install
@@ -52,7 +54,7 @@ cd ..
 echo "3.5 jsoncpp"
 mkdir jsoncpp-build
 cd jsoncpp-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release ../jsoncpp
+mingw32-cmake -DCMAKE_BUILD_TYPE=Debug ../jsoncpp
 mingw32-make
 pause
 sudo mingw32-make install
@@ -62,7 +64,7 @@ cd ..
 echo "3.6 kms-jsonrpc"
 mkdir kms-jsonrpc-build
 cd kms-jsonrpc-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules ../kms-jsonrpc
+mingw32-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules ../kms-jsonrpc
 pause
 sudo mingw32-make install
 cd ..
@@ -87,7 +89,7 @@ if [[ $EUID == 0 ]]; then
 fi
 mkdir kms-core-build
 cd kms-core-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ ../kms-core
+mingw32-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ ../kms-core
 mingw32-make
 pause
 sudo mingw32-make install
@@ -97,27 +99,30 @@ cd ..
 echo "3.9 libevent"
 cd libevent/
 ./autogen.sh ## However, you should not build using configured Makefile
-mingw32-configure
+mingw32-configure --enable-debug
 mingw32-make
 pause
 sudo mingw32-make install
 cd ..
 
+#fi
 
 echo "3.10 kurento-media-server"
 mkdir kurento-media-server-build
 cd kurento-media-server-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
+mingw32-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
 mingw32-make
 pause
-sudo mingw32-make install
+#sudo mingw32-make install
 cd ..
 
+#fi
+#if false; then
 
 echo "3.11 usersctp"
 cd usrsctp/
 ./bootstrap
-mingw32-configure
+mingw32-configure --enable-debug
 mingw32-make
 pause
 sudo mingw32-make install
@@ -127,7 +132,7 @@ cd ..
 echo "3.12 openwebrtc-gst-plugins"
 cd openwebrtc-gst-plugins/
 ./autogen.sh ## Ignore configuration errors
-mingw32-configure
+mingw32-configure --enable-debug
 mingw32-make
 pause
 sudo mingw32-make install
@@ -138,7 +143,7 @@ cd ..
 echo "3.13 libnice"
 cd libnice/
 ./autogen.sh ## Ignore configuration errors
-mingw32-configure
+mingw32-configure --enable-debug
 mingw32-make
 pause
 sudo mingw32-make install
@@ -148,7 +153,7 @@ cd ..
 echo "3.14 kms-elements"
 mkdir kms-elements-build
 cd kms-elements-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ ../kms-elements
+mingw32-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ ../kms-elements
 mingw32-make
 pause
 sudo mingw32-make install
@@ -159,6 +164,7 @@ cd opencv
 mkdir ../opencv-build
 cd ../opencv-build
 mingw32-cmake \
+  -DCMAKE_BUILD_TYPE=Debug \
   -DBUILD_PERF_TESTS=false \
   -DBUILD_TESTS=false \
   -DWITH_DSHOW=false \
@@ -201,7 +207,7 @@ cd ..
 echo "3.16 kms-filters"
 mkdir kms-filters-build
 cd kms-filters-build/
-mingw32-cmake -DCMAKE_BUILD_TYPE=Release \
+mingw32-cmake -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_MODULE_PATH=$cmakemodules \
   -DCMAKE_INSTALL_PREFIX=/usr/i686-w64-mingw32/sys-root/mingw \
   -DKURENTO_MODULES_DIR=/usr/i686-w64-mingw32/sys-root/mingw/share/kurento/modules/ \
@@ -220,7 +226,7 @@ mingw32-configure \
   --disable-wavpack --disable-valgrind --disable-directsound \
   --disable-libcaca --disable-waveform \
   --libexec=/usr/i686-w64-mingw32/sys-root/mingw/libexec \
-  --disable-debug --disable-gtk-doc --disable-examples
+  --enable-debug --disable-gtk-doc --disable-examples
 printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
 mingw32-make
 pause
@@ -229,64 +235,73 @@ cd ..
 
 echo "3.18 libsrtp"
 cd libsrtp/
-mingw32-configure
+mingw32-configure --enable-debug
 mingw32-make
 pause
 sudo mingw32-make install
 cd ..
 
+fi
+
 echo "3.19 gst-plugins-bad"
 cd gst-plugins-bad/
 ./autogen.sh
 mingw32-configure \
-  --disable-directsound --disable-direct3d --disable-debug \
+  --disable-directsound --disable-direct3d --enable-debug \
   --disable-examples --disable-gtk-doc --disable-winscreencap \
   --disable-winks --disable-wasapi --disable-opencv
 sed -i 's/\buint\b/unsigned/g' ext/opencv/gstmotioncells.cpp ## We may need this later
 printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
 mingw32-make
 pause
-sudo mingw32-make install
+#sudo mingw32-make install
 
 cd ..
 
-#echo "3.20 gst-libav"
-#cd gst-libav/
-#./autogen.sh
-#mingw32-configure \
-#  --disable-directsound --disable-direct3d \
-#  --disable-examples --disable-gtk-doc --disable-winscreencap \
-#  --disable-winks --disable-wasapi --disable-opencv
-#printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
-#mingw32-make
-#pause
-##sudo mingw32-make install
+if false; then
 
-#cd ..
+echo "3.20 gst-libav"
+cd gst-libav/
+./autogen.sh
+mingw32-configure \
+  --disable-directsound --disable-direct3d --enable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
+mingw32-make
+pause
+#sudo mingw32-make install
 
-#echo "3.21 glib"
-#cd glib/
-#./autogen.sh
-#mingw32-configure \
-#  --disable-directsound --disable-direct3d \
-#  --disable-examples --disable-gtk-doc --disable-winscreencap \
-#  --disable-winks --disable-wasapi --disable-opencv
-#mingw32-make
-#pause
-##sudo mingw32-make install
+cd ..
 
-#cd ..
+echo "3.21 glib"
+cd glib/
+./autogen.sh
+mingw32-configure \
+  --disable-directsound --disable-direct3d --enable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+mingw32-make
+pause
+#sudo mingw32-make install
 
-#echo "3.22 openssl"
-#cd openssl/
-#./Configure shared --cross-compile-prefix=i686-w64-mingw32- mingw
-#mingw32-make depend
-#mingw32-make
-#cp libeay32.dll libcrypto-10.dll
-#cp ssleay32.dll libssl-10.dll
-#pause
-##sudo mingw32-make install
+cd ..
 
-#cd ..
+#fi
+#if false; then
+
+echo "3.22 openssl"
+cd openssl/
+./Configure shared --cross-compile-prefix=i686-w64-mingw32- --debug mingw
+mingw32-make depend
+mingw32-make
+cp libeay32.dll libcrypto-10.dll
+cp ssleay32.dll libssl-10.dll
+pause
+#sudo mingw32-make install
+
+cd ..
+
+fi
 
 echo "BUILD DONE."

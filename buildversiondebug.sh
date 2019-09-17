@@ -251,32 +251,43 @@ sudo mingw32-make install
 
 cd ..
 
-#echo "3.20 gst-libav"
-#cd gst-libav/
-#./autogen.sh
-#mingw32-configure \
-#  --disable-directsound --disable-direct3d --enable-debug \
-#  --disable-examples --disable-gtk-doc --disable-winscreencap \
-#  --disable-winks --disable-wasapi --disable-opencv
-#sed -i 's/\buint\b/unsigned/g' ext/opencv/gstmotioncells.cpp ## We may need this later
-#printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
-#mingw32-make
-#pause
+echo "3.20 gst-libav"
+cd gst-libav/
+./autogen.sh
+mingw32-configure \
+  --disable-directsound --disable-direct3d --enable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
+mingw32-make
+pause
 #sudo mingw32-make install
-#
-#cd ..
 
-#echo "3.21 glib"
-#cd glib/
-#./autogen.sh
-#mingw32-configure \
-#  --disable-directsound --disable-direct3d --enable-debug \
-#  --disable-examples --disable-gtk-doc --disable-winscreencap \
-#  --disable-winks --disable-wasapi --disable-opencv
-#mingw32-make
-#pause
+cd ..
+
+echo "3.21 glib"
+cd glib/
+./autogen.sh
+mingw32-configure \
+  --disable-directsound --disable-direct3d --enable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+mingw32-make
+pause
 #sudo mingw32-make install
-#
-#cd ..
+
+cd ..
+
+echo "3.22 openssl"
+cd openssl/
+./Configure shared --cross-compile-prefix=i686-w64-mingw32- --debug mingw
+mingw32-make depend
+mingw32-make
+cp libeay32.dll libcrypto-10.dll
+cp ssleay32.dll libssl-10.dll
+pause
+#sudo mingw32-make install
+
+cd ..
 
 echo "BUILD DONE."

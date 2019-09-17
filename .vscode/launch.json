@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+     "configurations": [
+         {
+             "name": "(gdb) Launch",
+             "type": "cppdbg",
+             "request": "launch",
+             "program": "x:/build/MediaService/kmswindows/bin/uc-media-server.exe",
+             "args": [  "-d","x:/build/MediaService/kmswindows/log",
+                        "--gst-debug-level=3",
+                        "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:3,dtls*:9,dtlsagent:5,libnice:9,glib:9,nice*:9"
+                     ],
+             "stopAtEntry": false,
+             "cwd": "x:/build/MediaService/kmswindows/bin/",
+             "environment":[
+                 {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
+                 {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose"}
+                ],
+             //"environment": [],
+             "externalConsole": false,
+             "MIMode": "gdb",
+             "miDebuggerPath": "C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/gdb.exe",
+             "setupCommands": [
+                 {
+                     "description": "Enable pretty-printing for gdb",
+                     "text": "-enable-pretty-printing",
+                     "ignoreFailures": true
+                 }
+             ]
+         }
+     ]
+ }
