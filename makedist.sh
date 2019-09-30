@@ -33,6 +33,8 @@ cp $PREF/bin/libboost_thread-mt.dll bin/
 # cp $PREF/bin/libcairo-2.dll bin/
 # cp $PREF/bin/libcairo-gobject-2.dll bin/
 cp $PREF/bin/libcrypto-10.dll bin/
+# libeay32.dll == libcrypto-10.dll -> need it with debug libssl-10.dll
+# cp $PREF/bin/libcrypto-10.dll bin/libeay32.dll
 # cp $PREF/bin/libepoxy-0.dll bin/
 cp $PREF/bin/libexpat-1.dll bin/
 cp $PREF/bin/libffi-6.dll bin/

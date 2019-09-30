@@ -8,7 +8,7 @@
              "program": "x:/build/MediaService/kmswindows/bin/uc-media-server.exe",
              "args": [  "-d","x:/build/MediaService/kmswindows/log",
                         "--gst-debug-level=3",
-                        "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:3,dtls*:9,dtlsagent:5,libnice:9,glib:9,nice*:9"
+                        "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:3,dtls*:3,dtlsagent:5,libnice:3,glib:3,nice*:3"
                      ],
              "stopAtEntry": false,
              "cwd": "x:/build/MediaService/kmswindows/bin/",
