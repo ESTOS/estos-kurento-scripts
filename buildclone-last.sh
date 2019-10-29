@@ -52,7 +52,7 @@ git checkout f2a23a2f1566e7eb421452e4a8644773a116254d
 cd ..
 git clone https://github.com/ESTOS/kms-elements.git
 cd kms-elements
-git checkout e2f20f0d119e60e06d2ba158d450d08c350764d9
+git checkout 100f375ee49ffaf39dff274f8f35417ce50b6cfe
 cd ..
 git clone https://github.com/ESTOS/opencv.git
 cd opencv
