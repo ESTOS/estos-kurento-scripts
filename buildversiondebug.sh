@@ -278,16 +278,16 @@ pause
 
 cd ..
 
-echo "3.22 openssl"
-cd openssl/
-./Configure shared --cross-compile-prefix=i686-w64-mingw32- --debug mingw
-mingw32-make depend
-mingw32-make
-cp libeay32.dll libcrypto-10.dll
-cp ssleay32.dll libssl-10.dll
-pause
+#echo "3.22 openssl" dont call it here in this script because the environment dont fits
+#cd openssl/
+#./Configure shared --cross-compile-prefix=i686-w64-mingw32- --debug mingw
+#mingw32-make depend
+#mingw32-make
+#cp libeay32.dll libcrypto-10.dll
+#cp ssleay32.dll libssl-10.dll
+#pause
 #sudo mingw32-make install
 
-cd ..
+#cd ..
 
 echo "BUILD DONE."
