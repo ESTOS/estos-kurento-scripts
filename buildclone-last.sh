@@ -72,5 +72,5 @@ git checkout 5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 cd ..
 git clone https://github.com/ESTOS/gst-plugins-bad.git
 cd gst-plugins-bad
-git checkout 133d2d35c81440d54efefe2e0a396b25e07db795
+git checkout 015bcfb2b0cf03404b95131d3be18dbd8bb4c0b5
 cd ..
