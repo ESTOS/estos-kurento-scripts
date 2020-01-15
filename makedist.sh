@@ -332,6 +332,12 @@ cp $PREF/etc/kurento/kurento.conf.json etc/kurento/
 #sed -i 's/\/\/.*//' etc/kurento/kurento.conf.json
 #sed -i 's/"resources": {/"resources": {\n"exceptionLimit": 0.99,/' etc/kurento/kurento.conf.json
 sed -i 's/"\/\/exceptionLimit": "0.8"/"exceptionLimit": "0.99"/' etc/kurento/kurento.conf.json
+#switch tls on
+cp ../etc/defaultCertificate.pem etc/kurento/
+sed -i 's/"\/\/secure": {/"secure": {/' etc/kurento/kurento.conf.json
+sed -i 's/"\/\/port": 8433/"port": 8433/' etc/kurento/kurento.conf.json
+sed -i 's/"\/\/certificate": "defaultCertificate.pem"/"certificate": "defaultCertificate.pem"/' etc/kurento/kurento.conf.json
+sed -i 's/"\/\/password": ""/"password": ""/' etc/kurento/kurento.conf.json
 
 cp $PREF/etc/kurento/modules/kurento/*.* etc/kurento/modules/kurento/
 
