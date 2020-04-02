@@ -1,0 +1,297 @@
+[
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\gst-plugins\\commons\\kmsenctreebin.c",
+		"bookmarks": [
+			{
+				"line": 198,
+				"column": 56,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\gst-plugins-base\\gst-libs\\gst\\rtp\\gstrtpbuffer.c",
+		"bookmarks": [
+			{
+				"line": 1266,
+				"column": 28,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\.vscode\\launch.json",
+		"bookmarks": [
+			{
+				"line": 10,
+				"column": 29,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\gst-plugins-good\\gst\\rtpmanager\\gstrtpsession.c",
+		"bookmarks": [
+			{
+				"line": 1918,
+				"column": 30,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\gst-plugins-good\\gst\\rtpmanager\\gstrtpjitterbuffer.c",
+		"bookmarks": [
+			{
+				"line": 2891,
+				"column": 27,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\gst-plugins\\commons\\kmsrtpsynchronizer.c",
+		"bookmarks": [
+			{
+				"line": 301,
+				"column": 34,
+				"label": ""
+			},
+			{
+				"line": 385,
+				"column": 46,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\gst-plugins\\commons\\kmsutils.c",
+		"bookmarks": [
+			{
+				"line": 1496,
+				"column": 36,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\gst-plugins\\commons\\kmsbasertpendpoint.c",
+		"bookmarks": [
+			{
+				"line": 2118,
+				"column": 36,
+				"label": ""
+			},
+			{
+				"line": 2251,
+				"column": 9,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\gst-plugins-base\\gst-libs\\gst\\audio\\gstaudioencoder.c",
+		"bookmarks": [
+			{
+				"line": 356,
+				"column": 10,
+				"label": ""
+			},
+			{
+				"line": 1178,
+				"column": 23,
+				"label": ""
+			},
+			{
+				"line": 1302,
+				"column": 33,
+				"label": ""
+			},
+			{
+				"line": 1378,
+				"column": 29,
+				"label": ""
+			},
+			{
+				"line": 2014,
+				"column": 16,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\gst-plugins-base\\ext\\opus\\gstopusenc.c",
+		"bookmarks": [
+			{
+				"line": 1145,
+				"column": 19,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\glib\\glib\\gmem.c",
+		"bookmarks": [
+			{
+				"line": 87,
+				"column": 11,
+				"label": ""
+			},
+			{
+				"line": 185,
+				"column": 17,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kurento-media-server\\server\\transport\\websocket\\WebSocketTransport.cpp",
+		"bookmarks": [
+			{
+				"line": 69,
+				"column": 18,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kurento-media-server\\server\\transport\\websocket\\websocketpp\\transport\\asio\\security\\tls.hpp",
+		"bookmarks": [
+			{
+				"line": 478,
+				"column": 6,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\libnice\\agent\\conncheck.c",
+		"bookmarks": [
+			{
+				"line": 751,
+				"column": 42,
+				"label": ""
+			},
+			{
+				"line": 756,
+				"column": 73,
+				"label": ""
+			},
+			{
+				"line": 773,
+				"column": 24,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\libnice\\agent\\agent.c",
+		"bookmarks": [
+			{
+				"line": 3911,
+				"column": 23,
+				"label": ""
+			},
+			{
+				"line": 5184,
+				"column": 44,
+				"label": ""
+			},
+			{
+				"line": 5293,
+				"column": 33,
+				"label": ""
+			},
+			{
+				"line": 5309,
+				"column": 14,
+				"label": ""
+			},
+			{
+				"line": 5400,
+				"column": 20,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\gst-plugins\\kmscompositemixer.c",
+		"bookmarks": [
+			{
+				"line": 638,
+				"column": 7,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\gst-plugins\\kmsdispatcheronetomany.c",
+		"bookmarks": [
+			{
+				"line": 198,
+				"column": 21,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\glib\\glib\\giowin32.c",
+		"bookmarks": [
+			{
+				"line": 543,
+				"column": 37,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\glib\\glib\\gthread-posix.c",
+		"bookmarks": [
+			{
+				"line": 1176,
+				"column": 41,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\glib\\glib\\gthread-win32.c",
+		"bookmarks": [
+			{
+				"line": 475,
+				"column": 41,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\usrsctp\\usrsctplib\\user_socketvar.h",
+		"bookmarks": [
+			{
+				"line": 105,
+				"column": 6,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kurento-media-server\\server\\ServerMethods.cpp",
+		"bookmarks": [
+			{
+				"line": 64,
+				"column": 15,
+				"label": ""
+			},
+			{
+				"line": 85,
+				"column": 22,
+				"label": ""
+			},
+			{
+				"line": 653,
+				"column": 9,
+				"label": ""
+			}
+		]
+	}
+]
