@@ -2,16 +2,16 @@
     "version": "0.2.0",
      "configurations": [
          {
-             "name": "(gdb) Launch",
+             "name": "(gdb32) Launch",
              "type": "cppdbg",
              "request": "launch",
-             "program": "x:/build/MediaService/kmswindows/bin/uc-media-server.exe",
-             "args": [  "-d","x:/build/MediaService/kmswindows/log",
+             "program": "x:/build/MediaService/kmswindows-32/bin/uc-media-server.exe",
+             "args": [  "-d","x:/build/MediaService/kmswindows-32/log",
                         "--gst-debug-level=3",
-                        "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:3,dtls*:3,dtlsagent:5,libnice:3,glib:3,nice*:3"
+                        "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:5,rtpjitterbuffer:3,audioencoder:3,kmsutils:3,rtpsynchronizer:3"
                      ],
              "stopAtEntry": false,
-             "cwd": "x:/build/MediaService/kmswindows/bin/",
+             "cwd": "x:/build/MediaService/kmswindows-32/bin/",
              "environment":[
                  {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
                  {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose"}
@@ -27,6 +27,33 @@
                      "ignoreFailures": true
                  }
              ]
-         }
+         },
+         {
+            "name": "(gdb64) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "x:/build/MediaService/kmswindows-64/bin/uc-media-server.exe",
+            "args": [  "-d","x:/build/MediaService/kmswindows-64/log",
+                       "--gst-debug-level=3",
+                       "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:5,rtpjitterbuffer:3,audioencoder:3,kmsutils:3,rtpsynchronizer:3"
+                    ],
+            "stopAtEntry": false,
+            "cwd": "x:/build/MediaService/kmswindows-64/bin/",
+            "environment":[
+                {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
+                {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose"}
+               ],
+            //"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-6.3.0-posix-seh-rt_v5-rev1/mingw64/bin/gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
      ]
  }

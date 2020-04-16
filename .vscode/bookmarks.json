@@ -235,28 +235,18 @@
 		]
 	},
 	{
-		"path": "$ROOTPATH$\\glib\\glib\\giowin32.c",
-		"bookmarks": [
-			{
-				"line": 543,
-				"column": 37,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\glib\\glib\\gthread-posix.c",
-		"bookmarks": [
-			{
-				"line": 1176,
-				"column": 41,
-				"label": ""
-			}
-		]
-	},
-	{
 		"path": "$ROOTPATH$\\glib\\glib\\gthread-win32.c",
 		"bookmarks": [
+			{
+				"line": 459,
+				"column": 10,
+				"label": ""
+			},
+			{
+				"line": 469,
+				"column": 10,
+				"label": ""
+			},
 			{
 				"line": 475,
 				"column": 41,
@@ -290,6 +280,36 @@
 			{
 				"line": 653,
 				"column": 9,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kurento-media-server\\server\\ResourceManager.cpp",
+		"bookmarks": [
+			{
+				"line": 200,
+				"column": 9,
+				"label": ""
+			},
+			{
+				"line": 215,
+				"column": 8,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\glib\\glib\\gthread.c",
+		"bookmarks": [
+			{
+				"line": 819,
+				"column": 9,
+				"label": ""
+			},
+			{
+				"line": 861,
+				"column": 13,
 				"label": ""
 			}
 		]
