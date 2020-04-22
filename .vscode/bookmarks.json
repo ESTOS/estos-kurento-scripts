@@ -188,6 +188,26 @@
 		"path": "$ROOTPATH$\\libnice\\agent\\agent.c",
 		"bookmarks": [
 			{
+				"line": 542,
+				"column": 24,
+				"label": ""
+			},
+			{
+				"line": 902,
+				"column": 11,
+				"label": ""
+			},
+			{
+				"line": 1558,
+				"column": 10,
+				"label": ""
+			},
+			{
+				"line": 1615,
+				"column": 31,
+				"label": ""
+			},
+			{
 				"line": 3911,
 				"column": 23,
 				"label": ""
@@ -310,6 +330,26 @@
 			{
 				"line": 861,
 				"column": 13,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\gst-plugins\\webrtcendpoint\\kmsiceniceagent.c",
+		"bookmarks": [
+			{
+				"line": 231,
+				"column": 14,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\MediaSet.cpp",
+		"bookmarks": [
+			{
+				"line": 123,
+				"column": 6,
 				"label": ""
 			}
 		]
