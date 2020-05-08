@@ -83,6 +83,9 @@ gitcheck libsrtp
 echo "3.19 gst-plugins-bad"
 gitcheck gst-plugins-bad
 
+echo "3.20 glib"
+gitcheck glib
+
 diff $lastcommitslog $commitlogs_now
 ret=$?
 if [[ $ret -eq 0 ]]; then

@@ -68,5 +68,8 @@ gitclone libsrtp
 echo "3.19 gst-plugins-bad"
 gitclone gst-plugins-bad
 
+echo "3.20 glib"
+gitclone glib
+
 chmod 775 buildclone-last.sh
 

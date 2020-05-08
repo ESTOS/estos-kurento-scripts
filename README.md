@@ -9,18 +9,16 @@ At the moment we recommend a virtual machine as a build machine for the media se
 Use this software at your own risc.
 
 ## Usage
-Checkout these scripts in a new Directory. Running first time, execute the **initsystem.sh** script, which will check and install system dependencies (like mingw32 and such) needed for cross compiling the Kurento Media Server. This have to be done only once (or later for possible updates on these dependencies).
+Checkout these scripts in a new Directory. Running first time, execute the **initsystem(64).sh** script (add 64 if for 64 Bit otherwise its 32 Bit), which will check and install system dependencies (like mingw32 and such) needed for cross compiling the Kurento Media Server. This have to be done only once (or later for possible updates on these dependencies).
 
-To Compile the Media Server and its DLLs, call **build.sh** in the same directory. This will fetch and compile all Module needed. DO NOT RUN WITH ROOT-PRIVILIGES! The Scripts are asking for them when needed.
+To Compile the Media Server and its DLLs, call **buildlast(64)-log.sh** in the same directory. This will fetch and compile all Module needed. DO NOT RUN WITH ROOT-PRIVILIGES! The Scripts are asking for them when needed.
 
-To get a distribution package call **makedist.sh**, which will assemble all parts generated with build.sh into a subdirectory and compress it into a zip file named *emswindows_current-timestamp.zip*.
+To get a distribution package call **makedist(64).sh**, which will assemble all parts generated with build.sh into a subdirectory and compress it into a zip file named *emswindows_current-timestamp.zip*.
 Copy this file to a Windows machine, unzip it into a own Directory and start the estos uc media server in the bin directory.
 
 You can now test the server using the [Kurento Tutorials](http://doc-kurento.readthedocs.io/en/stable/tutorials.html). The server will be reachable on localhost, port 8888. The Portnumber can be configured in kurento.conf.json, which is located in the etc/kurento directory.
 
-Further builds shoud be made using either **rebuild.sh** (if you made local changes) or **update.sh + rebuild.sh** (if you need updates from the repositories).
-
-**lastcommits.sh** is used by **makedist.sh** to get information about the last commits in the respositories to make it possible to reproduce each build.
+**lastcommits.sh** is used by **makedist(64).sh** to get information about the last commits in the respositories to make it possible to reproduce each build.
 
 
 ## License

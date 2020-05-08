@@ -250,7 +250,20 @@ sudo mingw64-make install
 
 cd ..
 
-#echo "3.20 gst-libav"
+echo "3.20 glib"
+cd glib/
+./autogen.sh
+mingw64-configure \
+  --disable-directsound --disable-direct3d \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+mingw64-make
+pause
+sudo mingw64-make install
+
+cd ..
+
+#echo "3.21 gst-libav"
 #cd gst-libav/
 #./autogen.sh
 #mingw64-configure \
@@ -258,19 +271,6 @@ cd ..
 #  --disable-examples --disable-gtk-doc --disable-winscreencap \
 #  --disable-winks --disable-wasapi --disable-opencv
 #printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
-#mingw64-make
-#pause
-##sudo mingw64-make install
-
-#cd ..
-
-#echo "3.21 glib"
-#cd glib/
-#./autogen.sh
-#mingw64-configure \
-#  --disable-directsound --disable-direct3d \
-#  --disable-examples --disable-gtk-doc --disable-winscreencap \
-#  --disable-winks --disable-wasapi --disable-opencv
 #mingw64-make
 #pause
 ##sudo mingw64-make install

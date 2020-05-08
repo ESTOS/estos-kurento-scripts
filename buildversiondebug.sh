@@ -251,7 +251,20 @@ sudo mingw32-make install
 
 cd ..
 
-echo "3.20 gst-libav"
+echo "3.20 glib"
+cd glib/
+./autogen.sh
+mingw32-configure \
+  --disable-directsound --disable-direct3d --enable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+mingw32-make
+pause
+sudo mingw32-make install
+
+cd ..
+
+echo "3.21 gst-libav"
 cd gst-libav/
 ./autogen.sh
 mingw32-configure \
@@ -259,19 +272,6 @@ mingw32-configure \
   --disable-examples --disable-gtk-doc --disable-winscreencap \
   --disable-winks --disable-wasapi --disable-opencv
 printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
-mingw32-make
-pause
-#sudo mingw32-make install
-
-cd ..
-
-echo "3.21 glib"
-cd glib/
-./autogen.sh
-mingw32-configure \
-  --disable-directsound --disable-direct3d --enable-debug \
-  --disable-examples --disable-gtk-doc --disable-winscreencap \
-  --disable-winks --disable-wasapi --disable-opencv
 mingw32-make
 pause
 #sudo mingw32-make install
