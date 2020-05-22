@@ -148,6 +148,11 @@
 		"path": "$ROOTPATH$\\kurento-media-server\\server\\transport\\websocket\\WebSocketTransport.cpp",
 		"bookmarks": [
 			{
+				"line": 36,
+				"column": 42,
+				"label": ""
+			},
+			{
 				"line": 69,
 				"column": 18,
 				"label": ""
@@ -237,6 +242,11 @@
 	{
 		"path": "$ROOTPATH$\\kms-elements\\src\\gst-plugins\\kmscompositemixer.c",
 		"bookmarks": [
+			{
+				"line": 29,
+				"column": 27,
+				"label": ""
+			},
 			{
 				"line": 638,
 				"column": 7,
@@ -380,6 +390,116 @@
 			{
 				"line": 428,
 				"column": 22,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\gstreamer\\libs\\gst\\base\\gstbasesink.c",
+		"bookmarks": [
+			{
+				"line": 3142,
+				"column": 18,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\objects\\SdpEndpointImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 165,
+				"column": 8,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\RtpEndpointImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 48,
+				"column": 10,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\CompositeImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 33,
+				"column": 20,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\WebRtcEndpointImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 432,
+				"column": 29,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\DispatcherOneToManyImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 36,
+				"column": 31,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\MixerImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 35,
+				"column": 30,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\objects\\HubPortImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 33,
+				"column": 17,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\objects\\MediaElementImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 571,
+				"column": 23,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\objects\\MediaObjectImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 32,
+				"column": 32,
+				"label": ""
+			}
+		]
+	},
+	{
+		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\PlayerEndpointImpl.cpp",
+		"bookmarks": [
+			{
+				"line": 99,
+				"column": 11,
 				"label": ""
 			}
 		]
