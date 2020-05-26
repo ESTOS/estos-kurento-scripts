@@ -8,114 +8,114 @@
 
 #if false; then
 
-cd kms-cmake-utils/
-git clean -xf
-git checkout -f
+cd kms-cmake-utils && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd kurento-module-creator/
-git clean -xf
-git checkout -f
+cd kurento-module-creator && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd gstreamer/
-git clean -xf
-git checkout -f
+cd gstreamer && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd gst-plugins-base/
-git clean -xf
-git checkout -f
+cd gst-plugins-base && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
 #fi
 
-cd jsoncpp/
-git clean -xf
-git checkout -f
+cd jsoncpp && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
 #if false; then
 
-cd kms-jsonrpc/
-git clean -xf
-git checkout -f
+cd kms-jsonrpc && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd libvpx/
-git clean -xf
-git checkout -f
+cd libvpx && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd kms-core/
-git clean -xf
-git checkout -f
+cd kms-core && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd libevent/
-git clean -xf
-git checkout -f
+cd libevent && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd kurento-media-server/
-git clean -xf
-git checkout -f
+cd kurento-media-server && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd usrsctp/
-git clean -xf
-git checkout -f
+cd usrsctp && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd openwebrtc-gst-plugins/
-git clean -xf
-git checkout -f
+cd openwebrtc-gst-plugins && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
 
-cd libnice/
-git clean -xf
-git checkout -f
+cd libnice && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd kms-elements/
-git clean -xf
-git checkout -f
+cd kms-elements && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
 cd opencv/		
-git clean -xf
+rm -rf *
 git checkout -f
 cd ..
 
-cd kms-filters/
-git clean -xf
-git checkout -f
+cd kms-filters && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd gst-plugins-good/
-git clean -xf
-git checkout -f
+cd gst-plugins-good && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd libsrtp/
-git clean -xf
-git checkout -f
+cd libsrtp && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd gst-plugins-bad/
-git clean -xf
-git checkout -f
+cd gst-plugins-bad && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-cd glib/
-git clean -xf
-git checkout -f
+cd glib && \
+rm -rf * && \
+git checkout -f && \
 cd ..
 
-#cd gst-libav/
-#git clean -xf
-#git checkout -f
-#cd ..
+cd gst-libav && \
+rm -rf * && \
+git checkout -f && \
+cd ..
 
 #fi

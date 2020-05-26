@@ -107,7 +107,10 @@ cd ..
 echo "3.10 kurento-media-server"
 mkdir kurento-media-server-build
 cd kurento-media-server-build/
-mingw64-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
+#problem mit mingw -> too many sections (40348)... Fatal error: can't write 97 bytes to section .text of CMakeFiles/websocketTransport.dir/WebSocketTransport.cpp.obj because: 'File too big'
+#nur bei 64 bit -> 32 bit ok
+#mingw64-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
+mingw64-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
 mingw64-make
 pause
 sudo mingw64-make install

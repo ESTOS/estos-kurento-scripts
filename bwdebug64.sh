@@ -105,19 +105,20 @@ pause
 sudo mingw64-make install
 cd ..
 
-#fi
+fi
 
 echo "3.10 kurento-media-server"
 mkdir kurento-media-server-build
 cd kurento-media-server-build/
-mingw64-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
+#mingw64-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
+mingw64-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
 mingw64-make
 pause
 sudo mingw64-make install
 cd ..
 
 #fi
-#if false; then
+if false; then
 
 echo "3.11 usersctp"
 cd usrsctp/
@@ -267,7 +268,7 @@ sudo mingw64-make install
 
 cd ..
 
-fi
+#fi
 #if false; then
 
 echo "3.20 glib"
@@ -279,12 +280,12 @@ mingw64-configure \
   --disable-winks --disable-wasapi --disable-opencv
 mingw64-make
 pause
-#sudo mingw64-make install
+sudo mingw64-make install
 
 cd ..
 
 #fi
-if false; then
+#if false; then
 
 echo "3.21 gst-libav"
 cd gst-libav/
