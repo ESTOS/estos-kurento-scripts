@@ -186,6 +186,11 @@
 				"line": 773,
 				"column": 24,
 				"label": ""
+			},
+			{
+				"line": 1884,
+				"column": 51,
+				"label": ""
 			}
 		]
 	},
@@ -235,6 +240,16 @@
 			{
 				"line": 5400,
 				"column": 20,
+				"label": ""
+			},
+			{
+				"line": 5529,
+				"column": 32,
+				"label": ""
+			},
+			{
+				"line": 5804,
+				"column": 32,
 				"label": ""
 			}
 		]
