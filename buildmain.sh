@@ -1,17 +1,16 @@
 #!/bin/bash
 # build script for kurento for windows
 
-#stop on error
-set -e
-#print all executed command
-set -x
+#set -e #stop on error
+#set -x #print all executed command
 
-DOINSTALL=TRUE
-DOBUILD=TRUE
 MINGW=mingw32
 #MINGW=mingw64
 BUILDTYPE=RELEASE
 #BUILDTYPE=DEBUG
+
+DOINSTALL=TRUE
+DOBUILD=TRUE
 
 if [ $MINGW = mingw32 ]; then
 MINGWPATH=i686-w64-mingw32
@@ -47,7 +46,7 @@ function getcmakemodules() {
 
 build_kms-cmake-utils()
 {
-	echo "3.1 kms-cmake-utils"
+	echo "--- 01 --- kms-cmake-utils ---"
 	mkdir -p "kms-cmake-utils-build"
 	pushd "kms-cmake-utils-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -62,7 +61,7 @@ build_kms-cmake-utils()
 
 build_kurento-module-creator()
 {
-	echo "3.2 kurento-module-creator"
+	echo "--- 02 --- kurento-module-creator ---"
 	mkdir -p "kurento-module-creator"
 	pushd "kurento-module-creator"
 	if [ $DOBUILD = TRUE ]; then
@@ -76,7 +75,7 @@ build_kurento-module-creator()
 
 build_gstreamer()
 {
-	echo "3.3 gstreamer"
+	echo "--- 03 --- gstreamer ---"
 	pushd "gstreamer"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -92,7 +91,7 @@ build_gstreamer()
 
 build_gst-plugins-base()
 {
-	echo "3.4 gst-plugins-base-1.5"
+	echo "--- 04 --- gst-plugins-base-1.5 ---"
 	pushd "gst-plugins-base"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -107,7 +106,7 @@ build_gst-plugins-base()
 
 build_jsoncpp()
 {
-	echo "3.5 jsoncpp"
+	echo "--- 05 --- jsoncpp ---"
 	mkdir -p "jsoncpp-build"
 	pushd "jsoncpp-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -122,7 +121,7 @@ build_jsoncpp()
 
 build_kms-jsonrpc()
 {
-	echo "3.6 kms-jsonrpc"
+	echo "--- 06 --- kms-jsonrpc ---"
 	mkdir -p "kms-jsonrpc-build"
 	pushd "kms-jsonrpc-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -139,7 +138,7 @@ build_kms-jsonrpc()
 
 build_libvpx()
 {
-	echo "3.7 libvpx"
+	echo "--- 07 --- libvpx ---"
 	pushd "libvpx"
 	if [ $MINGW = mingw32 ]; then
 		eval `rpm --eval %{mingw32_env}`
@@ -163,7 +162,7 @@ build_libvpx()
 
 build_kms-core()
 {
-	echo "3.8 kms-core"
+	echo "--- 08 --- kms-core ---"
 if [[ $EUID == 0 ]]; then
 	echo "Build this step as root will lead to troubles later! (e.g. kurentocreator will not be found) Stop here now."
 	exit
@@ -186,7 +185,7 @@ fi
 
 build_libevent()
 {
-	echo "3.9 libevent"
+	echo "--- 09 --- libevent ---"
 	pushd "libevent"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## However, you should not build using configured Makefile
@@ -201,13 +200,22 @@ build_libevent()
 
 build_kurento-media-server()
 {
-	echo "3.10 kurento-media-server"
+	echo "--- 10 --- kurento-media-server ---"
 	mkdir -p "kurento-media-server-build"
 	pushd "kurento-media-server-build"
 	if [ $DOBUILD = TRUE ]; then
-	$MINGW-cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+#problem mit mingw -> too many sections (40348)... Fatal error: can't write 97 bytes to section .text of CMakeFiles/websocketTransport.dir/WebSocketTransport.cpp.obj because: 'File too big'
+#nur bei 64 bit -> 32 bit ok
+	if [ $MINGW = mingw64 ]; then
+		$MINGW-cmake -DCMAKE_BUILD_TYPE=Release \
 				  -DCMAKE_MODULE_PATH=$cmakemodules \
 				  ../kurento-media-server
+	else
+	
+		$MINGW-cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+				  -DCMAKE_MODULE_PATH=$cmakemodules \
+				  ../kurento-media-server
+	fi
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then
@@ -218,7 +226,7 @@ build_kurento-media-server()
 
 build_usrsctp()
 {
-	echo "3.11 usersctp"
+	echo "--- 11 --- usersctp ---"
 	pushd "usrsctp"
 	./bootstrap
 	if [ $DOBUILD = TRUE ]; then
@@ -233,7 +241,7 @@ build_usrsctp()
 
 build_openwebrtc-gst-plugins()
 {
-	echo "3.12 openwebrtc-gst-plugins"
+	echo "--- 12 --- openwebrtc-gst-plugins ---"
 	pushd "openwebrtc-gst-plugins"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -251,7 +259,7 @@ build_openwebrtc-gst-plugins()
 
 build_libnice()
 {
-	echo "3.13 libnice"
+	echo "--- 13 --- libnice ---"
 	pushd "libnice"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -266,7 +274,7 @@ build_libnice()
 
 build_kms-elements()
 {
-	echo "3.14 kms-elements"
+	echo "--- 14 --- kms-elements ---"
 	mkdir -p "kms-elements-build"
 	pushd "kms-elements-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -285,7 +293,7 @@ build_kms-elements()
 
 build_opencv()
 {
-	echo "3.15 opencv"
+	echo "--- 15 --- opencv ---"
 	mkdir -p "opencv-build"
 	pushd "opencv-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -348,7 +356,7 @@ build_opencv()
 
 build_kms-filters()
 {
-	echo "3.16 kms-filters"
+	echo "--- 16 --- kms-filters ---"
 	mkdir -p "kms-filters-build"
 	pushd "kms-filters-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -368,7 +376,7 @@ build_kms-filters()
 
 build_gst-plugins-good()
 {
-	echo "3.17 gst-plugins-good"
+	echo "--- 17 --- gst-plugins-good ---"
 	pushd "gst-plugins-good"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -388,7 +396,7 @@ build_gst-plugins-good()
 
 build_libsrtp()
 {
-	echo "3.18 libsrtp"
+	echo "--- 18 --- libsrtp ---"
 	pushd "libsrtp"
 	if [ $DOBUILD = TRUE ]; then
 	mingw32-configure $CONFIGUREPARAMDEBUG
@@ -402,7 +410,7 @@ build_libsrtp()
 
 build_gst-plugins-bad()
 {
-	echo "3.19 gst-plugins-bad"
+	echo "--- 19 --- gst-plugins-bad ---"
 	pushd "gst-plugins-bad"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -422,7 +430,7 @@ build_gst-plugins-bad()
 
 build_glib()
 {
-	echo "3.20 glib"
+	echo "--- 20 --- glib ---"
 	pushd "glib"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true
@@ -440,7 +448,7 @@ build_glib()
 
 build_gst-libav()
 {
-	echo "3.21 gst-libav"
+	echo "--- 21 --- gst-libav ---"
 	pushd "gst-libav"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -455,6 +463,7 @@ build_gst-libav()
 
 build_gst-plugins-ugly()
 {
+	echo "--- 22 --- gst-plugins-ugly ---"
 	pushd "gst-plugins-ugly"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -471,7 +480,7 @@ build_gst-plugins-ugly()
 
 build_openssl()
 {
-	echo "3.22 openssl"
+	echo "--- 23 --- openssl ---"
 	pushd "openssl"
 	if [ $DOBUILD = TRUE ]; then
 	./Configure shared --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL mingw
@@ -497,7 +506,7 @@ https://github.com/ESTOS/gst-plugins-base.git             7bf50f79f694dda7676db8
 https://github.com/ESTOS/jsoncpp.git                      79efbfde69a285caca20b494a0f94b0528847088
 https://github.com/ESTOS/kms-jsonrpc.git                  ae5ae3184a41a293eb91e8c8a329dbc12b980411
 https://github.com/ESTOS/libvpx.git                       a90944ce794986d8c0daab1449903909ba1956a7
-https://github.com/ESTOS/kms-core.git                     2293119b92999337d0b42ab22b52a92d4dece306
+https://github.com/ESTOS/kms-core.git                     8c052ec49f6e9c65b7603769b089e4d1009c1c25
 https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14a281d7421c95d37937
 https://github.com/ESTOS/kurento-media-server.git         4070af6023d4a0d97afa8231d35da027b91650a2
 https://github.com/ESTOS/usrsctp.git                      6a7541145d3b802c632c9e164eecae58e7780f36
@@ -512,11 +521,14 @@ https://github.com/ESTOS/gst-plugins-bad.git              015bcfb2b0cf03404b9513
 https://github.com/ESTOS/glib.git                         acee2a89397f8c91145bbeb174723026f931cae4
 https://github.com/ESTOS/gst-libav.git                    493eee49c7171e7fc0bf0110e30d445ba573dc5e
 https://github.com/ESTOS/gst-plugins-ugly.git             2685b0f252bf0ed6aa27a5c69e82e05289346ff1
+https://github.com/ESTOS/openssl.git                      5dd94f1847c744929a3bd24819f1c99644bb18c7
 EOF
 }
 
 setup_workspace()
 {
+set +e #dont stop on error
+set -x #print all executed command	
     local url tag rname ldir
 	# split url, local dir, and tag
 	repos | while read url tag; do
@@ -549,6 +561,8 @@ setup_workspace()
 
 build()
 {
+set -e #stop on error
+set -x #print all executed command
 	build_kms-cmake-utils
 	getcmakemodules
 	build_kurento-module-creator
@@ -592,6 +606,13 @@ case "$1" in
 	build)
 		build
 		;;
+	buildlog)
+		build > logbuildmain.txt 2>&1
+		;;
+	buildalllog)
+		setup_workspace
+		build > logbuildmain.txt 2>&1
+		;;
 	build_*)
 		build_kms-cmake-utils
 		getcmakemodules
@@ -601,15 +622,20 @@ case "$1" in
 		build
 		;;
 	*)
-		build_kms-cmake-utils
-		getcmakemodules
+		build_kms-cmake-utils > /dev/null 2>&1
+		getcmakemodules > /dev/null 2>&1
 		echo ""
 		echo "Usage:"
-		echo "setup -> clones all components"
-		echo "buildnoinstall -> without install"
-		echo "buildonlyinstall -> install without build"
+		echo "  setup            -> clones all components"
+		echo "  buildonlyinstall -> install without build"
+		echo "  buildnoinstall   -> build without install"
+		echo "  build            -> build"
+		echo "  buildlog         -> build + log to logbuildmain.txt"
+		echo "  buildalllog      -> setup + build + log to logbuildmain.txt"
+		echo "  build_*          -> build selected component"
+		echo "  all              -> build"
 		echo "Environment:"
-		echo " CMAKEPATH     $cmakemodules"
+		echo "  CMAKEPATH     $cmakemodules"
 		echo ""
 		;;
 esac

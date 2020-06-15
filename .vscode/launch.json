@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
      "configurations": [
+         
          {
              "name": "(gdb32) Launch",
              "type": "cppdbg",
@@ -8,7 +9,7 @@
              "program": "x:/build/MediaService/kmswindows-32/bin/uc-media-server.exe",
              "args": [  "-d","x:/build/MediaService/kmswindows-32/log",
                         "--gst-debug-level=3",
-                        "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:5,rtpjitterbuffer:3,audioencoder:3,kmsutils:3,rtpsynchronizer:3"
+                        "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:3,rtpjitterbuffer:3,audioencoder:3,kmsutils:3,rtpsynchronizer:3"
                      ],
              "stopAtEntry": false,
              "cwd": "x:/build/MediaService/kmswindows-32/bin/",
