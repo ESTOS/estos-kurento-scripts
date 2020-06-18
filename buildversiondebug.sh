@@ -72,7 +72,8 @@ echo "3.7 libvpx"
 cd libvpx/
 eval `rpm --eval %{mingw32_env}`
 export AS=yasm
-./configure --target=x86-win32-gcc --prefix=/usr/i686-w64-mingw32/sys-root/mingw/
+#libvpx bug https://bugzilla.gnome.org/show_bug.cgi?id=763663 -mstackrealign
+./configure --target=x86-win32-gcc --prefix=/usr/i686-w64-mingw32/sys-root/mingw/ --enable-debug --enable-debug-libs --extra-cflags=-mstackrealign
 mingw32-make
 pause
 sudo mingw32-make install

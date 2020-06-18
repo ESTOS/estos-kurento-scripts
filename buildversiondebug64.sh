@@ -72,7 +72,7 @@ echo "3.7 libvpx"
 cd libvpx/
 eval `rpm --eval %{mingw64_env}`
 export AS=yasm
-./configure --target=x86_64-win64-gcc --prefix=/usr/x86_64-w64-mingw32/sys-root/mingw/
+./configure --target=x86_64-win64-gcc --prefix=/usr/x86_64-w64-mingw32/sys-root/mingw/ --enable-debug --enable-debug-libs
 mingw64-make
 pause
 sudo mingw64-make install

@@ -25,11 +25,13 @@ BUILD_TYPE=Release
 CONFIGUREPARAMDEBUG=--disable-debug
 DEBUGSUFFIX=
 DEBUGOPENSSL=
+DEBUGLIBVPX=
 else
 BUILD_TYPE=Debug
 CONFIGUREPARAMDEBUG=--enable-debug
 DEBUGSUFFIX=d
 DEBUGOPENSSL=--debug
+DEBUGLIBVPX="--enable-debug --enable-debug-libs"
 fi
 
 function pause() {
@@ -148,9 +150,10 @@ build_libvpx()
 	if [ $DOBUILD = TRUE ]; then
 	export AS=yasm
 	if [ $MINGW = mingw32 ]; then
-		./configure --target=x86-win32-gcc --prefix=/usr/$MINGWPATH/sys-root/mingw/
+		#libvpx bug https://bugzilla.gnome.org/show_bug.cgi?id=763663 -mstackrealign
+		./configure --target=x86-win32-gcc --prefix=/usr/$MINGWPATH/sys-root/mingw/ $DEBUGLIBVPX --extra-cflags=-mstackrealign
 	else
-		./configure --target=x86_64-win64-gcc --prefix=/usr/$MINGWPATH/sys-root/mingw/
+		./configure --target=x86_64-win64-gcc --prefix=/usr/$MINGWPATH/sys-root/mingw/ $DEBUGLIBVPX
 	fi
 	$MINGW-make
 	fi
@@ -515,7 +518,7 @@ https://github.com/ESTOS/libnice.git                      269d2ea5ebfc80addf5f3f
 https://github.com/ESTOS/kms-elements.git                 81a45062d30f95c772a78f90e9200dd9df8428f3
 https://github.com/ESTOS/opencv.git                       d68e3502278d6fc5a1de0ce8f7951d9961b20913
 https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
-https://github.com/ESTOS/gst-plugins-good.git             aea740fdba5bb450ac191bdf3210bb2f3793b521
+https://github.com/ESTOS/gst-plugins-good.git             91d38231582237eb6f6bf88bae37bdd8ef073b78
 https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 https://github.com/ESTOS/gst-plugins-bad.git              015bcfb2b0cf03404b95131d3be18dbd8bb4c0b5
 https://github.com/ESTOS/glib.git                         acee2a89397f8c91145bbeb174723026f931cae4
@@ -616,6 +619,7 @@ case "$1" in
 	build_*)
 		build_kms-cmake-utils
 		getcmakemodules
+		set -x #print all executed command
 		$1
 		;;
 	all)
