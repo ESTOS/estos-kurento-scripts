@@ -36,7 +36,7 @@ git checkout ba78ba9e8ba4c964dd5d14a281d7421c95d37937
 cd ..
 git clone https://github.com/ESTOS/kurento-media-server.git
 cd kurento-media-server
-git checkout 4070af6023d4a0d97afa8231d35da027b91650a2
+git checkout d9e73c6f5b940dc10c9f99202fc666fe8fd05256
 cd ..
 git clone https://github.com/ESTOS/usrsctp.git
 cd usrsctp
@@ -72,7 +72,7 @@ git checkout 5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 cd ..
 git clone https://github.com/ESTOS/gst-plugins-bad.git
 cd gst-plugins-bad
-git checkout 015bcfb2b0cf03404b95131d3be18dbd8bb4c0b5
+git checkout ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
 cd ..
 git clone https://github.com/ESTOS/glib.git
 cd glib
