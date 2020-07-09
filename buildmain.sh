@@ -4,8 +4,8 @@
 #set -e #stop on error
 #set -x #print all executed command
 
-MINGW=mingw32
-#MINGW=mingw64
+#MINGW=mingw32
+MINGW=mingw64
 BUILDTYPE=RELEASE
 #BUILDTYPE=DEBUG
 
@@ -81,7 +81,7 @@ build_gstreamer()
 	pushd "gstreamer"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
-	mingw32-configure --disable-tools --disable-tests --disable-benchmarks --disable-examples \
+	$MINGW-configure --disable-tools --disable-tests --disable-benchmarks --disable-examples \
 					$CONFIGUREPARAMDEBUG --libexec=/usr/$MINGWPATH/sys-root/mingw/libexec
 	make
 	fi
@@ -97,7 +97,7 @@ build_gst-plugins-base()
 	pushd "gst-plugins-base"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
-	mingw32-configure $CONFIGUREPARAMDEBUG
+	$MINGW-configure $CONFIGUREPARAMDEBUG
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then
@@ -192,7 +192,7 @@ build_libevent()
 	pushd "libevent"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## However, you should not build using configured Makefile
-	mingw32-configure $CONFIGUREPARAMDEBUG
+	$MINGW-configure $CONFIGUREPARAMDEBUG
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then
@@ -233,7 +233,7 @@ build_usrsctp()
 	pushd "usrsctp"
 	./bootstrap
 	if [ $DOBUILD = TRUE ]; then
-	mingw32-configure $CONFIGUREPARAMDEBUG
+	$MINGW-configure $CONFIGUREPARAMDEBUG
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then
@@ -248,7 +248,7 @@ build_openwebrtc-gst-plugins()
 	pushd "openwebrtc-gst-plugins"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
-	mingw32-configure $CONFIGUREPARAMDEBUG
+	$MINGW-configure $CONFIGUREPARAMDEBUG
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then
@@ -266,7 +266,7 @@ build_libnice()
 	pushd "libnice"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
-	mingw32-configure $CONFIGUREPARAMDEBUG
+	$MINGW-configure $CONFIGUREPARAMDEBUG
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then
@@ -383,7 +383,7 @@ build_gst-plugins-good()
 	pushd "gst-plugins-good"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
-	mingw32-configure \
+	$MINGW-configure \
 		--disable-wavpack --disable-valgrind --disable-directsound \
 		--disable-libcaca --disable-waveform \
 		--libexec=/usr/$MINGWPATH/sys-root/mingw/libexec \
@@ -402,7 +402,7 @@ build_libsrtp()
 	echo "--- 18 --- libsrtp ---"
 	pushd "libsrtp"
 	if [ $DOBUILD = TRUE ]; then
-	mingw32-configure $CONFIGUREPARAMDEBUG
+	$MINGW-configure $CONFIGUREPARAMDEBUG
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then
@@ -417,7 +417,7 @@ build_gst-plugins-bad()
 	pushd "gst-plugins-bad"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
-	mingw32-configure \
+	$MINGW-configure \
 		--disable-directsound --disable-direct3d $CONFIGUREPARAMDEBUG \
 		--disable-examples --disable-gtk-doc --disable-winscreencap \
 		--disable-winks --disable-wasapi --disable-opencv
@@ -437,7 +437,7 @@ build_glib()
 	pushd "glib"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true
-	mingw32-configure \
+	$MINGW-configure \
 		--disable-directsound --disable-direct3d $CONFIGUREPARAMDEBUG \
 		--disable-examples --disable-gtk-doc --disable-winscreencap \
 		--disable-winks --disable-wasapi --disable-opencv
@@ -455,7 +455,7 @@ build_gst-libav()
 	pushd "gst-libav"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
-	mingw32-configure $CONFIGUREPARAMDEBUG
+	$MINGW-configure $CONFIGUREPARAMDEBUG
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then
@@ -470,7 +470,7 @@ build_gst-plugins-ugly()
 	pushd "gst-plugins-ugly"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
-	mingw32-configure \
+	$MINGW-configure \
 		--libexec=/usr/$MINGWPATH/sys-root/mingw/libexec \
 		$CONFIGUREPARAMDEBUG --disable-gtk-doc --disable-examples
 	$MINGW-make
@@ -613,8 +613,8 @@ case "$1" in
 		build > logbuildmain.txt 2>&1
 		;;
 	buildalllog)
-		setup_workspace
-		build > logbuildmain.txt 2>&1
+		setup_workspace > logbuildmain.txt 2>&1
+		build >> logbuildmain.txt 2>&1
 		;;
 	build_*)
 		build_kms-cmake-utils
