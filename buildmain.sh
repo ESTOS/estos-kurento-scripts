@@ -26,12 +26,14 @@ CONFIGUREPARAMDEBUG=--disable-debug
 DEBUGSUFFIX=
 DEBUGOPENSSL=
 DEBUGLIBVPX=
+DEBUGLIBSRTP=
 else
 BUILD_TYPE=Debug
 CONFIGUREPARAMDEBUG=--enable-debug
 DEBUGSUFFIX=d
 DEBUGOPENSSL=--debug
 DEBUGLIBVPX="--enable-debug --enable-debug-libs"
+DEBUGLIBSRTP=--enable-debug-logging
 fi
 
 function pause() {
@@ -402,7 +404,7 @@ build_libsrtp()
 	echo "--- 18 --- libsrtp ---"
 	pushd "libsrtp"
 	if [ $DOBUILD = TRUE ]; then
-	$MINGW-configure $CONFIGUREPARAMDEBUG
+	$MINGW-configure $DEBUGLIBSRTP
 	$MINGW-make
 	fi
 	if [ $DOINSTALL = TRUE ]; then

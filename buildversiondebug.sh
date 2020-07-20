@@ -240,7 +240,7 @@ cd ..
 
 echo "3.18 libsrtp"
 cd libsrtp/
-mingw32-configure --enable-debug
+mingw32-configure --enable-debug-logging
 mingw32-make
 pause
 sudo mingw32-make install

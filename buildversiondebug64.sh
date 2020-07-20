@@ -242,7 +242,7 @@ cd ..
 
 echo "3.18 libsrtp"
 cd libsrtp/
-mingw64-configure --enable-debug
+mingw64-configure --enable-debug-logging
 mingw64-make
 pause
 sudo mingw64-make install
