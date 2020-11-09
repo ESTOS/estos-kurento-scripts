@@ -80,6 +80,7 @@ pause
 sudo mingw32-make install
 cd ..
 
+#fi
 
 echo "3.8 kms-core"
 # if this is executed using root, cmake will not find the kurentocreator
@@ -95,6 +96,8 @@ pause
 sudo mingw32-make install
 cd ..
 
+#fi
+#if false; then
 
 echo "3.9 libevent"
 cd libevent/
@@ -136,9 +139,11 @@ mingw32-configure --enable-debug
 mingw32-make
 pause
 sudo mingw32-make install
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/bin/libgstsctp-1.5.dll
 sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/lib/libgstsctp-1.5.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libgstsctp-1.5.dll 
 cd ..
 
+#fi
 
 echo "3.13 libnice"
 cd libnice/
@@ -149,6 +154,8 @@ pause
 sudo mingw32-make install
 cd ..
 
+#fi
+#if false; then
 
 echo "3.14 kms-elements"
 mkdir kms-elements-build
@@ -158,6 +165,8 @@ mingw32-make
 pause
 sudo mingw32-make install
 cd ..
+
+#if false; then
 
 echo "3.15 opencv"
 cd opencv
@@ -189,18 +198,26 @@ sed -i 's/-isystem\ \/usr\/i686-w64-mingw32\/sys-root\/mingw\/include\ / /g' ./m
 mingw32-make
 sudo mingw32-make install
 sudo cp unix-install/opencv.pc /usr/i686-w64-mingw32/sys-root/mingw/lib/pkgconfig/
-sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_core2413.dll.a \
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_core.a
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_core2413d.dll.a \
   /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_core.a
-sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_highgui2413.dll.a \
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_highgui.a
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_highgui2413d.dll.a \
   /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_highgui.a
-sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_imgproc2413.dll.a \
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_imgproc.a
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_imgproc2413d.dll.a \
   /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_imgproc.a
-sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_objdetect2413.dll.a \
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_objdetect.a
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/lib/libopencv_objdetect2413d.dll.a \
   /usr/i686-w64-mingw32/sys-root/mingw/lib/libopencv_objdetect.a
-sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_core2413.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_core2413.dll
-sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_highgui2413.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_highgui2413.dll
-sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_imgproc2413.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_imgproc2413.dll
-sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_objdetect2413.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_objdetect2413.dll
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_core2413.dll
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_highgui2413.dll
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_imgproc2413.dll
+sudo rm /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_objdetect2413.dll
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_core2413d.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_core2413.dll
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_highgui2413d.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_highgui2413.dll
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_imgproc2413d.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_imgproc2413.dll
+sudo ln -s /usr/i686-w64-mingw32/sys-root/mingw/x86/mingw/bin/libopencv_objdetect2413d.dll /usr/i686-w64-mingw32/sys-root/mingw/bin/libopencv_objdetect2413.dll
 cd ..
 
 
@@ -241,7 +258,7 @@ pause
 sudo mingw32-make install
 cd ..
 
-fi
+#fi
 
 echo "3.19 gst-plugins-bad"
 cd gst-plugins-bad/
@@ -258,23 +275,10 @@ pause
 
 cd ..
 
-if false; then
+#if false; then
+fi
 
-echo "3.20 gst-libav"
-cd gst-libav/
-./autogen.sh
-mingw32-configure \
-  --disable-directsound --disable-direct3d --enable-debug \
-  --disable-examples --disable-gtk-doc --disable-winscreencap \
-  --disable-winks --disable-wasapi --disable-opencv
-printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
-mingw32-make
-pause
-#sudo mingw32-make install
-
-cd ..
-
-echo "3.21 glib"
+echo "3.20 glib"
 cd glib/
 ./autogen.sh
 mingw32-configure \
@@ -287,8 +291,21 @@ pause
 
 cd ..
 
-#fi
-#if false; then
+if false; then
+
+echo "3.21 gst-libav"
+cd gst-libav/
+./autogen.sh
+mingw32-configure \
+  --disable-directsound --disable-direct3d --enable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
+mingw32-make
+pause
+#sudo mingw32-make install
+
+cd ..
 
 echo "3.22 openssl"
 cd openssl/

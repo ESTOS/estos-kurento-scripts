@@ -127,13 +127,13 @@ git checkout -f $1
 git pull origin $1
 cd ..
 
-#cd gst-libav/
-#git checkout origin/$1 -b $1
-#git checkout -f $1
-#git pull origin $1
-#cd ..
+cd glib/
+git checkout origin/$1 -b $1
+git checkout -f $1
+git pull origin $1
+cd ..
 
-#cd glib/
+#cd gst-libav/
 #git checkout origin/$1 -b $1
 #git checkout -f $1
 #git pull origin $1

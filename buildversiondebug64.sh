@@ -107,7 +107,10 @@ cd ..
 echo "3.10 kurento-media-server"
 mkdir kurento-media-server-build
 cd kurento-media-server-build/
-mingw64-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
+#problem mit mingw -> too many sections (40348)... Fatal error: can't write 97 bytes to section .text of CMakeFiles/websocketTransport.dir/WebSocketTransport.cpp.obj because: 'File too big'
+#nur bei 64 bit -> 32 bit ok
+#mingw64-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
+mingw64-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MODULE_PATH=$cmakemodules ../kurento-media-server
 mingw64-make
 pause
 sudo mingw64-make install
@@ -131,6 +134,7 @@ mingw64-configure --enable-debug
 mingw64-make
 pause
 sudo mingw64-make install
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libgstsctp-1.5.dll
 sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libgstsctp-1.5.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libgstsctp-1.5.dll 
 cd ..
 
@@ -184,18 +188,26 @@ sed -i 's/-isystem\ \/usr\/x86_64-w64-mingw32\/sys-root\/mingw\/include\ / /g' .
 mingw64-make
 sudo mingw64-make install
 sudo cp unix-install/opencv.pc /usr/x86_64-w64-mingw32/sys-root/mingw/lib/pkgconfig/
-sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/lib/libopencv_core2413.dll.a \
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libopencv_core.a
+sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/lib/libopencv_core2413d.dll.a \
   /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libopencv_core.a
-sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/lib/libopencv_highgui2413.dll.a \
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libopencv_highgui.a
+sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/lib/libopencv_highgui2413d.dll.a \
   /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libopencv_highgui.a
-sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/lib/libopencv_imgproc2413.dll.a \
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libopencv_imgproc.a
+sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/lib/libopencv_imgproc2413d.dll.a \
   /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libopencv_imgproc.a
-sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/lib/libopencv_objdetect2413.dll.a \
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libopencv_objdetect.a
+sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/lib/libopencv_objdetect2413d.dll.a \
   /usr/x86_64-w64-mingw32/sys-root/mingw/lib/libopencv_objdetect.a
-sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/bin/libopencv_core2413.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_core2413.dll
-sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/bin/libopencv_highgui2413.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_highgui2413.dll
-sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/bin/libopencv_imgproc2413.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_imgproc2413.dll
-sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/bin/libopencv_objdetect2413.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_objdetect2413.dll
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_core2413.dll
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_highgui2413.dll
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_imgproc2413.dll
+sudo rm /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_objdetect2413.dll
+sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/bin/libopencv_core2413d.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_core2413.dll
+sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/bin/libopencv_highgui2413d.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_highgui2413.dll
+sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/bin/libopencv_imgproc2413d.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_imgproc2413.dll
+sudo ln -s /usr/x86_64-w64-mingw32/sys-root/mingw/x64/mingw/bin/libopencv_objdetect2413d.dll /usr/x86_64-w64-mingw32/sys-root/mingw/bin/libopencv_objdetect2413.dll
 cd ..
 
 
@@ -251,7 +263,20 @@ sudo mingw64-make install
 
 cd ..
 
-echo "3.20 gst-libav"
+echo "3.20 glib"
+cd glib/
+./autogen.sh
+mingw64-configure \
+  --disable-directsound --disable-direct3d --enable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+mingw64-make
+pause
+sudo mingw64-make install
+
+cd ..
+
+echo "3.21 gst-libav"
 cd gst-libav/
 ./autogen.sh
 mingw64-configure \
@@ -259,19 +284,6 @@ mingw64-configure \
   --disable-examples --disable-gtk-doc --disable-winscreencap \
   --disable-winks --disable-wasapi --disable-opencv
 printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
-mingw64-make
-pause
-#sudo mingw64-make install
-
-cd ..
-
-echo "3.21 glib"
-cd glib/
-./autogen.sh
-mingw64-configure \
-  --disable-directsound --disable-direct3d --enable-debug \
-  --disable-examples --disable-gtk-doc --disable-winscreencap \
-  --disable-winks --disable-wasapi --disable-opencv
 mingw64-make
 pause
 #sudo mingw64-make install
@@ -286,7 +298,7 @@ cd ..
 #cp libeay32.dll libcrypto-10.dll
 #cp ssleay32.dll libssl-10.dll
 #pause
-#sudo mingw64-make install
+##sudo mingw64-make install
 
 #cd ..
 

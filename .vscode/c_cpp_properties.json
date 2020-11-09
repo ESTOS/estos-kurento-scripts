@@ -10,7 +10,28 @@
             "intelliSenseMode": "gcc-x64",
             "browse": {
                 "path": [
-                    "${workspaceFolder}"
+                    "${workspaceFolder}",
+                    "x:\\usr\\i686-w64-mingw32\\sys-root\\mingw\\include\\**"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "includePath": [
+                "x:\\home\\builder\\work\\estos\\kurento\\estos-kurento-scripts\\**"
+            ]
+        },
+        {
+            "name": "Win64",
+            "defines": [
+                "_DEBUG",
+                "UNICODE"
+            ],
+            "compilerPath": "",
+            "intelliSenseMode": "gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "x:\\usr\\x86_64-w64-mingw32\\sys-root\\mingw\\include\\**"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
