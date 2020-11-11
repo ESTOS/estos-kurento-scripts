@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 #if [ -z "$1" ]
 #then
 #      echo "needs branch argument"
