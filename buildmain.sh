@@ -6,8 +6,8 @@
 
 #MINGW=mingw32
 MINGW=mingw64
-#BUILDTYPE=RELEASE
-BUILDTYPE=DEBUG
+BUILDTYPE=RELEASE
+#BUILDTYPE=DEBUG
 
 DOINSTALL=TRUE
 DOBUILD=TRUE
@@ -516,14 +516,14 @@ https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14
 https://github.com/ESTOS/kurento-media-server.git         d9e73c6f5b940dc10c9f99202fc666fe8fd05256
 https://github.com/ESTOS/usrsctp.git                      6a7541145d3b802c632c9e164eecae58e7780f36
 https://github.com/ESTOS/openwebrtc-gst-plugins.git       079ccd07956a33c8c5bcca1c1a39cc19b8167370
-https://github.com/ESTOS/libnice.git                      0a3bfcafa2faf7d3224eb7c2178861bcecb702d1
-https://github.com/ESTOS/kms-elements.git                 4acf61ed290459d9e4568caaaeee7193ef3fbc3f
+https://github.com/ESTOS/libnice.git                      e4bf28cae98420fe760a2b7cba1fcf0fadc2b784
+https://github.com/ESTOS/kms-elements.git                 d0d25bf5c28656f714872ec4e68f4f353540ac32
 https://github.com/ESTOS/opencv.git                       d68e3502278d6fc5a1de0ce8f7951d9961b20913
 https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
 https://github.com/ESTOS/gst-plugins-good.git             91d38231582237eb6f6bf88bae37bdd8ef073b78
 https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 https://github.com/ESTOS/gst-plugins-bad.git              ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
-https://github.com/ESTOS/glib.git                         acee2a89397f8c91145bbeb174723026f931cae4
+https://github.com/ESTOS/glib.git                         b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
 https://github.com/ESTOS/gst-libav.git                    493eee49c7171e7fc0bf0110e30d445ba573dc5e
 https://github.com/ESTOS/gst-plugins-ugly.git             2685b0f252bf0ed6aa27a5c69e82e05289346ff1
 https://github.com/ESTOS/openssl.git                      5dd94f1847c744929a3bd24819f1c99644bb18c7
@@ -570,6 +570,7 @@ set -e #stop on error
 set -x #print all executed command
 	build_kms-cmake-utils
 	getcmakemodules
+	build_glib
 	build_kurento-module-creator
 	build_gstreamer
 	build_gst-plugins-base
@@ -588,7 +589,6 @@ set -x #print all executed command
 	build_gst-plugins-good
 	build_libsrtp
 	build_gst-plugins-bad
-	build_glib
 	#build_gst-libav
 	#build_gst-plugins-ugly
 	#build_openssl
