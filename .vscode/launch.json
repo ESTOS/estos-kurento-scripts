@@ -8,13 +8,13 @@
              "program": "x:/build/MediaService/kmswindows-32/bin/uc-media-server.exe",
              "args": [  "-d","x:/build/MediaService/kmswindows-32/log",
                         "--gst-debug-level=3",
-                        "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:5,rtpjitterbuffer:3,audioencoder:3,kmsutils:3,rtpsynchronizer:3"
+                        "--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,rtpjitterbuffer:3,audioencoder:3,rtpsynchronizer:3"
                      ],
              "stopAtEntry": false,
              "cwd": "x:/build/MediaService/kmswindows-32/bin/",
              "environment":[
                  {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
-                 {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose"}
+                 {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose"}
                 ],
              //"environment": [],
              "externalConsole": false,
@@ -35,13 +35,13 @@
             "program": "x:/build/MediaService/kmswindows-64/bin/uc-media-server.exe",
             "args": [  "-d","x:/build/MediaService/kmswindows-64/log",
                        "--gst-debug-level=3",
-                       "--gst-debug=KurentoWebSocketTransport:5,KurentoWebSocketEventHandler:5,GST_ELEMENT_FACTORY:5,rtpjitterbuffer:3,audioencoder:3,kmsutils:3,rtpsynchronizer:3"
+                       "--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
                     ],
             "stopAtEntry": false,
             "cwd": "x:/build/MediaService/kmswindows-64/bin/",
             "environment":[
                 {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
-                {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose"}
+                {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose"}
                ],
             //"environment": [],
             "externalConsole": false,
