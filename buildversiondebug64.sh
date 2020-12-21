@@ -21,6 +21,18 @@ getcmakemodules
 pwd
 pause 
 
+echo "3.20 glib"
+cd glib/
+./autogen.sh
+mingw64-configure \
+  --disable-directsound --disable-direct3d --enable-debug \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+mingw64-make
+pause
+sudo mingw64-make install
+
+cd ..
 
 echo "3.2 kurento-module-creator"
 cd kurento-module-creator/
@@ -263,19 +275,6 @@ sudo mingw64-make install
 
 cd ..
 
-echo "3.20 glib"
-cd glib/
-./autogen.sh
-mingw64-configure \
-  --disable-directsound --disable-direct3d --enable-debug \
-  --disable-examples --disable-gtk-doc --disable-winscreencap \
-  --disable-winks --disable-wasapi --disable-opencv
-mingw64-make
-pause
-sudo mingw64-make install
-
-cd ..
-
 echo "3.21 gst-libav"
 cd gst-libav/
 ./autogen.sh
@@ -292,7 +291,7 @@ cd ..
 
 #echo "3.22 openssl" dont call it here in this script because the environment dont fits
 #cd openssl/
-#./Configure shared --cross-compile-prefix=x86_64-w64-mingw32- --debug mingw
+#./Configure shared --cross-compile-prefix=x86_64-w64-mingw32- --debug mingw64
 #mingw64-make depend
 #mingw64-make
 #cp libeay32.dll libcrypto-10.dll

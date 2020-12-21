@@ -21,6 +21,18 @@ getcmakemodules
 pwd
 pause 
 
+echo "3.20 glib"
+cd glib/
+./autogen.sh
+mingw32-configure \
+  --disable-directsound --disable-direct3d \
+  --disable-examples --disable-gtk-doc --disable-winscreencap \
+  --disable-winks --disable-wasapi --disable-opencv
+mingw32-make
+pause
+sudo mingw32-make install
+
+cd ..
 
 echo "3.2 kurento-module-creator"
 cd kurento-module-creator/
@@ -254,19 +266,6 @@ mingw32-configure \
   --disable-winks --disable-wasapi --disable-opencv
 sed -i 's/\buint\b/unsigned/g' ext/opencv/gstmotioncells.cpp ## We may need this later
 printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
-mingw32-make
-pause
-sudo mingw32-make install
-
-cd ..
-
-echo "3.20 glib"
-cd glib/
-./autogen.sh
-mingw32-configure \
-  --disable-directsound --disable-direct3d \
-  --disable-examples --disable-gtk-doc --disable-winscreencap \
-  --disable-winks --disable-wasapi --disable-opencv
 mingw32-make
 pause
 sudo mingw32-make install
