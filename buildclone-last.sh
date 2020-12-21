@@ -48,11 +48,11 @@ git checkout 079ccd07956a33c8c5bcca1c1a39cc19b8167370
 cd ..
 git clone https://github.com/ESTOS/libnice.git
 cd libnice
-git checkout 269d2ea5ebfc80addf5f3fdac446eef46f6fd4be
+git checkout 50f84f98c134803f74b2d0fa70fbc83971473b2f
 cd ..
 git clone https://github.com/ESTOS/kms-elements.git
 cd kms-elements
-git checkout 81a45062d30f95c772a78f90e9200dd9df8428f3
+git checkout efc093be98b05884d910fa763c05c0b85d7d7903
 cd ..
 git clone https://github.com/ESTOS/opencv.git
 cd opencv
@@ -76,5 +76,5 @@ git checkout ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
 cd ..
 git clone https://github.com/ESTOS/glib.git
 cd glib
-git checkout acee2a89397f8c91145bbeb174723026f931cae4
+git checkout b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
 cd ..

@@ -15,9 +15,11 @@ DOBUILD=TRUE
 if [ $MINGW = mingw32 ]; then
 MINGWPATH=i686-w64-mingw32
 MINGWX=x86
+MINGWP1=mingw
 else
 MINGWPATH=x86_64-w64-mingw32
 MINGWX=x64
+MINGWP1=mingw64
 fi
 
 if [ $BUILDTYPE = RELEASE ]; then
@@ -63,9 +65,27 @@ build_kms-cmake-utils()
 	popd
 }
 
+build_glib()
+{
+	echo "--- 02 --- glib ---"
+	pushd "glib"
+	if [ $DOBUILD = TRUE ]; then
+	./autogen.sh || true
+	$MINGW-configure \
+		--disable-directsound --disable-direct3d $CONFIGUREPARAMDEBUG \
+		--disable-examples --disable-gtk-doc --disable-winscreencap \
+		--disable-winks --disable-wasapi --disable-opencv
+	$MINGW-make
+	fi
+	if [ $DOINSTALL = TRUE ]; then
+	sudo $MINGW-make install
+	fi
+	popd
+}
+
 build_kurento-module-creator()
 {
-	echo "--- 02 --- kurento-module-creator ---"
+	echo "--- 03 --- kurento-module-creator ---"
 	mkdir -p "kurento-module-creator"
 	pushd "kurento-module-creator"
 	if [ $DOBUILD = TRUE ]; then
@@ -79,7 +99,7 @@ build_kurento-module-creator()
 
 build_gstreamer()
 {
-	echo "--- 03 --- gstreamer ---"
+	echo "--- 04 --- gstreamer ---"
 	pushd "gstreamer"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -95,7 +115,7 @@ build_gstreamer()
 
 build_gst-plugins-base()
 {
-	echo "--- 04 --- gst-plugins-base-1.5 ---"
+	echo "--- 05 --- gst-plugins-base-1.5 ---"
 	pushd "gst-plugins-base"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -110,7 +130,7 @@ build_gst-plugins-base()
 
 build_jsoncpp()
 {
-	echo "--- 05 --- jsoncpp ---"
+	echo "--- 06 --- jsoncpp ---"
 	mkdir -p "jsoncpp-build"
 	pushd "jsoncpp-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -125,7 +145,7 @@ build_jsoncpp()
 
 build_kms-jsonrpc()
 {
-	echo "--- 06 --- kms-jsonrpc ---"
+	echo "--- 07 --- kms-jsonrpc ---"
 	mkdir -p "kms-jsonrpc-build"
 	pushd "kms-jsonrpc-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -142,7 +162,7 @@ build_kms-jsonrpc()
 
 build_libvpx()
 {
-	echo "--- 07 --- libvpx ---"
+	echo "--- 08 --- libvpx ---"
 	pushd "libvpx"
 	if [ $MINGW = mingw32 ]; then
 		eval `rpm --eval %{mingw32_env}`
@@ -167,7 +187,7 @@ build_libvpx()
 
 build_kms-core()
 {
-	echo "--- 08 --- kms-core ---"
+	echo "--- 09 --- kms-core ---"
 if [[ $EUID == 0 ]]; then
 	echo "Build this step as root will lead to troubles later! (e.g. kurentocreator will not be found) Stop here now."
 	exit
@@ -190,7 +210,7 @@ fi
 
 build_libevent()
 {
-	echo "--- 09 --- libevent ---"
+	echo "--- 10 --- libevent ---"
 	pushd "libevent"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## However, you should not build using configured Makefile
@@ -205,7 +225,7 @@ build_libevent()
 
 build_kurento-media-server()
 {
-	echo "--- 10 --- kurento-media-server ---"
+	echo "--- 11 --- kurento-media-server ---"
 	mkdir -p "kurento-media-server-build"
 	pushd "kurento-media-server-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -231,7 +251,7 @@ build_kurento-media-server()
 
 build_usrsctp()
 {
-	echo "--- 11 --- usersctp ---"
+	echo "--- 12 --- usersctp ---"
 	pushd "usrsctp"
 	./bootstrap
 	if [ $DOBUILD = TRUE ]; then
@@ -246,7 +266,7 @@ build_usrsctp()
 
 build_openwebrtc-gst-plugins()
 {
-	echo "--- 12 --- openwebrtc-gst-plugins ---"
+	echo "--- 13 --- openwebrtc-gst-plugins ---"
 	pushd "openwebrtc-gst-plugins"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -264,7 +284,7 @@ build_openwebrtc-gst-plugins()
 
 build_libnice()
 {
-	echo "--- 13 --- libnice ---"
+	echo "--- 14 --- libnice ---"
 	pushd "libnice"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -279,7 +299,7 @@ build_libnice()
 
 build_kms-elements()
 {
-	echo "--- 14 --- kms-elements ---"
+	echo "--- 15 --- kms-elements ---"
 	mkdir -p "kms-elements-build"
 	pushd "kms-elements-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -298,7 +318,7 @@ build_kms-elements()
 
 build_opencv()
 {
-	echo "--- 15 --- opencv ---"
+	echo "--- 16 --- opencv ---"
 	mkdir -p "opencv-build"
 	pushd "opencv-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -361,7 +381,7 @@ build_opencv()
 
 build_kms-filters()
 {
-	echo "--- 16 --- kms-filters ---"
+	echo "--- 17 --- kms-filters ---"
 	mkdir -p "kms-filters-build"
 	pushd "kms-filters-build"
 	if [ $DOBUILD = TRUE ]; then
@@ -381,7 +401,7 @@ build_kms-filters()
 
 build_gst-plugins-good()
 {
-	echo "--- 17 --- gst-plugins-good ---"
+	echo "--- 18 --- gst-plugins-good ---"
 	pushd "gst-plugins-good"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -401,7 +421,7 @@ build_gst-plugins-good()
 
 build_libsrtp()
 {
-	echo "--- 18 --- libsrtp ---"
+	echo "--- 19 --- libsrtp ---"
 	pushd "libsrtp"
 	if [ $DOBUILD = TRUE ]; then
 	$MINGW-configure $DEBUGLIBSRTP
@@ -415,7 +435,7 @@ build_libsrtp()
 
 build_gst-plugins-bad()
 {
-	echo "--- 19 --- gst-plugins-bad ---"
+	echo "--- 20 --- gst-plugins-bad ---"
 	pushd "gst-plugins-bad"
 	if [ $DOBUILD = TRUE ]; then
 	./autogen.sh || true ## Ignore configuration errors
@@ -433,23 +453,6 @@ build_gst-plugins-bad()
 	popd
 }
 
-build_glib()
-{
-	echo "--- 20 --- glib ---"
-	pushd "glib"
-	if [ $DOBUILD = TRUE ]; then
-	./autogen.sh || true
-	$MINGW-configure \
-		--disable-directsound --disable-direct3d $CONFIGUREPARAMDEBUG \
-		--disable-examples --disable-gtk-doc --disable-winscreencap \
-		--disable-winks --disable-wasapi --disable-opencv
-	$MINGW-make
-	fi
-	if [ $DOINSTALL = TRUE ]; then
-	sudo $MINGW-make install
-	fi
-	popd
-}
 
 build_gst-libav()
 {
@@ -488,11 +491,16 @@ build_openssl()
 	echo "--- 23 --- openssl ---"
 	pushd "openssl"
 	if [ $DOBUILD = TRUE ]; then
-	./Configure shared --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL mingw
+	./Configure shared --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
 	$MINGW-make depend
 	$MINGW-make
-	cp libeay32.dll libcrypto-10.dll
-	cp ssleay32.dll libssl-10.dll
+	if [ $MINGW = mingw64 ]; then
+		cp libcrypto-3-x64.dll libcrypto-10.dll
+		cp libssl-3-x64.dll libssl-10.dll
+	else
+		cp libeay32.dll libcrypto-10.dll
+		cp ssleay32.dll libssl-10.dll
+	fi
 	fi
 	#if [ $DOINSTALL = TRUE ]; then
 	#sudo $MINGW-make install
@@ -516,14 +524,14 @@ https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14
 https://github.com/ESTOS/kurento-media-server.git         d9e73c6f5b940dc10c9f99202fc666fe8fd05256
 https://github.com/ESTOS/usrsctp.git                      6a7541145d3b802c632c9e164eecae58e7780f36
 https://github.com/ESTOS/openwebrtc-gst-plugins.git       079ccd07956a33c8c5bcca1c1a39cc19b8167370
-https://github.com/ESTOS/libnice.git                      269d2ea5ebfc80addf5f3fdac446eef46f6fd4be
-https://github.com/ESTOS/kms-elements.git                 81a45062d30f95c772a78f90e9200dd9df8428f3
+https://github.com/ESTOS/libnice.git                      50f84f98c134803f74b2d0fa70fbc83971473b2f
+https://github.com/ESTOS/kms-elements.git                 efc093be98b05884d910fa763c05c0b85d7d7903
 https://github.com/ESTOS/opencv.git                       d68e3502278d6fc5a1de0ce8f7951d9961b20913
 https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
 https://github.com/ESTOS/gst-plugins-good.git             91d38231582237eb6f6bf88bae37bdd8ef073b78
 https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 https://github.com/ESTOS/gst-plugins-bad.git              ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
-https://github.com/ESTOS/glib.git                         acee2a89397f8c91145bbeb174723026f931cae4
+https://github.com/ESTOS/glib.git                         b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
 https://github.com/ESTOS/gst-libav.git                    493eee49c7171e7fc0bf0110e30d445ba573dc5e
 https://github.com/ESTOS/gst-plugins-ugly.git             2685b0f252bf0ed6aa27a5c69e82e05289346ff1
 https://github.com/ESTOS/openssl.git                      5dd94f1847c744929a3bd24819f1c99644bb18c7
@@ -570,6 +578,7 @@ set -e #stop on error
 set -x #print all executed command
 	build_kms-cmake-utils
 	getcmakemodules
+	build_glib
 	build_kurento-module-creator
 	build_gstreamer
 	build_gst-plugins-base
@@ -588,7 +597,6 @@ set -x #print all executed command
 	build_gst-plugins-good
 	build_libsrtp
 	build_gst-plugins-bad
-	build_glib
 	#build_gst-libav
 	#build_gst-plugins-ugly
 	#build_openssl
