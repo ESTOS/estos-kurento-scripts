@@ -36,7 +36,8 @@
             "program": "x:/build/MediaService/kmswindows-64/bin/uc-media-server.exe",
             "args": [  "-d","x:/build/MediaService/kmswindows-64/log",
                        "--gst-debug-level=3",
-                       "--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
+                       //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
+                       "--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5"
                     ],
             "stopAtEntry": false,
             "cwd": "x:/build/MediaService/kmswindows-64/bin/",
