@@ -28,7 +28,7 @@ git checkout a90944ce794986d8c0daab1449903909ba1956a7
 cd ..
 git clone https://github.com/ESTOS/kms-core.git
 cd kms-core
-git checkout 5cd6a62f9a24845182129c46b8f8d4cb5d443e2f
+git checkout 19a8575224373f0a4fcba27dd438daf8d50ae796
 cd ..
 git clone https://github.com/ESTOS/libevent.git
 cd libevent
@@ -64,7 +64,7 @@ git checkout 9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
 cd ..
 git clone https://github.com/ESTOS/gst-plugins-good.git
 cd gst-plugins-good
-git checkout 91d38231582237eb6f6bf88bae37bdd8ef073b78
+git checkout a423b325c07a45f6d5af298f06fad2b2b9c66f76
 cd ..
 git clone https://github.com/ESTOS/libsrtp.git
 cd libsrtp

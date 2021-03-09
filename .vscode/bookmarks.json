@@ -1,522 +1,569 @@
-[
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\gst-plugins\\commons\\kmsenctreebin.c",
-		"bookmarks": [
-			{
-				"line": 198,
-				"column": 56,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\gst-plugins-base\\gst-libs\\gst\\rtp\\gstrtpbuffer.c",
-		"bookmarks": [
-			{
-				"line": 1266,
-				"column": 28,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\.vscode\\launch.json",
-		"bookmarks": [
-			{
-				"line": 10,
-				"column": 29,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\gst-plugins-good\\gst\\rtpmanager\\gstrtpsession.c",
-		"bookmarks": [
-			{
-				"line": 1918,
-				"column": 30,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\gst-plugins-good\\gst\\rtpmanager\\gstrtpjitterbuffer.c",
-		"bookmarks": [
-			{
-				"line": 2891,
-				"column": 27,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\gst-plugins\\commons\\kmsrtpsynchronizer.c",
-		"bookmarks": [
-			{
-				"line": 301,
-				"column": 34,
-				"label": ""
-			},
-			{
-				"line": 385,
-				"column": 46,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\gst-plugins\\commons\\kmsutils.c",
-		"bookmarks": [
-			{
-				"line": 1496,
-				"column": 36,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\gst-plugins\\commons\\kmsbasertpendpoint.c",
-		"bookmarks": [
-			{
-				"line": 2118,
-				"column": 36,
-				"label": ""
-			},
-			{
-				"line": 2251,
-				"column": 9,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\gst-plugins-base\\gst-libs\\gst\\audio\\gstaudioencoder.c",
-		"bookmarks": [
-			{
-				"line": 356,
-				"column": 10,
-				"label": ""
-			},
-			{
-				"line": 1178,
-				"column": 23,
-				"label": ""
-			},
-			{
-				"line": 1302,
-				"column": 33,
-				"label": ""
-			},
-			{
-				"line": 1378,
-				"column": 29,
-				"label": ""
-			},
-			{
-				"line": 2014,
-				"column": 16,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\gst-plugins-base\\ext\\opus\\gstopusenc.c",
-		"bookmarks": [
-			{
-				"line": 1145,
-				"column": 19,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\glib\\glib\\gmem.c",
-		"bookmarks": [
-			{
-				"line": 87,
-				"column": 11,
-				"label": ""
-			},
-			{
-				"line": 185,
-				"column": 17,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kurento-media-server\\server\\transport\\websocket\\WebSocketTransport.cpp",
-		"bookmarks": [
-			{
-				"line": 36,
-				"column": 42,
-				"label": ""
-			},
-			{
-				"line": 69,
-				"column": 18,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kurento-media-server\\server\\transport\\websocket\\websocketpp\\transport\\asio\\security\\tls.hpp",
-		"bookmarks": [
-			{
-				"line": 478,
-				"column": 6,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\libnice\\agent\\conncheck.c",
-		"bookmarks": [
-			{
-				"line": 751,
-				"column": 42,
-				"label": ""
-			},
-			{
-				"line": 756,
-				"column": 73,
-				"label": ""
-			},
-			{
-				"line": 773,
-				"column": 24,
-				"label": ""
-			},
-			{
-				"line": 1884,
-				"column": 51,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\libnice\\agent\\agent.c",
-		"bookmarks": [
-			{
-				"line": 542,
-				"column": 24,
-				"label": ""
-			},
-			{
-				"line": 902,
-				"column": 11,
-				"label": ""
-			},
-			{
-				"line": 1558,
-				"column": 10,
-				"label": ""
-			},
-			{
-				"line": 1615,
-				"column": 31,
-				"label": ""
-			},
-			{
-				"line": 3911,
-				"column": 23,
-				"label": ""
-			},
-			{
-				"line": 5184,
-				"column": 44,
-				"label": ""
-			},
-			{
-				"line": 5293,
-				"column": 33,
-				"label": ""
-			},
-			{
-				"line": 5309,
-				"column": 14,
-				"label": ""
-			},
-			{
-				"line": 5400,
-				"column": 20,
-				"label": ""
-			},
-			{
-				"line": 5529,
-				"column": 32,
-				"label": ""
-			},
-			{
-				"line": 5804,
-				"column": 32,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\gst-plugins\\kmscompositemixer.c",
-		"bookmarks": [
-			{
-				"line": 29,
-				"column": 27,
-				"label": ""
-			},
-			{
-				"line": 638,
-				"column": 7,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\gst-plugins\\kmsdispatcheronetomany.c",
-		"bookmarks": [
-			{
-				"line": 198,
-				"column": 21,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\glib\\glib\\gthread-win32.c",
-		"bookmarks": [
-			{
-				"line": 459,
-				"column": 10,
-				"label": ""
-			},
-			{
-				"line": 469,
-				"column": 10,
-				"label": ""
-			},
-			{
-				"line": 475,
-				"column": 41,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\usrsctp\\usrsctplib\\user_socketvar.h",
-		"bookmarks": [
-			{
-				"line": 105,
-				"column": 6,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kurento-media-server\\server\\ServerMethods.cpp",
-		"bookmarks": [
-			{
-				"line": 64,
-				"column": 15,
-				"label": ""
-			},
-			{
-				"line": 85,
-				"column": 22,
-				"label": ""
-			},
-			{
-				"line": 653,
-				"column": 9,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kurento-media-server\\server\\ResourceManager.cpp",
-		"bookmarks": [
-			{
-				"line": 200,
-				"column": 9,
-				"label": ""
-			},
-			{
-				"line": 215,
-				"column": 8,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\glib\\glib\\gthread.c",
-		"bookmarks": [
-			{
-				"line": 819,
-				"column": 9,
-				"label": ""
-			},
-			{
-				"line": 861,
-				"column": 13,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\gst-plugins\\webrtcendpoint\\kmsiceniceagent.c",
-		"bookmarks": [
-			{
-				"line": 231,
-				"column": 14,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\MediaSet.cpp",
-		"bookmarks": [
-			{
-				"line": 123,
-				"column": 6,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\gstreamer\\gst\\gstpad.c",
-		"bookmarks": [
-			{
-				"line": 1273,
-				"column": 7,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\glib\\glib\\gpoll.c",
-		"bookmarks": [
-			{
-				"line": 284,
-				"column": 31,
-				"label": ""
-			},
-			{
-				"line": 404,
-				"column": 10,
-				"label": ""
-			},
-			{
-				"line": 428,
-				"column": 22,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\gstreamer\\libs\\gst\\base\\gstbasesink.c",
-		"bookmarks": [
-			{
-				"line": 3142,
-				"column": 18,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\objects\\SdpEndpointImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 165,
-				"column": 8,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\RtpEndpointImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 48,
-				"column": 10,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\CompositeImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 33,
-				"column": 20,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\WebRtcEndpointImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 432,
-				"column": 29,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\DispatcherOneToManyImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 36,
-				"column": 31,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\MixerImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 35,
-				"column": 30,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\objects\\HubPortImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 33,
-				"column": 17,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\objects\\MediaElementImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 571,
-				"column": 23,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-core\\src\\server\\implementation\\objects\\MediaObjectImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 32,
-				"column": 32,
-				"label": ""
-			}
-		]
-	},
-	{
-		"path": "$ROOTPATH$\\kms-elements\\src\\server\\implementation\\objects\\PlayerEndpointImpl.cpp",
-		"bookmarks": [
-			{
-				"line": 99,
-				"column": 11,
-				"label": ""
-			}
-		]
-	}
-]
+{
+	"files": [
+		{
+			"path": "kms-core/src/gst-plugins/commons/kmsenctreebin.c",
+			"bookmarks": [
+				{
+					"line": 198,
+					"column": 56,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-base/gst-libs/gst/rtp/gstrtpbuffer.c",
+			"bookmarks": [
+				{
+					"line": 1266,
+					"column": 28,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": ".vscode/launch.json",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 29,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-good/gst/rtpmanager/gstrtpsession.c",
+			"bookmarks": [
+				{
+					"line": 1918,
+					"column": 30,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-good/gst/rtpmanager/gstrtpjitterbuffer.c",
+			"bookmarks": [
+				{
+					"line": 2891,
+					"column": 27,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/gst-plugins/commons/kmsrtpsynchronizer.c",
+			"bookmarks": [
+				{
+					"line": 301,
+					"column": 34,
+					"label": ""
+				},
+				{
+					"line": 385,
+					"column": 46,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/gst-plugins/commons/kmsutils.c",
+			"bookmarks": [
+				{
+					"line": 1496,
+					"column": 36,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/gst-plugins/commons/kmsbasertpendpoint.c",
+			"bookmarks": [
+				{
+					"line": 2118,
+					"column": 36,
+					"label": ""
+				},
+				{
+					"line": 2274,
+					"column": 17,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-base/gst-libs/gst/audio/gstaudioencoder.c",
+			"bookmarks": [
+				{
+					"line": 356,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 1178,
+					"column": 23,
+					"label": ""
+				},
+				{
+					"line": 1302,
+					"column": 33,
+					"label": ""
+				},
+				{
+					"line": 1378,
+					"column": 29,
+					"label": ""
+				},
+				{
+					"line": 2014,
+					"column": 16,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-base/ext/opus/gstopusenc.c",
+			"bookmarks": [
+				{
+					"line": 1145,
+					"column": 19,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "glib/glib/gmem.c",
+			"bookmarks": [
+				{
+					"line": 87,
+					"column": 11,
+					"label": ""
+				},
+				{
+					"line": 185,
+					"column": 17,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kurento-media-server/server/transport/websocket/WebSocketTransport.cpp",
+			"bookmarks": [
+				{
+					"line": 36,
+					"column": 42,
+					"label": ""
+				},
+				{
+					"line": 69,
+					"column": 18,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kurento-media-server/server/transport/websocket/websocketpp/transport/asio/security/tls.hpp",
+			"bookmarks": [
+				{
+					"line": 478,
+					"column": 6,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libnice/agent/conncheck.c",
+			"bookmarks": [
+				{
+					"line": 751,
+					"column": 42,
+					"label": ""
+				},
+				{
+					"line": 756,
+					"column": 73,
+					"label": ""
+				},
+				{
+					"line": 773,
+					"column": 24,
+					"label": ""
+				},
+				{
+					"line": 1884,
+					"column": 51,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libnice/agent/agent.c",
+			"bookmarks": [
+				{
+					"line": 542,
+					"column": 24,
+					"label": ""
+				},
+				{
+					"line": 902,
+					"column": 11,
+					"label": ""
+				},
+				{
+					"line": 1558,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 1615,
+					"column": 31,
+					"label": ""
+				},
+				{
+					"line": 3911,
+					"column": 23,
+					"label": ""
+				},
+				{
+					"line": 5184,
+					"column": 44,
+					"label": ""
+				},
+				{
+					"line": 5293,
+					"column": 33,
+					"label": ""
+				},
+				{
+					"line": 5309,
+					"column": 14,
+					"label": ""
+				},
+				{
+					"line": 5400,
+					"column": 20,
+					"label": ""
+				},
+				{
+					"line": 5529,
+					"column": 32,
+					"label": ""
+				},
+				{
+					"line": 5804,
+					"column": 32,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/gst-plugins/kmscompositemixer.c",
+			"bookmarks": [
+				{
+					"line": 29,
+					"column": 27,
+					"label": ""
+				},
+				{
+					"line": 638,
+					"column": 7,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/gst-plugins/kmsdispatcheronetomany.c",
+			"bookmarks": [
+				{
+					"line": 198,
+					"column": 21,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "glib/glib/gthread-win32.c",
+			"bookmarks": [
+				{
+					"line": 459,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 469,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 475,
+					"column": 41,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "usrsctp/usrsctplib/user_socketvar.h",
+			"bookmarks": [
+				{
+					"line": 105,
+					"column": 6,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kurento-media-server/server/ServerMethods.cpp",
+			"bookmarks": [
+				{
+					"line": 64,
+					"column": 15,
+					"label": ""
+				},
+				{
+					"line": 85,
+					"column": 22,
+					"label": ""
+				},
+				{
+					"line": 653,
+					"column": 9,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kurento-media-server/server/ResourceManager.cpp",
+			"bookmarks": [
+				{
+					"line": 200,
+					"column": 9,
+					"label": ""
+				},
+				{
+					"line": 215,
+					"column": 8,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "glib/glib/gthread.c",
+			"bookmarks": [
+				{
+					"line": 819,
+					"column": 9,
+					"label": ""
+				},
+				{
+					"line": 861,
+					"column": 13,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/gst-plugins/webrtcendpoint/kmsiceniceagent.c",
+			"bookmarks": [
+				{
+					"line": 231,
+					"column": 14,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/server/implementation/MediaSet.cpp",
+			"bookmarks": [
+				{
+					"line": 123,
+					"column": 6,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gstreamer/gst/gstpad.c",
+			"bookmarks": [
+				{
+					"line": 1273,
+					"column": 7,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "glib/glib/gpoll.c",
+			"bookmarks": [
+				{
+					"line": 284,
+					"column": 31,
+					"label": ""
+				},
+				{
+					"line": 404,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 428,
+					"column": 22,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gstreamer/libs/gst/base/gstbasesink.c",
+			"bookmarks": [
+				{
+					"line": 3142,
+					"column": 18,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/server/implementation/objects/SdpEndpointImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 165,
+					"column": 8,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/server/implementation/objects/RtpEndpointImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 48,
+					"column": 10,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/server/implementation/objects/CompositeImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 33,
+					"column": 20,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/server/implementation/objects/WebRtcEndpointImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 432,
+					"column": 29,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/server/implementation/objects/DispatcherOneToManyImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 36,
+					"column": 31,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/server/implementation/objects/MixerImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 35,
+					"column": 30,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/server/implementation/objects/HubPortImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 33,
+					"column": 17,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/server/implementation/objects/MediaElementImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 571,
+					"column": 23,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/server/implementation/objects/MediaObjectImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 32,
+					"column": 32,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/server/implementation/objects/PlayerEndpointImpl.cpp",
+			"bookmarks": [
+				{
+					"line": 99,
+					"column": 11,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "glib/glib/gshell.c",
+			"bookmarks": [
+				{
+					"line": 639,
+					"column": 18,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "glib/glib/gslice.c",
+			"bookmarks": [
+				{
+					"line": 286,
+					"column": 35,
+					"label": ""
+				},
+				{
+					"line": 675,
+					"column": 15,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-good/gst/rtpmanager/gstrtpssrcdemux.c",
+			"bookmarks": [
+				{
+					"line": 277,
+					"column": 48,
+					"label": ""
+				},
+				{
+					"line": 442,
+					"column": 19,
+					"label": ""
+				},
+				{
+					"line": 607,
+					"column": 35,
+					"label": ""
+				}
+			]
+		}
+	]
+}

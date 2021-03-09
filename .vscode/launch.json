@@ -38,10 +38,12 @@
                        "--gst-debug-level=3",
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
                        "--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5"
+                       //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,rtp*:9,audioencoder:9"
                     ],
             "stopAtEntry": false,
             "cwd": "x:/build/MediaService/kmswindows-64/bin/",
             "environment":[
+                //{"name":"G_SLICE", "value":"always-malloc,debug-blocks"},
                 {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
                 {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose"}
                ],
