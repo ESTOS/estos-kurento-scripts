@@ -192,6 +192,11 @@
 					"line": 1884,
 					"column": 51,
 					"label": ""
+				},
+				{
+					"line": 2368,
+					"column": 15,
+					"label": ""
 				}
 			]
 		},
@@ -531,21 +536,6 @@
 			]
 		},
 		{
-			"path": "glib/glib/gslice.c",
-			"bookmarks": [
-				{
-					"line": 286,
-					"column": 35,
-					"label": ""
-				},
-				{
-					"line": 675,
-					"column": 15,
-					"label": ""
-				}
-			]
-		},
-		{
 			"path": "gst-plugins-good/gst/rtpmanager/gstrtpssrcdemux.c",
 			"bookmarks": [
 				{
@@ -561,6 +551,41 @@
 				{
 					"line": 607,
 					"column": 35,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "../../../../../bk/build/estos-kurento-scripts/glib/glib/gslice.c",
+			"bookmarks": [
+				{
+					"line": 293,
+					"column": 9,
+					"label": ""
+				},
+				{
+					"line": 374,
+					"column": 27,
+					"label": ""
+				},
+				{
+					"line": 541,
+					"column": 18,
+					"label": ""
+				},
+				{
+					"line": 685,
+					"column": 23,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "../../../../../bk/build/estos-kurento-scripts/libnice/agent/conncheck.c",
+			"bookmarks": [
+				{
+					"line": 2367,
+					"column": 25,
 					"label": ""
 				}
 			]
