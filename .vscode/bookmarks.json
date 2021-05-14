@@ -34,7 +34,7 @@
 			"path": "gst-plugins-good/gst/rtpmanager/gstrtpsession.c",
 			"bookmarks": [
 				{
-					"line": 1922,
+					"line": 1967,
 					"column": 30,
 					"label": ""
 				}
@@ -44,17 +44,32 @@
 			"path": "gst-plugins-good/gst/rtpmanager/gstrtpjitterbuffer.c",
 			"bookmarks": [
 				{
-					"line": 2891,
+					"line": 136,
+					"column": 40,
+					"label": ""
+				},
+				{
+					"line": 156,
+					"column": 3,
+					"label": ""
+				},
+				{
+					"line": 2023,
+					"column": 4,
+					"label": ""
+				},
+				{
+					"line": 2895,
 					"column": 27,
 					"label": ""
 				},
 				{
-					"line": 3159,
+					"line": 3163,
 					"column": 50,
 					"label": ""
 				},
 				{
-					"line": 3984,
+					"line": 3989,
 					"column": 17,
 					"label": ""
 				}
@@ -89,12 +104,12 @@
 			"path": "kms-core/src/gst-plugins/commons/kmsbasertpendpoint.c",
 			"bookmarks": [
 				{
-					"line": 2119,
+					"line": 2120,
 					"column": 36,
 					"label": ""
 				},
 				{
-					"line": 2275,
+					"line": 2276,
 					"column": 17,
 					"label": ""
 				}
@@ -624,28 +639,13 @@
 					"label": ""
 				},
 				{
-					"line": 1071,
-					"column": 32,
-					"label": ""
-				},
-				{
-					"line": 1254,
-					"column": 25,
-					"label": ""
-				},
-				{
-					"line": 1839,
+					"line": 1441,
 					"column": 20,
 					"label": ""
-				}
-			]
-		},
-		{
-			"path": "kms-elements/src/gst-plugins/rtpendpoint/kmsrtpconnection.c",
-			"bookmarks": [
+				},
 				{
-					"line": 105,
-					"column": 19,
+					"line": 1456,
+					"column": 13,
 					"label": ""
 				}
 			]
@@ -726,6 +726,66 @@
 				{
 					"line": 398,
 					"column": 42,
+					"label": ""
+				},
+				{
+					"line": 1151,
+					"column": 33,
+					"label": ""
+				},
+				{
+					"line": 1195,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 1225,
+					"column": 36,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-base/gst-libs/gst/rtp/gstrtpbasedepayload.c",
+			"bookmarks": [
+				{
+					"line": 313,
+					"column": 36,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "../../../../../bk/build/estos-kurento-scripts/gst-plugins-good/gst/rtpmanager/rtpjitterbuffer.c",
+			"bookmarks": [
+				{
+					"line": 691,
+					"column": 31,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gstreamer/libs/gst/base/gstbasesrc.c",
+			"bookmarks": [
+				{
+					"line": 2187,
+					"column": 20,
+					"label": ""
+				},
+				{
+					"line": 2268,
+					"column": 14,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-good/gst/rtpmanager/rtpjitterbuffer.c",
+			"bookmarks": [
+				{
+					"line": 692,
+					"column": 27,
 					"label": ""
 				}
 			]

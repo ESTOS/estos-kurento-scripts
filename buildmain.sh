@@ -514,12 +514,12 @@ repos ()
     cat <<EOF
 https://github.com/ESTOS/kms-cmake-utils.git              d408e638eaabffdb09c508813706abcd52c88cbf
 https://github.com/ESTOS/kurento-module-creator.git       422d3f3f91cd875af93713c1f71037cb6e9e0d85
-https://github.com/ESTOS/gstreamer.git                    c5dd87a593feac9244152c83b7632043d461625f
-https://github.com/ESTOS/gst-plugins-base.git             7bf50f79f694dda7676db8364d7c50bb2fef1c2b
+https://github.com/ESTOS/gstreamer.git                    4fbf4946a685234c434ddb4334cdda400f673813
+https://github.com/ESTOS/gst-plugins-base.git             0a2d80755aef80670b9ab8fc66b3dd7ae1e68597
 https://github.com/ESTOS/jsoncpp.git                      79efbfde69a285caca20b494a0f94b0528847088
 https://github.com/ESTOS/kms-jsonrpc.git                  ae5ae3184a41a293eb91e8c8a329dbc12b980411
 https://github.com/ESTOS/libvpx.git                       a90944ce794986d8c0daab1449903909ba1956a7
-https://github.com/ESTOS/kms-core.git                     9d8f85904cbae79f99f53e36bc6a89af2ab2384f
+https://github.com/ESTOS/kms-core.git                     e3bc739539df5657d02ca5e034cf6e3a55354b9f
 https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14a281d7421c95d37937
 https://github.com/ESTOS/kurento-media-server.git         d9e73c6f5b940dc10c9f99202fc666fe8fd05256
 https://github.com/ESTOS/usrsctp.git                      6a7541145d3b802c632c9e164eecae58e7780f36
@@ -528,7 +528,7 @@ https://github.com/ESTOS/libnice.git                      84ace21d75c4e3a6165a6a
 https://github.com/ESTOS/kms-elements.git                 e9bee31930ed0938b498109a58b88a1a9197d79d
 https://github.com/ESTOS/opencv.git                       d68e3502278d6fc5a1de0ce8f7951d9961b20913
 https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
-https://github.com/ESTOS/gst-plugins-good.git             7fe53316b35f320f78e595c3d39602fed3820169
+https://github.com/ESTOS/gst-plugins-good.git             b36fc4b50b1be25c750617d676e1e1ecb73939fb
 https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 https://github.com/ESTOS/gst-plugins-bad.git              ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
 https://github.com/ESTOS/glib.git                         b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
