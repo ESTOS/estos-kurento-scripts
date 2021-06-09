@@ -47,8 +47,8 @@
             "environment":[
                 {"name":"G_SLICE", "value":"always-malloc,debug-blocks"},
                 {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
-                //{"name":"ESTOS_DEBUG", "value":"latency200,end"},
-                //{"name":"ESTOS_DEBUG", "value":"latency100,nomark"},
+                //{"name":"ESTOS_DEBUG", "value":"latency75"},
+                //{"name":"ESTOS_DEBUG", "value":"latency50,nomark"},
                 {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose,udpsrcrxrtp,rtpsessiontxrtp"}
                ],
             //"environment": [],
