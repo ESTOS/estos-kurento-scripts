@@ -519,7 +519,7 @@ https://github.com/ESTOS/gst-plugins-base.git             0a2d80755aef80670b9ab8
 https://github.com/ESTOS/jsoncpp.git                      79efbfde69a285caca20b494a0f94b0528847088
 https://github.com/ESTOS/kms-jsonrpc.git                  ae5ae3184a41a293eb91e8c8a329dbc12b980411
 https://github.com/ESTOS/libvpx.git                       a90944ce794986d8c0daab1449903909ba1956a7
-https://github.com/ESTOS/kms-core.git                     6e4da977f084e4cfa45ea67f6b02d3afb7610fc9
+https://github.com/ESTOS/kms-core.git                     740f3fcdb4895346d3fca15c4089acea04dabada
 https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14a281d7421c95d37937
 https://github.com/ESTOS/kurento-media-server.git         d9e73c6f5b940dc10c9f99202fc666fe8fd05256
 https://github.com/ESTOS/usrsctp.git                      6a7541145d3b802c632c9e164eecae58e7780f36

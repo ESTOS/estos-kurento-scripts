@@ -28,7 +28,7 @@ git checkout a90944ce794986d8c0daab1449903909ba1956a7
 cd ..
 git clone https://github.com/ESTOS/kms-core.git
 cd kms-core
-git checkout 6e4da977f084e4cfa45ea67f6b02d3afb7610fc9
+git checkout 740f3fcdb4895346d3fca15c4089acea04dabada
 cd ..
 git clone https://github.com/ESTOS/libevent.git
 cd libevent

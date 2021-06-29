@@ -114,12 +114,12 @@
 			"path": "kms-core/src/gst-plugins/commons/kmsbasertpendpoint.c",
 			"bookmarks": [
 				{
-					"line": 2120,
+					"line": 2122,
 					"column": 36,
 					"label": ""
 				},
 				{
-					"line": 2276,
+					"line": 2278,
 					"column": 17,
 					"label": ""
 				}
@@ -796,6 +796,26 @@
 				{
 					"line": 692,
 					"column": 27,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "glib/gio/gsocket.c",
+			"bookmarks": [
+				{
+					"line": 1923,
+					"column": 31,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-elements/src/gst-plugins/rtpendpoint/kmssocketutils.c",
+			"bookmarks": [
+				{
+					"line": 31,
+					"column": 15,
 					"label": ""
 				}
 			]
