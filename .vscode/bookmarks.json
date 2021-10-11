@@ -69,17 +69,17 @@
 					"label": ""
 				},
 				{
-					"line": 3911,
+					"line": 3899,
 					"column": 15,
 					"label": ""
 				},
 				{
-					"line": 4000,
+					"line": 3988,
 					"column": 17,
 					"label": ""
 				},
 				{
-					"line": 4039,
+					"line": 4027,
 					"column": 16,
 					"label": ""
 				}
@@ -106,21 +106,6 @@
 				{
 					"line": 1496,
 					"column": 36,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "kms-core/src/gst-plugins/commons/kmsbasertpendpoint.c",
-			"bookmarks": [
-				{
-					"line": 2122,
-					"column": 36,
-					"label": ""
-				},
-				{
-					"line": 2278,
-					"column": 17,
 					"label": ""
 				}
 			]
@@ -474,7 +459,7 @@
 			"path": "kms-core/src/server/implementation/objects/SdpEndpointImpl.cpp",
 			"bookmarks": [
 				{
-					"line": 165,
+					"line": 167,
 					"column": 8,
 					"label": ""
 				}
@@ -649,6 +634,11 @@
 					"label": ""
 				},
 				{
+					"line": 1387,
+					"column": 7,
+					"label": ""
+				},
+				{
 					"line": 1441,
 					"column": 20,
 					"label": ""
@@ -674,7 +664,7 @@
 			"path": "kms-core/src/gst-plugins/commons/kmsbasertpendpoint.h",
 			"bookmarks": [
 				{
-					"line": 36,
+					"line": 37,
 					"column": 33,
 					"label": ""
 				}
@@ -794,7 +784,7 @@
 			"path": "gst-plugins-good/gst/rtpmanager/rtpjitterbuffer.c",
 			"bookmarks": [
 				{
-					"line": 692,
+					"line": 691,
 					"column": 27,
 					"label": ""
 				}
