@@ -20,8 +20,8 @@
  "name" : "VP8/90000"
  }
  ],
- "jbufmodertp" : 4,
- "jbufmodewebrtc" : 4,
+ "jbufmodertp" : 0,
+ "jbufmodewebrtc" : 0,
  "localAddress" : ""
 }
 

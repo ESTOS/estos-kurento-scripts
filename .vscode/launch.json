@@ -42,7 +42,7 @@
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9"
                        //"--gst-debug=kms*:9,Kurento*:9,GST_ELEMENT_FACTORY:5,rtp*:9,audioencoder:9,kmsutils:9,GST_PADS:3,udpsrc:9,dtlsenc:3,rtpsession:9"
-                       "--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9,libnice:9,glib:9,nice*:9"
+                       "--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9,basesrc:9,libnice:9,glib:9,nice*:9,rtpjitterbuffer:7"
                     ],
             "stopAtEntry": false,
             "cwd": "x:/build/MediaService/kmswindows-64/bin/",
