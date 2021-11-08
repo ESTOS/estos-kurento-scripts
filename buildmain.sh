@@ -528,7 +528,7 @@ https://github.com/ESTOS/libnice.git                      84ace21d75c4e3a6165a6a
 https://github.com/ESTOS/kms-elements.git                 e9bee31930ed0938b498109a58b88a1a9197d79d
 https://github.com/ESTOS/opencv.git                       d68e3502278d6fc5a1de0ce8f7951d9961b20913
 https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
-https://github.com/ESTOS/gst-plugins-good.git             f1bc0f8066ec843c832f84d8ed176f876cfe622f
+https://github.com/ESTOS/gst-plugins-good.git             13dba256101392f800e1a40624ec690ece062183
 https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 https://github.com/ESTOS/gst-plugins-bad.git              ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
 https://github.com/ESTOS/glib.git                         b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
