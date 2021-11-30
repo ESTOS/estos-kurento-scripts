@@ -491,15 +491,18 @@ build_openssl()
 	echo "--- 23 --- openssl ---"
 	pushd "openssl"
 	if [ $DOBUILD = TRUE ]; then
-	./Configure shared --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
+	#./Configure shared --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
+	./Configure shared no-sse2 --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
+	#./Configure shared 386 --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
 	$MINGW-make depend
 	$MINGW-make
 	if [ $MINGW = mingw64 ]; then
-		cp libcrypto-3-x64.dll libcrypto-10.dll
-		cp libssl-3-x64.dll libssl-10.dll
+		cp libeay32.dll libcrypto-10-no-sse.dll
+		#cp libcrypto-3-x64.dll libcrypto-10.dll
+		#cp libssl-3-x64.dll libssl-10.dll
 	else
-		cp libeay32.dll libcrypto-10.dll
-		cp ssleay32.dll libssl-10.dll
+		cp libeay32.dll libcrypto-10-no-sse.dll
+		#cp ssleay32.dll libssl-10.dll
 	fi
 	fi
 	#if [ $DOINSTALL = TRUE ]; then
@@ -534,7 +537,7 @@ https://github.com/ESTOS/gst-plugins-bad.git              ce2dcb310f2fb80fabf002
 https://github.com/ESTOS/glib.git                         b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
 https://github.com/ESTOS/gst-libav.git                    493eee49c7171e7fc0bf0110e30d445ba573dc5e
 https://github.com/ESTOS/gst-plugins-ugly.git             2685b0f252bf0ed6aa27a5c69e82e05289346ff1
-https://github.com/ESTOS/openssl.git                      5dd94f1847c744929a3bd24819f1c99644bb18c7
+https://github.com/ESTOS/openssl.git                      12ad22dd16ffe47f8cde3cddb84a160e8cdb3e30
 EOF
 }
 

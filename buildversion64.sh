@@ -285,16 +285,16 @@ cd ..
 
 #cd ..
 
-#echo "3.22 openssl"
-#cd openssl/
-#./Configure shared --cross-compile-prefix=x86_64-w64-mingw32- mingw64
-#mingw64-make depend
-#mingw64-make
-#cp libeay32.dll libcrypto-10.dll
+echo "3.22 openssl"
+cd openssl/
+./Configure shared no-sse2 --cross-compile-prefix=x86_64-w64-mingw32- mingw64
+mingw64-make depend
+mingw64-make
+cp libeay32.dll libcrypto-10-no-sse.dll
 #cp ssleay32.dll libssl-10.dll
-#pause
-##sudo mingw64-make install
+pause
+#sudo mingw64-make install
 
-#cd ..
+cd ..
 
 echo "BUILD DONE."

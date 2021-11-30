@@ -87,5 +87,8 @@ gitclone gst-plugins-bad
 echo "3.20 glib"
 gitclone glib
 
+echo "3.21 openssl"
+gitclone openssl
+
 #chmod 775 buildclone-last.sh
 

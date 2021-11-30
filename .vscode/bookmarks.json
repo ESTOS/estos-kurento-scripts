@@ -464,8 +464,33 @@
 			"path": "kms-core/src/server/implementation/objects/SdpEndpointImpl.cpp",
 			"bookmarks": [
 				{
-					"line": 167,
-					"column": 8,
+					"line": 98,
+					"column": 40,
+					"label": ""
+				},
+				{
+					"line": 168,
+					"column": 58,
+					"label": ""
+				},
+				{
+					"line": 273,
+					"column": 45,
+					"label": ""
+				},
+				{
+					"line": 297,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 319,
+					"column": 31,
+					"label": ""
+				},
+				{
+					"line": 354,
+					"column": 19,
 					"label": ""
 				}
 			]
@@ -744,18 +769,48 @@
 					"label": ""
 				},
 				{
+					"line": 767,
+					"column": 60,
+					"label": ""
+				},
+				{
+					"line": 911,
+					"column": 51,
+					"label": ""
+				},
+				{
+					"line": 937,
+					"column": 36,
+					"label": ""
+				},
+				{
+					"line": 957,
+					"column": 53,
+					"label": ""
+				},
+				{
 					"line": 1151,
 					"column": 33,
 					"label": ""
 				},
 				{
-					"line": 1195,
-					"column": 12,
+					"line": 1184,
+					"column": 17,
 					"label": ""
 				},
 				{
-					"line": 1225,
-					"column": 36,
+					"line": 1223,
+					"column": 15,
+					"label": ""
+				},
+				{
+					"line": 1241,
+					"column": 11,
+					"label": ""
+				},
+				{
+					"line": 1264,
+					"column": 14,
 					"label": ""
 				}
 			]
@@ -859,12 +914,27 @@
 			"path": "kms-core/src/gst-plugins/commons/kmsbasertpendpoint.c",
 			"bookmarks": [
 				{
-					"line": 2012,
+					"line": 875,
+					"column": 16,
+					"label": ""
+				},
+				{
+					"line": 1567,
+					"column": 39,
+					"label": ""
+				},
+				{
+					"line": 1616,
+					"column": 33,
+					"label": ""
+				},
+				{
+					"line": 2024,
 					"column": 40,
 					"label": ""
 				},
 				{
-					"line": 3365,
+					"line": 3377,
 					"column": 34,
 					"label": ""
 				}
@@ -876,6 +946,66 @@
 				{
 					"line": 95,
 					"column": 20,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-good/gst/rtpmanager/rtpsession.c",
+			"bookmarks": [
+				{
+					"line": 648,
+					"column": 34,
+					"label": ""
+				},
+				{
+					"line": 674,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 2000,
+					"column": 19,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gst-plugins-good/gst/rtpmanager/rtpsource.c",
+			"bookmarks": [
+				{
+					"line": 598,
+					"column": 10,
+					"label": ""
+				},
+				{
+					"line": 996,
+					"column": 18,
+					"label": ""
+				},
+				{
+					"line": 1264,
+					"column": 12,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gstreamer/gst/gstevent.c",
+			"bookmarks": [
+				{
+					"line": 298,
+					"column": 13,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "kms-core/src/gst-plugins/commons/kmsbasesdpendpoint.c",
+			"bookmarks": [
+				{
+					"line": 245,
+					"column": 23,
 					"label": ""
 				}
 			]

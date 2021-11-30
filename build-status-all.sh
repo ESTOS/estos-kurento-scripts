@@ -125,4 +125,6 @@ pwd >> ../logstatus.txt
 git status >> ../logstatus.txt
 cd ..
 
+grep -v "geändert.       po" logstatus.txt > logstatus1.txt
+
 #fi

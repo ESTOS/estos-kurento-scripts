@@ -78,3 +78,7 @@ git clone https://github.com/ESTOS/glib.git
 cd glib
 git checkout b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
 cd ..
+git clone https://github.com/ESTOS/openssl.git
+cd openssl
+git checkout 12ad22dd16ffe47f8cde3cddb84a160e8cdb3e30
+cd ..
