@@ -490,6 +490,7 @@ build_openssl()
 {
 	echo "--- 23 --- openssl ---"
 	pushd "openssl"
+	unset CC
 	if [ $DOBUILD = TRUE ]; then
 	#./Configure shared --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
 	./Configure shared no-sse2 --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1

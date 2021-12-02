@@ -287,6 +287,7 @@ cd ..
 
 echo "3.22 openssl"
 cd openssl/
+unset CC
 ./Configure shared no-sse2 --cross-compile-prefix=x86_64-w64-mingw32- mingw64
 mingw64-make depend
 mingw64-make
