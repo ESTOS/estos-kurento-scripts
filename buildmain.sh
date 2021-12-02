@@ -603,7 +603,7 @@ set -x #print all executed command
 	build_gst-plugins-bad
 	#build_gst-libav
 	#build_gst-plugins-ugly
-	#build_openssl
+	build_openssl
 }
 
 case "$1" in
