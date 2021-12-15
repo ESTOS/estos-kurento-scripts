@@ -526,7 +526,7 @@ https://github.com/ESTOS/libvpx.git                       a90944ce794986d8c0daab
 https://github.com/ESTOS/kms-core.git                     9d1bce399c3774691acb79039d062a08c43fbb42
 https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14a281d7421c95d37937
 https://github.com/ESTOS/kurento-media-server.git         d9e73c6f5b940dc10c9f99202fc666fe8fd05256
-https://github.com/ESTOS/usrsctp.git                      6a7541145d3b802c632c9e164eecae58e7780f36
+https://github.com/ESTOS/usrsctp.git                      ee2c72bc0cd58de72f662902826e7661794f5e6e
 https://github.com/ESTOS/openwebrtc-gst-plugins.git       079ccd07956a33c8c5bcca1c1a39cc19b8167370
 https://github.com/ESTOS/libnice.git                      84ace21d75c4e3a6165a6aa71763588ca6e2b4a7
 https://github.com/ESTOS/kms-elements.git                 ca6e135096e98ec1ccf9ecfecef29af7dbd9737e

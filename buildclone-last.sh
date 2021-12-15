@@ -40,7 +40,7 @@ git checkout d9e73c6f5b940dc10c9f99202fc666fe8fd05256
 cd ..
 git clone https://github.com/ESTOS/usrsctp.git
 cd usrsctp
-git checkout 6a7541145d3b802c632c9e164eecae58e7780f36
+git checkout ee2c72bc0cd58de72f662902826e7661794f5e6e
 cd ..
 git clone https://github.com/ESTOS/openwebrtc-gst-plugins.git
 cd openwebrtc-gst-plugins
