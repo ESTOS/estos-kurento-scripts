@@ -86,6 +86,9 @@ gitcheck gst-plugins-bad
 echo "3.20 glib"
 gitcheck glib
 
+echo "3.21 openssl"
+gitcheck openssl
+
 diff $lastcommitslog $commitlogs_now
 ret=$?
 if [[ $ret -eq 0 ]]; then
