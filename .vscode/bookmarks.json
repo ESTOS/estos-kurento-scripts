@@ -44,48 +44,83 @@
 			"path": "gst-plugins-good/gst/rtpmanager/gstrtpjitterbuffer.c",
 			"bookmarks": [
 				{
+					"line": 152,
+					"column": 39,
+					"label": ""
+				},
+				{
 					"line": 2188,
 					"column": 36,
 					"label": ""
 				},
 				{
-					"line": 2502,
+					"line": 2496,
 					"column": 18,
 					"label": ""
 				},
 				{
-					"line": 2510,
+					"line": 2504,
 					"column": 25,
 					"label": ""
 				},
 				{
-					"line": 2953,
+					"line": 2546,
+					"column": 8,
+					"label": ""
+				},
+				{
+					"line": 2946,
 					"column": 33,
 					"label": ""
 				},
 				{
-					"line": 3053,
+					"line": 3046,
 					"column": 0,
 					"label": ""
 				},
 				{
-					"line": 3083,
+					"line": 3076,
 					"column": 20,
 					"label": ""
 				},
 				{
-					"line": 3103,
+					"line": 3096,
 					"column": 23,
 					"label": ""
 				},
 				{
-					"line": 4021,
+					"line": 3417,
+					"column": 56,
+					"label": ""
+				},
+				{
+					"line": 3519,
+					"column": 26,
+					"label": ""
+				},
+				{
+					"line": 3989,
+					"column": 17,
+					"label": ""
+				},
+				{
+					"line": 4014,
 					"column": 44,
 					"label": ""
 				},
 				{
-					"line": 4038,
+					"line": 4031,
 					"column": 52,
+					"label": ""
+				},
+				{
+					"line": 4136,
+					"column": 11,
+					"label": ""
+				},
+				{
+					"line": 4140,
+					"column": 16,
 					"label": ""
 				}
 			]
@@ -1026,6 +1061,16 @@
 				{
 					"line": 676,
 					"column": 22,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "../../x:/home/builder/work/estos/kurento/estos-kurento-scripts/gst-plugins-good/gst/rtpmanager/gstrtpjitterbuffer.c",
+			"bookmarks": [
+				{
+					"line": 4013,
+					"column": 53,
 					"label": ""
 				}
 			]

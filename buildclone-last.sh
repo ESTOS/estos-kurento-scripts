@@ -8,7 +8,7 @@ git checkout 422d3f3f91cd875af93713c1f71037cb6e9e0d85
 cd ..
 git clone https://github.com/ESTOS/gstreamer.git
 cd gstreamer
-git checkout 4fbf4946a685234c434ddb4334cdda400f673813
+git checkout 28c20b94242ddc014d098fd2124c7fd71f0ae1fd
 cd ..
 git clone https://github.com/ESTOS/gst-plugins-base.git
 cd gst-plugins-base
@@ -28,7 +28,7 @@ git checkout a90944ce794986d8c0daab1449903909ba1956a7
 cd ..
 git clone https://github.com/ESTOS/kms-core.git
 cd kms-core
-git checkout 9d1bce399c3774691acb79039d062a08c43fbb42
+git checkout e637da1144500061d27bbfaea2806def6aea266d
 cd ..
 git clone https://github.com/ESTOS/libevent.git
 cd libevent
@@ -64,7 +64,7 @@ git checkout 9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
 cd ..
 git clone https://github.com/ESTOS/gst-plugins-good.git
 cd gst-plugins-good
-git checkout ed7c4ec4606db7ec8f03fd1a683bb1ad4a5f8975
+git checkout da48327c8d6b77bbdc8fd897de9289cbb17da7c0
 cd ..
 git clone https://github.com/ESTOS/libsrtp.git
 cd libsrtp
