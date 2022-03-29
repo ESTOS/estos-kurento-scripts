@@ -97,4 +97,8 @@ cd ..
 #git remote update
 #cd ..
 
+cd openssl/
+git remote update
+cd ..
+
 #fi

@@ -120,4 +120,9 @@ rm -rf * && \
 git checkout -f && \
 cd ..
 
+cd openssl && \
+rm -rf * && \
+git checkout -f && \
+cd ..
+
 #fi

@@ -64,7 +64,7 @@ git checkout 9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
 cd ..
 git clone https://github.com/ESTOS/gst-plugins-good.git
 cd gst-plugins-good
-git checkout 1b55e9237e1591179912e0716572e1d6fea1009e
+git checkout 836d0ccb891700487fd2724a6a9ad66d8566fdea
 cd ..
 git clone https://github.com/ESTOS/libsrtp.git
 cd libsrtp

@@ -47,6 +47,11 @@
 					"line": 2513,
 					"column": 15,
 					"label": ""
+				},
+				{
+					"line": 3133,
+					"column": 41,
+					"label": ""
 				}
 			]
 		},
@@ -929,6 +934,11 @@
 					"label": ""
 				},
 				{
+					"line": 1713,
+					"column": 8,
+					"label": ""
+				},
+				{
 					"line": 2000,
 					"column": 19,
 					"label": ""
@@ -994,7 +1004,7 @@
 			"path": "../../x:/home/builder/work/estos/kurento/estos-kurento-scripts/gst-plugins-good/gst/rtpmanager/gstrtpjitterbuffer.c",
 			"bookmarks": [
 				{
-					"line": 4014,
+					"line": 4011,
 					"column": 53,
 					"label": ""
 				}
