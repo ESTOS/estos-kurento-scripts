@@ -90,5 +90,8 @@ gitclone glib
 echo "3.21 openssl"
 gitclone openssl
 
+echo "3.22 gst-libav"
+gitclone gst-libav
+
 #chmod 775 buildclone-last.sh
 

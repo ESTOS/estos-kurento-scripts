@@ -28,7 +28,7 @@ git checkout a90944ce794986d8c0daab1449903909ba1956a7
 cd ..
 git clone https://github.com/ESTOS/kms-core.git
 cd kms-core
-git checkout 46efee6d0b7e59a0f0d3a4cabf7aa712ec4197ca
+git checkout 07602f254f3ed62ab482ab059603e5a8e9e28852
 cd ..
 git clone https://github.com/ESTOS/libevent.git
 cd libevent
@@ -52,7 +52,7 @@ git checkout 84ace21d75c4e3a6165a6aa71763588ca6e2b4a7
 cd ..
 git clone https://github.com/ESTOS/kms-elements.git
 cd kms-elements
-git checkout ca6e135096e98ec1ccf9ecfecef29af7dbd9737e
+git checkout 47116211f5b21e50656f53af7e66dfc27f51d1ad
 cd ..
 git clone https://github.com/ESTOS/opencv.git
 cd opencv
@@ -81,4 +81,8 @@ cd ..
 git clone https://github.com/ESTOS/openssl.git
 cd openssl
 git checkout 12ad22dd16ffe47f8cde3cddb84a160e8cdb3e30
+cd ..
+git clone https://github.com/ESTOS/gst-libav.git
+cd gst-libav
+git checkout c8b5c6f9131a9952ef6db0674a9941b10a3e2613
 cd ..

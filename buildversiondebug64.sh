@@ -278,27 +278,24 @@ cd ..
 echo "3.21 gst-libav"
 cd gst-libav/
 ./autogen.sh
-mingw64-configure \
-  --disable-directsound --disable-direct3d --enable-debug \
-  --disable-examples --disable-gtk-doc --disable-winscreencap \
-  --disable-winks --disable-wasapi --disable-opencv
-printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
+mingw64-configure --enable-debug
 mingw64-make
+pause
+sudo mingw64-make install
+
+cd ..
+
+echo "3.22 openssl"
+cd openssl/
+unset CC
+./Configure shared no-sse2 --cross-compile-prefix=x86_64-w64-mingw32- --debug mingw64
+mingw64-make depend
+mingw64-make
+cp libeay32.dll libcrypto-10-no-sse.dll
+#cp ssleay32.dll libssl-10.dll
 pause
 #sudo mingw64-make install
 
 cd ..
-
-#echo "3.22 openssl" dont call it here in this script because the environment dont fits
-#cd openssl/
-#./Configure shared --cross-compile-prefix=x86_64-w64-mingw32- --debug mingw64
-#mingw64-make depend
-#mingw64-make
-#cp libeay32.dll libcrypto-10.dll
-#cp ssleay32.dll libssl-10.dll
-#pause
-##sudo mingw64-make install
-
-#cd ..
 
 echo "BUILD DONE."

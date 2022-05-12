@@ -334,6 +334,7 @@ cp $CPPARAMS $PREF/lib/gstreamer-1.5/librecorderendpoint.dll lib/gstreamer-1.5/l
 #for estos6.3
 cp $CPPARAMS $PREF/lib/gstreamer-1.5/librecorderendpoint.dll lib/gstreamer-1.5/libkmsrecorderendpoint.dll
 cp $CPPARAMS $PREF/lib/gstreamer-1.5/libgstvpx.dll lib/gstreamer-1.5/
+cp $CPPARAMS $PREF/lib/gstreamer-1.5/libgstlibav.dll lib/gstreamer-1.5/
 cp $CPPARAMS $PREF/lib/kurento/modules/libkmscoremodule.dll lib/kurento/modules/
 cp $CPPARAMS $PREF/lib/kurento/modules/libkmselementsmodule.dll lib/kurento/modules/
 cp $CPPARAMS $PREF/lib/kurento/modules/libkmsfiltersmodule.dll lib/kurento/modules/

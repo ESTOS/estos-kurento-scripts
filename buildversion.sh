@@ -272,19 +272,15 @@ sudo mingw32-make install
 
 cd ..
 
-#echo "3.21 gst-libav"
-#cd gst-libav/
-#./autogen.sh
-#mingw32-configure \
-#  --disable-directsound --disable-direct3d \
-#  --disable-examples --disable-gtk-doc --disable-winscreencap \
-#  --disable-winks --disable-wasapi --disable-opencv
-#printf "all:\ninstall:\nclean:\nuninstall:\n" > tests/Makefile
-#mingw32-make
-#pause
-##sudo mingw32-make install
+echo "3.21 gst-libav"
+cd gst-libav/
+./autogen.sh
+mingw32-configure
+mingw32-make
+pause
+sudo mingw32-make install
 
-#cd ..
+cd ..
 
 echo "3.22 openssl"
 cd openssl/

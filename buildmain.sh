@@ -512,6 +512,26 @@ build_openssl()
 	popd
 }
 
+build_bcg729()
+{
+	echo "--- 24 --- bcg729 ---"
+	mkdir -p "bcg729-build"
+	pushd "bcg729-build"
+	if [ $DOBUILD = TRUE ]; then
+	$MINGW-cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+				  -DCMAKE_MODULE_PATH=$cmakemodules \
+				  -DCMAKE_INSTALL_PREFIX=/usr/$MINGWPATH/sys-root/mingw \
+				  -DENABLE_TESTS=YES \
+				  ../bcg729
+	#set
+	$MINGW-make
+	fi
+	#if [ $DOINSTALL = TRUE ]; then
+	#sudo $MINGW-make install
+	#fi
+	popd	
+}
+
 # array of repo URL's and related tags
 repos ()
 {
@@ -523,22 +543,23 @@ https://github.com/ESTOS/gst-plugins-base.git             0a2d80755aef80670b9ab8
 https://github.com/ESTOS/jsoncpp.git                      79efbfde69a285caca20b494a0f94b0528847088
 https://github.com/ESTOS/kms-jsonrpc.git                  ae5ae3184a41a293eb91e8c8a329dbc12b980411
 https://github.com/ESTOS/libvpx.git                       a90944ce794986d8c0daab1449903909ba1956a7
-https://github.com/ESTOS/kms-core.git                     46efee6d0b7e59a0f0d3a4cabf7aa712ec4197ca
+https://github.com/ESTOS/kms-core.git                     07602f254f3ed62ab482ab059603e5a8e9e28852
 https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14a281d7421c95d37937
 https://github.com/ESTOS/kurento-media-server.git         d9e73c6f5b940dc10c9f99202fc666fe8fd05256
 https://github.com/ESTOS/usrsctp.git                      ee2c72bc0cd58de72f662902826e7661794f5e6e
 https://github.com/ESTOS/openwebrtc-gst-plugins.git       079ccd07956a33c8c5bcca1c1a39cc19b8167370
 https://github.com/ESTOS/libnice.git                      84ace21d75c4e3a6165a6aa71763588ca6e2b4a7
-https://github.com/ESTOS/kms-elements.git                 ca6e135096e98ec1ccf9ecfecef29af7dbd9737e
+https://github.com/ESTOS/kms-elements.git                 47116211f5b21e50656f53af7e66dfc27f51d1ad
 https://github.com/ESTOS/opencv.git                       d68e3502278d6fc5a1de0ce8f7951d9961b20913
 https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
 https://github.com/ESTOS/gst-plugins-good.git             1cc9f64bd2763c5580fd2d34a3568cf22b1b5c8d
 https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 https://github.com/ESTOS/gst-plugins-bad.git              ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
 https://github.com/ESTOS/glib.git                         b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
-https://github.com/ESTOS/gst-libav.git                    493eee49c7171e7fc0bf0110e30d445ba573dc5e
-https://github.com/ESTOS/gst-plugins-ugly.git             2685b0f252bf0ed6aa27a5c69e82e05289346ff1
 https://github.com/ESTOS/openssl.git                      12ad22dd16ffe47f8cde3cddb84a160e8cdb3e30
+https://github.com/ESTOS/gst-libav.git                    c8b5c6f9131a9952ef6db0674a9941b10a3e2613
+https://github.com/ESTOS/gst-plugins-ugly.git             2685b0f252bf0ed6aa27a5c69e82e05289346ff1
+https://github.com/ESTOS/bcg729.git                       faaa895862165acde6df8add722ba4f85a25007d
 EOF
 }
 
@@ -601,9 +622,10 @@ set -x #print all executed command
 	build_gst-plugins-good
 	build_libsrtp
 	build_gst-plugins-bad
-	#build_gst-libav
+	build_gst-libav
 	#build_gst-plugins-ugly
 	build_openssl
+	#build_bcg729
 }
 
 case "$1" in
