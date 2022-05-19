@@ -46,7 +46,7 @@
                        //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:9,rtpsession:9,rtpbasepayload:9,GST_EVENT:5,GST_CAPS:6,udpsrc:9,basesrc:9,libnice:9,glib:9,nice*:9,rtpjitterbuffer:7"
                        //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:9,GST_PADS:9,basesrc:9,GST_SCHEDULING:6,GST_ELEMENT_FACTORY:5,basertpendpoint:5"
                        //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:3,GST_PADS:4,basesrc:3,GST_SCHEDULING:6,GST_ELEMENT_FACTORY:5,basertpendpoint:5"
-                       //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:3,GST_PADS:9,basesrc:3,GST_SCHEDULING:6,GST_ELEMENT_FACTORY:5,basertpendpoint:5,sdpagent:5,gst*:6,GST_CAPS:6"
+                       //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:3,GST_PADS:9,basesrc:3,GST_SCHEDULING:6,GST_ELEMENT_FACTORY:5,basertpendpoint:5,sdpagent:5,gst*:6,GST_CAPS:6,base_sdp_endpoint:5"
                        "--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,GST_CAPS:6"
                     ],
             "stopAtEntry": false,
