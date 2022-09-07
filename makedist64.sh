@@ -35,7 +35,9 @@ cp $CPPARAMS $PREF/bin/libbz2-1.dll bin/
 # cp $CPPARAMS $PREF/bin/libcairo-2.dll bin/
 # cp $CPPARAMS $PREF/bin/libcairo-gobject-2.dll bin/
 cp $CPPARAMS ../openssl/libcrypto-10-no-sse.dll bin/
-cp $CPPARAMS $PREF/bin/libcrypto-10.dll bin/
+cp $CPPARAMS ../openssl/libcrypto-10-no-sse.dll bin/libcrypto-10.dll
+#cp $CPPARAMS $PREF/bin/libcrypto-10.dll bin/
+cp $CPPARAMS $PREF/bin/libcrypto-10.dll bin/libcrypto-10-sse.dll
 # libeay32.dll == libcrypto-10.dll -> need it with debug libssl-10.dll
 # cp $CPPARAMS $PREF/bin/libcrypto-10.dll bin/libeay32.dll
 # cp $CPPARAMS $PREF/bin/libepoxy-0.dll bin/
