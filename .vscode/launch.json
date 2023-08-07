@@ -39,7 +39,8 @@
                        //"-n5",
                        "--gst-debug-level=3",
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
-                       "--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4,rtpsession:9"
+                       //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4,rtpsession:9"
+                       "--gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5"
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9" //-> rtp-daten

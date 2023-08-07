@@ -37,7 +37,7 @@
                 "limitSymbolsToIncludedHeaders": true
             },
             "includePath": [
-                "x:\\home\\builder\\work\\estos\\kurento\\estos-kurento-scripts-64\\**",
+                "x:\\home\\builder\\work\\estos\\kurento\\estos-kurento-scripts\\**",
                 "x:\\dev\\procall\\estos\\tools\\kurentodebug\\mingwincludes\\**"
             ],
             "compilerArgs": [],
