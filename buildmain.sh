@@ -557,7 +557,7 @@ https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b
 https://github.com/ESTOS/gst-plugins-bad.git              ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
 https://github.com/ESTOS/glib.git                         b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
 https://github.com/ESTOS/openssl.git                      12ad22dd16ffe47f8cde3cddb84a160e8cdb3e30
-https://github.com/ESTOS/gst-libav.git                    c8b5c6f9131a9952ef6db0674a9941b10a3e2613
+https://github.com/ESTOS/gst-libav.git                    ac8131242aca0506f68129fe7158786913b2ef03
 https://github.com/ESTOS/gst-plugins-ugly.git             2685b0f252bf0ed6aa27a5c69e82e05289346ff1
 https://github.com/ESTOS/bcg729.git                       faaa895862165acde6df8add722ba4f85a25007d
 EOF

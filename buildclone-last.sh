@@ -84,5 +84,5 @@ git checkout 12ad22dd16ffe47f8cde3cddb84a160e8cdb3e30
 cd ..
 git clone https://github.com/ESTOS/gst-libav.git
 cd gst-libav
-git checkout c8b5c6f9131a9952ef6db0674a9941b10a3e2613
+git checkout ac8131242aca0506f68129fe7158786913b2ef03
 cd ..
