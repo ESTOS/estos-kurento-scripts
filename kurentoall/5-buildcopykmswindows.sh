@@ -14,7 +14,7 @@ mv $TARGET_DIRECTORY/bin/libkmsfiltersmodule.dll $TARGET_DIRECTORY/lib/kurento/m
 fi
 
 #if [ "$1" = ""  ] || [ "$1" = "system"  ]; then
-if [ 0 ]; then
+if [ "$1" = "mist1" ]; then
 #system + submodules files
 cp $LIB_DIRECTORY/libboost_atomic-mt.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libboost_filesystem-mt.dll -t $TARGET_DIRECTORY/bin/
@@ -53,7 +53,7 @@ fi
 
 #LIB_DIRECTORY=/mingw64/bin
 #if [ "$1" = ""  ] || [ "$1" = "system"  ]; then
-if [ 0 ]; then
+if [ "$1" = "mist2" ]; then
 cp $LIB_DIRECTORY/libavcodec-58.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libavdevice-58.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libavfilter-7.dll -t $TARGET_DIRECTORY/bin/
@@ -127,25 +127,6 @@ cp $LIB_DIRECTORY/libintl-8.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libjpeg-8.2.2.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libjsoncpp-25.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libjson-glib-1.0-0.dll -t $TARGET_DIRECTORY/bin/
-
-#libjsonrpc.dll
-#libkmscore.dll
-#libkmscoreimpl.dll
-#libkmselements.dll
-#libkmselementsimpl.dll
-#libkmsfacedetector.dll
-#libkmsfaceoverlay.dll
-#libkmsfiltersimpl.dll
-#libkmsgstcommons.dll
-#libkmsimageoverlay.dll
-#libkmslogooverlay.dll
-#libkmsmovementdetector.dll
-#libkmsopencvfilter.dll
-#libkmsrecorderendpoint.dll
-#libkmsrtpendpointlib.dll
-#libkmssdpagent.dll
-#libkmswebrtcendpoint.dll
-
 cp $LIB_DIRECTORY/liblzma-5.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libmp3lame-0.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libnice-10.dll -t $TARGET_DIRECTORY/bin/
@@ -164,26 +145,16 @@ cp $LIB_DIRECTORY/libpcre2-8.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libpixman-1-0.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libpng16-16.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libpostproc-55.dll -t $TARGET_DIRECTORY/bin/
-
-#librtcpdemux.dll
-#librtpendpoint.dll
-
 cp $LIB_DIRECTORY/libsigc-2.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libsoup-2.4-1.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libsoup-gnome-2.4-1.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libssl-3-x64.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libstdc++-6.dll -t $TARGET_DIRECTORY/bin/
-
 cp $LIB_DIRECTORY/libswresample-3.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libswscale-5.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libvorbis-0.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libvorbisenc-2.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libvorbisfile-3.dll -t $TARGET_DIRECTORY/bin/
-
-#libvp8parse.dll
-#libwebrtcdataproto.dll
-#libwebrtcendpoint.dll
-
 cp $LIB_DIRECTORY/libwinpthread-1.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/zlib1.dll -t $TARGET_DIRECTORY/bin/
 
@@ -191,7 +162,7 @@ fi
 
 #LIB_DIRECTORY=/mingw64/bin
 #if [ "$1" = ""  ] || [ "$1" = "system"  ]; then
-if [ 0 ]; then
+if [ "$1" = "mist3" ]; then
 # -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 
 libexample_device_provider.dll
@@ -421,3 +392,4 @@ libwebrtcendpoint.dll
 libxml2.dll
 			   
 fi
+
