@@ -1,0 +1,54 @@
+{
+    "version": "0.2.0",
+     "configurations": [
+         {
+            "name": "(gdb64) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "c:/lwx/dev/estos-kurento-scripts/kurentoall/kmswindows/bin/uc-media-server.exe",
+            "args": [  "-d","c:/lwx/dev/estos-kurento-scripts/kurentoall/kmswindows/log",
+                       "-s500",
+                       //"-n5",
+                       "--gst-debug-level=9",
+                       //"--gst-debug-level=3",
+                       //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
+                       //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4,rtpsession:9"
+                       //"--gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5"
+                       "--gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5,GST_REGISTRY:7"
+                       //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5"
+                       //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9"
+                       //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9" //-> rtp-daten
+                       //"--gst-debug=kms*:9,Kurento*:9,GST_ELEMENT_FACTORY:5,rtp*:9,audioencoder:9,kmsutils:9,GST_PADS:3,udpsrc:9,dtlsenc:3,rtpsession:9"
+                       //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:9,rtpsession:9,rtpbasepayload:9,GST_EVENT:5,GST_CAPS:6,udpsrc:9,basesrc:9,libnice:9,glib:9,nice*:9,rtpjitterbuffer:7"
+                       //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:9,GST_PADS:9,basesrc:9,GST_SCHEDULING:6,GST_ELEMENT_FACTORY:5,basertpendpoint:5"
+                       //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:3,GST_PADS:4,basesrc:3,GST_SCHEDULING:3,GST_ELEMENT_FACTORY:5,basertpendpoint:5"
+                       //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:3,GST_PADS:9,basesrc:3,GST_SCHEDULING:6,GST_ELEMENT_FACTORY:5,basertpendpoint:5,sdpagent:5,gst*:6,GST_CAPS:6,base_sdp_endpoint:5"
+                       //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,GST_CAPS:6"
+                    ],
+            "stopAtEntry": true,
+            "cwd": "c:/lwx/dev/estos-kurento-scripts/kurentoall/kmswindows/bin/",
+            "environment":[
+                //{"name":"GST_PLUGIN_PATH", "value":"c:/lwx/dev/tools/mingw/20230718-msys2-base-x86_64/msys64/mingw64/lib/gstreamer-1.0:c:/lwx/dev/tools/mingw/20230718-msys2-base-x86_64/msys64/mingw64/bin"},
+                //{"name":"GST_PLUGIN_PATH", "value":"c:/lwx/dev/estos-kurento-scripts/kurentoall/kmswindows/bin-all"},
+                //{"name":"G_SLICE", "value":"always-malloc,debug-blocks"},
+                {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
+                //{"name":"ESTOS_DEBUG", "value":"latency75"},
+                //{"name":"ESTOS_DEBUG", "value":"latency50,nomark"},
+                {"name":"G_MESSAGES_DEBUG", "value": "libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose,udpsrcrxrtp,rtpsessiontxrtp"}
+                //{"name":"G_MESSAGES_DEBUG", "value": "rtpsessiontxrtp"}
+               ],
+            //"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            //"miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-6.3.0-posix-seh-rt_v5-rev1/mingw64/bin/gdb.exe",
+            "miDebuggerPath": "c:/lwx/dev/tools/mingw/20230718-msys2-base-x86_64/msys64/mingw64/bin/gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+     ]
+ }

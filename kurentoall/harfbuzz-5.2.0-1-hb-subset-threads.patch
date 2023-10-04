@@ -1,0 +1,10 @@
+--- hb-subset-threads.cc.old	2023-09-25 15:45:16.140138000 +0200
++++ hb-subset-threads.cc	2023-09-25 15:42:05.200408400 +0200
+@@ -9,6 +9,7 @@
+ #endif
+ 
+ #include "hb-subset.h"
++#include <cstdio>
+ 
+ enum operation_t
+ {
