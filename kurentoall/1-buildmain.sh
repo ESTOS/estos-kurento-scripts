@@ -2,10 +2,10 @@
 
 set -e #stop on error
 set -x #print all executed command
-export MAKEFLAGS="-j8"
+#export MAKEFLAGS="-j8"
 
-#ROOT_DIRECTORY=/x/dev/estos-kurento-scripts/kurentoall
-ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
+ROOT_DIRECTORY=/x/dev/estos-kurento-scripts/kurentoall
+#ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
 cd $ROOT_DIRECTORY
 
 SAV_JAVA_HOME=$JAVA_HOME
@@ -18,8 +18,8 @@ MY_PATH=$PATH:$ROOT_DIRECTORY/maven/bin
 MY_PKG_CONFIG_SYSTEM_INCLUDE_PATH=$PKG_CONFIG_SYSTEM_INCLUDE_PATH:/usr/include
 MY_PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH:/usr/lib/pkgconfig
 
-#BUILDTYPE=RELEASE
-BUILDTYPE=DEBUG
+BUILDTYPE=RELEASE
+#BUILDTYPE=DEBUG
 
 
 if [ $BUILDTYPE = RELEASE ]; then
