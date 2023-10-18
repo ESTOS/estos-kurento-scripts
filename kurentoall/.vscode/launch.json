@@ -5,16 +5,16 @@
             "name": "(gdb64) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "c:/lwx/dev/estos-kurento-scripts/kurentoall/kmswindows/bin/uc-media-server.exe",
-            "args": [  "-d","c:/lwx/dev/estos-kurento-scripts/kurentoall/kmswindows/log",
+            "program": "x:/dev/estos-kurento-scripts/kurentoall/kmswindows/bin/uc-media-server.exe",
+            "args": [  "-d","x:/dev/estos-kurento-scripts/kurentoall/kmswindows/log",
                        "-s500",
                        //"-n5",
-                       "--gst-debug-level=9",
+                       "--gst-debug-level=3",
                        //"--gst-debug-level=3",
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4,rtpsession:9"
                        //"--gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5"
-                       "--gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5,GST_REGISTRY:7"
+                       "--gst-debug=Kurento*:7,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5,GST_REGISTRY:7"
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9" //-> rtp-daten
@@ -26,10 +26,10 @@
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,GST_CAPS:6"
                     ],
             "stopAtEntry": true,
-            "cwd": "c:/lwx/dev/estos-kurento-scripts/kurentoall/kmswindows/bin/",
+            "cwd": "x:/dev/estos-kurento-scripts/kurentoall/kmswindows/bin/",
             "environment":[
-                //{"name":"GST_PLUGIN_PATH", "value":"c:/lwx/dev/tools/mingw/20230718-msys2-base-x86_64/msys64/mingw64/lib/gstreamer-1.0:c:/lwx/dev/tools/mingw/20230718-msys2-base-x86_64/msys64/mingw64/bin"},
-                //{"name":"GST_PLUGIN_PATH", "value":"c:/lwx/dev/estos-kurento-scripts/kurentoall/kmswindows/bin-all"},
+                //{"name":"GST_PLUGIN_PATH", "value":"x:/dev/tools/mingw/msys64/mingw64/lib/gstreamer-1.0:x:/dev/tools/mingw/msys64/mingw64/bin"},
+                //{"name":"GST_PLUGIN_PATH", "value":"x:/dev/estos-kurento-scripts/kurentoall/kmswindows/bin-all"},
                 //{"name":"G_SLICE", "value":"always-malloc,debug-blocks"},
                 {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
                 //{"name":"ESTOS_DEBUG", "value":"latency75"},
@@ -41,7 +41,7 @@
             "externalConsole": false,
             "MIMode": "gdb",
             //"miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-6.3.0-posix-seh-rt_v5-rev1/mingw64/bin/gdb.exe",
-            "miDebuggerPath": "c:/lwx/dev/tools/mingw/20230718-msys2-base-x86_64/msys64/mingw64/bin/gdb.exe",
+            "miDebuggerPath": "x:/dev/tools/mingw/msys64/mingw64/bin/gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

@@ -11,12 +11,12 @@
             "browse": {
                 "path": [
                     "${workspaceFolder}",
-                    "c:\\lwx\\dev\\tools\\mingw\\20230718-msys2-base-x86_64\\msys64\\mingw64\\include\\**"
+                    "x:\\dev\\tools\\mingw\\msys64\\mingw64\\include\\**"
                 ],
                 "limitSymbolsToIncludedHeaders": true
             },
             "includePath": [
-                "c:\\lwx\\dev\\tools\\mingw\\20230718-msys2-base-x86_64\\msys64\\mingw64\\include\\**"
+                "x:\\dev\\tools\\mingw\\msys64\\mingw64\\include\\**"
             ],
             "compilerArgs": []
             //"compilerArgs": [],

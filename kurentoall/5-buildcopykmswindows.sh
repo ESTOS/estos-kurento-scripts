@@ -157,6 +157,7 @@ cp $LIB_DIRECTORY/libvorbisenc-2.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libvorbisfile-3.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/libwinpthread-1.dll -t $TARGET_DIRECTORY/bin/
 cp $LIB_DIRECTORY/zlib1.dll -t $TARGET_DIRECTORY/bin/
+cp $LIB_DIRECTORY/libsqlite3-0.dll -t $TARGET_DIRECTORY/bin/
 
 fi
 

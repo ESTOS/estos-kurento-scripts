@@ -11,6 +11,9 @@ BUILDTYPE=RELEASE
 
 DOINSTALL=TRUE
 DOBUILD=TRUE
+#CMAKE_ARGS=-DCMAKE_VERBOSE_MAKEFILE=TRUE --trace-expand
+CMAKE_ARGS=
+MAKE_ARGS=
 
 if [ $MINGW = mingw32 ]; then
 MINGWPATH=i686-w64-mingw32
@@ -199,8 +202,9 @@ fi
 				  -DCMAKE_MODULE_PATH=$cmakemodules \
 				  -DCMAKE_INSTALL_PREFIX=/usr/$MINGWPATH/sys-root/mingw \
 				  -DKURENTO_MODULES_DIR=/usr/$MINGWPATH/sys-root/mingw/share/kurento/modules/ \
+				  $CMAKE_ARGS \
 				  ../kms-core
-	$MINGW-make
+	$MINGW-make $MAKE_ARGS
 	fi
 	if [ $DOINSTALL = TRUE ]; then
 	sudo $MINGW-make install

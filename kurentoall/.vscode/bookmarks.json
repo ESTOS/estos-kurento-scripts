@@ -1034,6 +1034,26 @@
 					"label": ""
 				}
 			]
+		},
+		{
+			"path": "kurento/server/module-core/src/server/implementation/ModuleManager.cpp",
+			"bookmarks": [
+				{
+					"line": 92,
+					"column": 35,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "glib/gmodule/gmodule-win32.c",
+			"bookmarks": [
+				{
+					"line": 99,
+					"column": 14,
+					"label": ""
+				}
+			]
 		}
 	]
 }

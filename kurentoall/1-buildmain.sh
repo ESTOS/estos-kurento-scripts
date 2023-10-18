@@ -12,7 +12,8 @@ SAV_JAVA_HOME=$JAVA_HOME
 SAV_PATH=$PATH
 SAV_PKG_CONFIG_SYSTEM_INCLUDE_PATH=$PKG_CONFIG_SYSTEM_INCLUDE_PATH
 SAV_PKG_CONFIG_PATH=$PKG_CONFIG_PATH
-MY_JAVA_HOME="/c/Programme/Eclipse-Adoptium/jdk-11.0.20.8-hotspot"
+#MY_JAVA_HOME="/c/Programme/Eclipse-Adoptium/jdk-11.0.20.8-hotspot"
+MY_JAVA_HOME=$ROOT_DIRECTORY/jdk-11
 MY_PATH=$PATH:$ROOT_DIRECTORY/maven/bin
 MY_PKG_CONFIG_SYSTEM_INCLUDE_PATH=$PKG_CONFIG_SYSTEM_INCLUDE_PATH:/usr/include
 MY_PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH:/usr/lib/pkgconfig
@@ -35,6 +36,8 @@ fi
 repos ()
 {
 cat <<EOF
+https://github.com/ESTOS/glib.git						2.78.0
+https://github.com/ESTOS/libnice.git					0.1.21
 https://github.com/ESTOS/gstreamer.git					1.22.5
 https://github.com/ESTOS/opencv.git						4.8.0
 https://github.com/ESTOS/openssl.git					openssl-3.0.2
@@ -42,7 +45,51 @@ https://github.com/ESTOS/websocketpp.git				0.8.2
 ssh://rolf.burkhardt@leonas1/git/kurento/kurento.git	msys-build-test
 EOF
 }
-#https://github.com/ESTOS/kurento.git					7.0.1
+#https://github.com/ESTOS/kurento.git					7.0.1 -> needs cairo-float.patch
+#https://github.com/ESTOS/cairo.git						1.18.0 -> ok without cairo-float.patch
+#https://gitlab.freedesktop.org/cairo/cairo.git			1.17.6 -> problem with d2d1_3.h
+#https://github.com/ESTOS/glib.git						2.74.1
+
+build_tools ()
+{
+	#extract apache-maven-3.9.3-bin.zip/apache-maven-3.9.3 to /x/dev/estos-kurento-scripts/maven (maven\bin;naven\lib;...)
+	if [ ! -d maven ]; then
+		unzip /x/dev/tools/mingw/tools/apache-maven-3.9.3-bin.zip
+		mv apache-maven-3.9.3 maven
+	fi
+	#Install https://adoptium.net/de/temurin/releases -> Windows x64 JDK 11-LTS zip
+	if [ ! -d jdk-11 ]; then
+		unzip /x/dev/tools/mingw/tools/OpenJDK11U-jdk_x64_windows_hotspot_11.0.20.1_1.zip
+		mv jdk-11.0.20.1+1 jdk-11
+	fi
+}
+
+build_glib()
+{
+	pushd "glib"
+	meson setup --buildtype $build_type build-$BUILD_TYPE
+	ninja -C build-$BUILD_TYPE
+	ninja -C build-$BUILD_TYPE install
+	popd
+}
+
+build_libnice()
+{
+	pushd "libnice"
+	meson setup --buildtype $build_type build-$BUILD_TYPE
+	ninja -C build-$BUILD_TYPE
+	ninja -C build-$BUILD_TYPE install
+	popd
+}
+
+build_cairo()
+{
+	pushd "cairo"
+	meson setup --buildtype $build_type build-$BUILD_TYPE
+	ninja -C build-$BUILD_TYPE
+	ninja -C build-$BUILD_TYPE install
+	popd
+}
 
 build_gstreamer()
 {
@@ -50,13 +97,16 @@ build_gstreamer()
 	meson setup --buildtype $build_type build-$BUILD_TYPE
 	#builderror:
 	# diff -up hb-subset-threads.cc.old hb-subset-threads.cc > harfbuzz-5.2.0-1-hb-subset-threads.patch
-set +e	
-	patch -N $ROOT_DIRECTORY/gstreamer/subprojects/harfbuzz-5.2.0/test/threads/hb-subset-threads.cc $ROOT_DIRECTORY/harfbuzz-5.2.0-1-hb-subset-threads.patch
+#set +e
+	#harfbuzz-5.2.0 1.22.5 -> pango installs harfbuzz and cairo
+	#patch -N $ROOT_DIRECTORY/gstreamer/subprojects/harfbuzz-5.2.0/test/threads/hb-subset-threads.cc $ROOT_DIRECTORY/harfbuzz-5.2.0-1-hb-subset-threads.patch
+	#Cairo 1.17.6 -> 1.18.0 is ok
+	#/mingw64/include/d2d1_3.h must not exist else we get a build error	ID2D1DeviceContext4
 	#../subprojects/cairo/src/win32/cairo-dwrite-font.cpp:729:50: error: 'MCW_PC' was not declared in this scope
 	#- solution: add line: "#define	MCW_PC		0x00030000	/* Precision */" -> to /mingw64/include/float.h
 	# diff -up /mingw64/include/float.h.old /mingw64/include/float.h > cairo-float.patch
-	patch -N /mingw64/include/float.h $ROOT_DIRECTORY/cairo-float.patch
-set -e
+	#patch -N /mingw64/include/float.h $ROOT_DIRECTORY/cairo-float.patch
+#set -e
 	ninja -C build-$BUILD_TYPE
 	# -> /mingw64/
 	ninja -C build-$BUILD_TYPE install
@@ -195,13 +245,20 @@ set -x #print all executed command
 		git checkout "$tag"
 		popd
 	done
+	
+	build_tools
 }
 
 build()
 {
 set -e #stop on error
 set -x #print all executed command
+	build_glib
+	#cairo is installed with mingw-w64-x86_64-pango
+	#build_cairo
 	build_gstreamer
+	#gstreamer is building libnice anyway so build the newer version after it
+	build_libnice
 	build_opencv
 	build_openssl
 	build_websocketpp
