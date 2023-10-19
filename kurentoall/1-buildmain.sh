@@ -42,10 +42,11 @@ https://github.com/ESTOS/gstreamer.git					1.22.5
 https://github.com/ESTOS/opencv.git						4.8.0
 https://github.com/ESTOS/openssl.git					openssl-3.0.2
 https://github.com/ESTOS/websocketpp.git				0.8.2
-ssh://rolf.burkhardt@leonas1/git/kurento/kurento.git	msys-build-test
+https://github.com/ESTOS/kurento.git					PROCALL-3103-msys-build
 EOF
 }
 #https://github.com/ESTOS/kurento.git					7.0.1 -> needs cairo-float.patch
+#ssh://rolf.burkhardt@leonas1/git/kurento/kurento.git	msys-build-test
 #https://github.com/ESTOS/cairo.git						1.18.0 -> ok without cairo-float.patch
 #https://gitlab.freedesktop.org/cairo/cairo.git			1.17.6 -> problem with d2d1_3.h
 #https://github.com/ESTOS/glib.git						2.74.1
