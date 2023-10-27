@@ -11,6 +11,12 @@ BUILDTYPE=RELEASE
 
 DOINSTALL=TRUE
 DOBUILD=TRUE
+#CMAKE_ARGS=--trace-expand
+#CMAKE_ARGS=-DCMAKE_VERBOSE_MAKEFILE=TRUE
+CMAKE_ARGS=
+MAKE_ARGS=
+#MAKE_ARGS=--trace
+#MAKE_ARGS=
 
 if [ $MINGW = mingw32 ]; then
 MINGWPATH=i686-w64-mingw32
@@ -199,8 +205,9 @@ fi
 				  -DCMAKE_MODULE_PATH=$cmakemodules \
 				  -DCMAKE_INSTALL_PREFIX=/usr/$MINGWPATH/sys-root/mingw \
 				  -DKURENTO_MODULES_DIR=/usr/$MINGWPATH/sys-root/mingw/share/kurento/modules/ \
+				  $CMAKE_ARGS \
 				  ../kms-core
-	$MINGW-make
+	$MINGW-make $MAKE_ARGS
 	fi
 	if [ $DOINSTALL = TRUE ]; then
 	sudo $MINGW-make install
@@ -554,7 +561,7 @@ https://github.com/ESTOS/opencv.git                       d68e3502278d6fc5a1de0c
 https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e8c1c66df2d7fe1a1cb
 https://github.com/ESTOS/gst-plugins-good.git             1cc9f64bd2763c5580fd2d34a3568cf22b1b5c8d
 https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
-https://github.com/ESTOS/gst-plugins-bad.git              ce2dcb310f2fb80fabf0024052f3a56c9ac42f53
+https://github.com/ESTOS/gst-plugins-bad.git              16c13e44da3ab0a451ad272bfb703af23a25e178
 https://github.com/ESTOS/glib.git                         b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
 https://github.com/ESTOS/openssl.git                      12ad22dd16ffe47f8cde3cddb84a160e8cdb3e30
 https://github.com/ESTOS/gst-libav.git                    ac8131242aca0506f68129fe7158786913b2ef03

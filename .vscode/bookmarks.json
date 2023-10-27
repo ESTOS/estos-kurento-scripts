@@ -1044,6 +1044,16 @@
 					"label": ""
 				}
 			]
+		},
+		{
+			"path": "gst-plugins-bad/ext/srtp/gstsrtp.c",
+			"bookmarks": [
+				{
+					"line": 285,
+					"column": 39,
+					"label": ""
+				}
+			]
 		}
 	]
 }
