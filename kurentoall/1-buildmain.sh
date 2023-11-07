@@ -1,11 +1,19 @@
 #! /bin/sh
 
+BUILDTYPE=RELEASE
+#BUILDTYPE=DEBUG
+
 set -e #stop on error
 set -x #print all executed command
-#export MAKEFLAGS="-j8"
 
+if [ -d /c/lwx/dev ]; then
+#meine
+ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
+export MAKEFLAGS="-j8"
+else
 ROOT_DIRECTORY=/x/dev/estos-kurento-scripts/kurentoall
-#ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
+fi
+
 cd $ROOT_DIRECTORY
 
 SAV_JAVA_HOME=$JAVA_HOME
@@ -17,10 +25,6 @@ MY_JAVA_HOME=$ROOT_DIRECTORY/jdk-11
 MY_PATH=$PATH:$ROOT_DIRECTORY/maven/bin
 MY_PKG_CONFIG_SYSTEM_INCLUDE_PATH=$PKG_CONFIG_SYSTEM_INCLUDE_PATH:/usr/include
 MY_PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH:/usr/lib/pkgconfig
-
-BUILDTYPE=RELEASE
-#BUILDTYPE=DEBUG
-
 
 if [ $BUILDTYPE = RELEASE ]; then
 BUILD_TYPE=Release
@@ -171,11 +175,11 @@ build_kurento()
 	export PKG_CONFIG_SYSTEM_INCLUDE_PATH=$MY_PKG_CONFIG_SYSTEM_INCLUDE_PATH
 	export PKG_CONFIG_PATH=$MY_PKG_CONFIG_PATH
 	
-	#bin/build-run.sh --msys --build-only --$build_type
-	#bin/build-run.sh --msys --build-only --verbose --$build_type
-	#bin/build-run.sh --msys --addcmakeargs "-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	if [ $BUILDTYPE = RELEASE ]; then
+	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	else
 	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
-	#bin/build-run.sh --msys --cmakeconfig-only --verbose
+	fi
 	
 	export JAVA_HOME=$SAV_JAVA_HOME
 	export PATH=$SAV_PATH
@@ -185,32 +189,22 @@ build_kurento()
 	popd
 }
 
-build_kurento_run()
+kurento_run()
 {
-	pushd "kurento"
-	git submodule update --init --recursive --force
-	pushd "server"
-	export JAVA_HOME=$MY_JAVA_HOME
-	export PATH=$MY_PATH
-	export PKG_CONFIG_SYSTEM_INCLUDE_PATH=$MY_PKG_CONFIG_SYSTEM_INCLUDE_PATH
-	export PKG_CONFIG_PATH=$MY_PKG_CONFIG_PATH
+set +e #dont stop on error
+	#todo
+	#build_kurento
+	#copy files to $ROOT_DIRECTORY/kmswindows
+	#exit
 	
-	#export KURENTO_CONF_FILE=$ROOT_DIRECTORY/kmswindows/etc/kurento/kurento.conf.json
-	#export KURENTO_MODULES_CONFIG_PATH=$ROOT_DIRECTORY/kmswindows/etc/kurento/modules/kurento
-	export KURENTO_CONF_FILE=$ROOT_DIRECTORY/kmswindows/config/kurento.conf.json
-	export KURENTO_MODULES_CONFIG_PATH=$ROOT_DIRECTORY/kmswindows/config/kurento
-	#export KURENTO_MODULES_PATH=$MINGW_PREFIX/kurento
-	export KURENTO_MODULES_PATH=$ROOT_DIRECTORY/kmswindows/bin
-	export GST_PLUGIN_PATH=/mingw64/lib/gstreamer-1.0
-	
-	bin/build-run.sh --msys --verbose --$build_type
-	#bin/build-run.sh --msys --$build_type
-	
-	export JAVA_HOME=$SAV_JAVA_HOME
-	export PATH=$SAV_PATH
-	export PKG_CONFIG_SYSTEM_INCLUDE_PATH=$SAV_PKG_CONFIG_SYSTEM_INCLUDE_PATH
-	export PKG_CONFIG_PATH=$SAV_PKG_CONFIG_PATH
-	popd
+	pushd "kmswindows"
+	rm /c/Users/$USERNAME/AppData/Local/Microsoft/Windows/INetCache/gstreamer-1.0/registry.x86_64-mingw.bin
+	export NICE_DEBUG="stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"
+	export G_MESSAGES_DEBUG="libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose,udpsrcrxrtp,rtpsessiontxrtp"
+	export G_MESSAGES_DEBUG="rtpsessiontxrtp"
+	GSTDEBUGLEVEL=3
+	GSTDEBUG=kms*:6,Kurento*:5
+	$ROOT_DIRECTORY/kmswindows/bin/uc-media-server.exe -d $ROOT_DIRECTORY/kmswindows/log -s 500 -n 5 --gst-debug-level=$GSTDEBUGLEVEL --gst-debug=donttouchenv:1,$GSTDEBUG $ROOT_DIRECTORY/kmswindows/log/log.txt 2>&1
 	popd
 }
 
@@ -267,6 +261,9 @@ set -x #print all executed command
 }
 
 case "$1" in
+	run)
+		kurento_run
+		;;
 	setup)
 		setup_workspace
 		;;
@@ -294,6 +291,7 @@ case "$1" in
 set +x
 		echo ""
 		echo "Usage:"
+		echo "  run              -> start kurento"
 		echo "  setup            -> clones all components"
 		echo "  build            -> build"
 		echo "  buildlog         -> build + log to logbuildmain.txt"
