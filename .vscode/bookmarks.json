@@ -1054,6 +1054,16 @@
 					"label": ""
 				}
 			]
+		},
+		{
+			"path": "gst-plugins-base/gst-libs/gst/audio/audio.c",
+			"bookmarks": [
+				{
+					"line": 133,
+					"column": 37,
+					"label": ""
+				}
+			]
 		}
 	]
 }

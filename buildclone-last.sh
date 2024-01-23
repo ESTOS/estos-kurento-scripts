@@ -12,7 +12,7 @@ git checkout 28c20b94242ddc014d098fd2124c7fd71f0ae1fd
 cd ..
 git clone https://github.com/ESTOS/gst-plugins-base.git
 cd gst-plugins-base
-git checkout 0a2d80755aef80670b9ab8fc66b3dd7ae1e68597
+git checkout a828488117630e6dfacf7863e617c1a09c8d8a0c
 cd ..
 git clone https://github.com/ESTOS/jsoncpp.git
 cd jsoncpp

@@ -546,7 +546,7 @@ repos ()
 https://github.com/ESTOS/kms-cmake-utils.git              d408e638eaabffdb09c508813706abcd52c88cbf
 https://github.com/ESTOS/kurento-module-creator.git       422d3f3f91cd875af93713c1f71037cb6e9e0d85
 https://github.com/ESTOS/gstreamer.git                    28c20b94242ddc014d098fd2124c7fd71f0ae1fd
-https://github.com/ESTOS/gst-plugins-base.git             0a2d80755aef80670b9ab8fc66b3dd7ae1e68597
+https://github.com/ESTOS/gst-plugins-base.git             a828488117630e6dfacf7863e617c1a09c8d8a0c
 https://github.com/ESTOS/jsoncpp.git                      79efbfde69a285caca20b494a0f94b0528847088
 https://github.com/ESTOS/kms-jsonrpc.git                  ae5ae3184a41a293eb91e8c8a329dbc12b980411
 https://github.com/ESTOS/libvpx.git                       a90944ce794986d8c0daab1449903909ba1956a7

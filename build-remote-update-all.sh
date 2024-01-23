@@ -93,9 +93,9 @@ cd glib/
 git remote update
 cd ..
 
-#cd gst-libav/
-#git remote update
-#cd ..
+cd gst-libav/
+git remote update
+cd ..
 
 cd openssl/
 git remote update
