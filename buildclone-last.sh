@@ -36,7 +36,7 @@ git checkout ba78ba9e8ba4c964dd5d14a281d7421c95d37937
 cd ..
 git clone https://github.com/ESTOS/kurento-media-server.git
 cd kurento-media-server
-git checkout d9e73c6f5b940dc10c9f99202fc666fe8fd05256
+git checkout 8697c561e1a6f5db106c5a21f9a6ac92543d6dcc
 cd ..
 git clone https://github.com/ESTOS/usrsctp.git
 cd usrsctp
@@ -48,7 +48,7 @@ git checkout 079ccd07956a33c8c5bcca1c1a39cc19b8167370
 cd ..
 git clone https://github.com/ESTOS/libnice.git
 cd libnice
-git checkout ce760abfbc1d7b4840c1a60a0b1125574d7f7d92
+git checkout 649234ac69a6cff7ea3fb8706604813b7d9f215d
 cd ..
 git clone https://github.com/ESTOS/kms-elements.git
 cd kms-elements
@@ -76,7 +76,7 @@ git checkout 16c13e44da3ab0a451ad272bfb703af23a25e178
 cd ..
 git clone https://github.com/ESTOS/glib.git
 cd glib
-git checkout b92bcfb3685a9999a8fad4cd7a2d6c10a133d859
+git checkout 4b2b89006268f00d993b8ae0061aeb339c204e75
 cd ..
 git clone https://github.com/ESTOS/openssl.git
 cd openssl

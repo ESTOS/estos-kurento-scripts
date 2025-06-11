@@ -35,7 +35,7 @@
             "request": "launch",
             "program": "x:/build/MediaService/kmswindows-64/bin/uc-media-server.exe",
             "args": [  "-d","x:/build/MediaService/kmswindows-64/log",
-                       "-s500",
+                       //"-s500",
                        //"-n5",
                        "--gst-debug-level=3",
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
@@ -51,12 +51,14 @@
                        //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:3,GST_PADS:9,basesrc:3,GST_SCHEDULING:6,GST_ELEMENT_FACTORY:5,basertpendpoint:5,sdpagent:5,gst*:6,GST_CAPS:6,base_sdp_endpoint:5"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,GST_CAPS:6"
                        //"--gst-debug=Kurento*:5,srtp:5,srtpdec:5,kmsrtpconnection:5"
-                       "--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9,srtp*:5,srtpdec:6"
+                       //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9,srtp*:5,srtpdec:6,GST_*:3"
+                       "--gst-debug=donttouchenv:1,Kurento*:5,kmsiceniceagent:5,glib:3"
                     ],
             "stopAtEntry": false,
             "cwd": "x:/build/MediaService/kmswindows-64/bin/",
             "environment":[
-                //{"name":"G_SLICE", "value":"always-malloc,debug-blocks"},
+                {"name":"G_SLICE", "value":"always-malloc,debug-blocks"},
+                {"name":"G_DEBUG", "value":"gc-friendly,resident-modules"},
                 {"name":"NICE_DEBUG", "value":"stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"},
                 //{"name":"ESTOS_DEBUG", "value":"latency75"},
                 //{"name":"ESTOS_DEBUG", "value":"latency50,nomark"},
@@ -64,7 +66,7 @@
                 //{"name":"G_MESSAGES_DEBUG", "value": "rtpsessiontxrtp"}
                ],
             //"environment": [],
-            "externalConsole": false,
+            "externalConsole": true,
             "MIMode": "gdb",
             "miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-6.3.0-posix-seh-rt_v5-rev1/mingw64/bin/gdb.exe",
             "setupCommands": [
@@ -72,6 +74,11 @@
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
+                    
+                },
+                {
+                    "description": "Pass SIGINT signals to the program",
+                    "text": "handle SIGINT pass nostop noprint"
                 }
             ]
         }
