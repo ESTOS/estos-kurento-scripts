@@ -36,7 +36,7 @@ git checkout ba78ba9e8ba4c964dd5d14a281d7421c95d37937
 cd ..
 git clone https://github.com/ESTOS/kurento-media-server.git
 cd kurento-media-server
-git checkout 8697c561e1a6f5db106c5a21f9a6ac92543d6dcc
+git checkout d9e73c6f5b940dc10c9f99202fc666fe8fd05256
 cd ..
 git clone https://github.com/ESTOS/usrsctp.git
 cd usrsctp
