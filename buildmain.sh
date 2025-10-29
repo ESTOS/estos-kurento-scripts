@@ -550,9 +550,9 @@ https://github.com/ESTOS/gst-plugins-base.git             a828488117630e6dfacf78
 https://github.com/ESTOS/jsoncpp.git                      79efbfde69a285caca20b494a0f94b0528847088
 https://github.com/ESTOS/kms-jsonrpc.git                  ae5ae3184a41a293eb91e8c8a329dbc12b980411
 https://github.com/ESTOS/libvpx.git                       a90944ce794986d8c0daab1449903909ba1956a7
-https://github.com/ESTOS/kms-core.git                     fe702d1c2b9ec8d67e1ceae132eb1e61fa5661b5
+https://github.com/ESTOS/kms-core.git                     2374ddd1dd2ff34ec65a6c04d48c1c74f80c0aba
 https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14a281d7421c95d37937
-https://github.com/ESTOS/kurento-media-server.git         8697c561e1a6f5db106c5a21f9a6ac92543d6dcc
+https://github.com/ESTOS/kurento-media-server.git         bf85fd39e5d5b841019a41950d6fae195cb3fb13
 https://github.com/ESTOS/usrsctp.git                      ee2c72bc0cd58de72f662902826e7661794f5e6e
 https://github.com/ESTOS/openwebrtc-gst-plugins.git       079ccd07956a33c8c5bcca1c1a39cc19b8167370
 https://github.com/ESTOS/libnice.git                      03ef09e1ac1524f124cd30c3aeff7fe827a52ef3
@@ -562,7 +562,7 @@ https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e
 https://github.com/ESTOS/gst-plugins-good.git             1cc9f64bd2763c5580fd2d34a3568cf22b1b5c8d
 https://github.com/ESTOS/libsrtp.git                      5ec1baa78cd35b88bfbb2b0600a0f8262f3cf20b
 https://github.com/ESTOS/gst-plugins-bad.git              16c13e44da3ab0a451ad272bfb703af23a25e178
-https://github.com/ESTOS/glib.git                         4b2b89006268f00d993b8ae0061aeb339c204e75
+https://github.com/ESTOS/glib.git                         82b1df828dde0ddfed1de4a9f1ee3a2a65faf2d2
 https://github.com/ESTOS/openssl.git                      12ad22dd16ffe47f8cde3cddb84a160e8cdb3e30
 https://github.com/ESTOS/gst-libav.git                    ac8131242aca0506f68129fe7158786913b2ef03
 https://github.com/ESTOS/gst-plugins-ugly.git             2685b0f252bf0ed6aa27a5c69e82e05289346ff1
