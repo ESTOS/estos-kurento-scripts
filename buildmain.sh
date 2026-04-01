@@ -519,6 +519,32 @@ build_openssl()
 	popd
 }
 
+build_opensslnew()
+{
+	echo "--- 23-1 --- opensslnew ---"
+	pushd "opensslnew"
+	unset CC
+	if [ $DOBUILD = TRUE ]; then
+	#./Configure shared --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
+	./Configure shared no-sse2 --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
+	#./Configure shared 386 --cross-compile-prefix=$MINGWPATH- $DEBUGOPENSSL $MINGWP1
+	$MINGW-make depend
+	$MINGW-make
+	if [ $MINGW = mingw64 ]; then
+		cp libeay32.dll libcrypto-10-no-sse.dll
+		#cp libcrypto-3-x64.dll libcrypto-10.dll
+		#cp libssl-3-x64.dll libssl-10.dll
+	else
+		cp libeay32.dll libcrypto-10-no-sse.dll
+		#cp ssleay32.dll libssl-10.dll
+	fi
+	fi
+	#if [ $DOINSTALL = TRUE ]; then
+	#sudo $MINGW-make install
+	#fi
+	popd
+}
+
 build_bcg729()
 {
 	echo "--- 24 --- bcg729 ---"
@@ -552,10 +578,10 @@ https://github.com/ESTOS/kms-jsonrpc.git                  ae5ae3184a41a293eb91e8
 https://github.com/ESTOS/libvpx.git                       a90944ce794986d8c0daab1449903909ba1956a7
 https://github.com/ESTOS/kms-core.git                     fa6ab8a54a6b6827f3db2ba8ac9dbde30bb68318
 https://github.com/ESTOS/libevent.git                     ba78ba9e8ba4c964dd5d14a281d7421c95d37937
-https://github.com/ESTOS/kurento-media-server.git         bf85fd39e5d5b841019a41950d6fae195cb3fb13
+https://github.com/ESTOS/kurento-media-server.git         9a80d78caa296c24ccbf97c626272adf737e0160
 https://github.com/ESTOS/usrsctp.git                      ee2c72bc0cd58de72f662902826e7661794f5e6e
 https://github.com/ESTOS/openwebrtc-gst-plugins.git       079ccd07956a33c8c5bcca1c1a39cc19b8167370
-https://github.com/ESTOS/libnice.git                      03ef09e1ac1524f124cd30c3aeff7fe827a52ef3
+https://github.com/ESTOS/libnice.git                      4e6c2f8b79dd4c83fdc486e5226266313c33084f
 https://github.com/ESTOS/kms-elements.git                 47116211f5b21e50656f53af7e66dfc27f51d1ad
 https://github.com/ESTOS/opencv.git                       d68e3502278d6fc5a1de0ce8f7951d9961b20913
 https://github.com/ESTOS/kms-filters.git                  9a593d16e0899708101e8e8c1c66df2d7fe1a1cb

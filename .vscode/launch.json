@@ -30,6 +30,8 @@
                        //"--gst-debug=donttouchenv:1,Kurento*:5,kmsiceniceagent:5,glib:3"
                        //last
                        //"--gst-debug=donttouchenv:1,Kurento*:5,GST_*:5,GST_REFCOUNTING:7,rtp*:5"
+                       //"--gst-debug=Kurento*:5,dtls*:9,kmsiceniceagent:5,libnice:9,glib:9,nice*:9,GST_PADS:9"
+                       //"--gst-debug=Kurento*:5,dtls*:9,kmsiceniceagent:5,libnice:5,glib:5,nice*:5"
                     ],
             "stopAtEntry": false,
             "cwd": "x:/build/MediaService/kmswindows-64/bin/",
