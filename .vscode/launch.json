@@ -12,7 +12,28 @@
                        //default
                        "--gst-debug-level=3",
                        //default
-                       "--gst-debug=Kurento*:5",
+                       //"--gst-debug=Kurento*:5",
+                       // MediaSrvLog.xml begin
+                       //Session Control
+                       // "--gst-debug-level=3 --gst-debug=Kurento*:5"
+                       // "--gst-debug=Kurento*:5"
+                       //Network Basic
+                       // "--gst-debug-level=3 --gst-debug=Kurento*:5,kmsiceniceagent:6"
+                       //Network Advanced
+                       // "--gst-debug-level=3 --gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5"
+                       "--gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5"
+                       //Element Factory
+                       // "--gst-debug-level=3 --gst-debug=Kurento*:5,GST_ELEMENT_FACTORY:6"
+                       //DTLS Operations
+                       // "--gst-debug-level=3 --gst-debug=Kurento*:5,dtlsconnection:7"
+                       //Audio Jitterbuffer
+                       // "--gst-debug-level=3 --gst-debug=Kurento*:5,rtpjitterbuffer:6,nice*:6"
+                       //Audio Advanced
+                       // "--gst-debug-level=3 --gst-debug=Kurento*:5,rtp*:5,nice*:6"
+                       //Errors, Warnings and Information
+                       // "--gst-debug-level=4 --gst-debug=nice*:4"
+                       // MediaSrvLog.xml end
+
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4,rtpsession:9"
                        //"--gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5"
@@ -30,8 +51,10 @@
                        //"--gst-debug=donttouchenv:1,Kurento*:5,kmsiceniceagent:5,glib:3"
                        //last
                        //"--gst-debug=donttouchenv:1,Kurento*:5,GST_*:5,GST_REFCOUNTING:7,rtp*:5"
-                       //"--gst-debug=Kurento*:5,dtls*:9,kmsiceniceagent:5,libnice:9,glib:9,nice*:9,GST_PADS:9"
+                       //"--gst-debug=Kurento*:5,dtls*:9,kmsiceniceagent:5,libnice:9,glib:9,nice*:9,GST_PADS:9,GST_ELEMENT_FACTORY:5"
                        //"--gst-debug=Kurento*:5,dtls*:9,kmsiceniceagent:5,libnice:5,glib:5,nice*:5"
+
+                       
                     ],
             "stopAtEntry": false,
             "cwd": "x:/build/MediaService/kmswindows-64/bin/",

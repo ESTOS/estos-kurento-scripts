@@ -48,7 +48,7 @@ git checkout 079ccd07956a33c8c5bcca1c1a39cc19b8167370
 cd ..
 git clone https://github.com/ESTOS/libnice.git
 cd libnice
-git checkout 4e6c2f8b79dd4c83fdc486e5226266313c33084f
+git checkout 61578491987abbbabc800b6c8fdf7d95bed124da
 cd ..
 git clone https://github.com/ESTOS/kms-elements.git
 cd kms-elements
