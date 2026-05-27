@@ -23,6 +23,8 @@ mv $TARGET_DIRECTORY/bin/libkmscoremodule.dll $TARGET_DIRECTORY/lib/kurento/modu
 mv $TARGET_DIRECTORY/bin/libkmselementsmodule.dll $TARGET_DIRECTORY/lib/kurento/modules
 mv $TARGET_DIRECTORY/bin/libkmsfiltersmodule.dll $TARGET_DIRECTORY/lib/kurento/modules
 
+install_kurento_gst_plugins
+
 if [ 1 == 2 ]; then
 # kurentoall\kmswindows\bin
 libjsonrpc.dll
@@ -55,19 +57,63 @@ libkmsfiltersmodule.dll
 fi
 }
 
+# GStreamer MODULE plugins only (not shared libs in bin/).
+# Optional plugins (OpenCV filters, vp8parse) go to kurento/disabled/ — not scanned at startup.
+install_kurento_gst_plugins()
+{
+KURENTO_GST_PLUGINS=$TARGET_DIRECTORY/lib/gstreamer-1.0/kurento
+KURENTO_GST_DISABLED=$KURENTO_GST_PLUGINS/disabled
+mkdir -p $KURENTO_GST_PLUGINS $KURENTO_GST_DISABLED
+for plugin in \
+	libwebrtcendpoint.dll \
+	librtpendpoint.dll \
+	librtcpdemux.dll \
+	libkmscore.dll \
+	libkmselements.dll \
+	libkmsrecorderendpoint.dll
+do
+	if [ -f $TARGET_DIRECTORY/bin/$plugin ]; then
+		mv -f $TARGET_DIRECTORY/bin/$plugin $KURENTO_GST_PLUGINS/
+	fi
+done
+for plugin in \
+	libvp8parse.dll \
+	libkmsfacedetector.dll \
+	libkmsfaceoverlay.dll \
+	libkmsimageoverlay.dll \
+	libkmslogooverlay.dll \
+	libkmsmovementdetector.dll \
+	libkmsopencvfilter.dll
+do
+	if [ -f $TARGET_DIRECTORY/bin/$plugin ]; then
+		mv -f $TARGET_DIRECTORY/bin/$plugin $KURENTO_GST_DISABLED/
+	fi
+done
+# Re-deploy: move optional plugins out of the active plugin dir if they were copied earlier.
+for plugin in libvp8parse.dll libkmsfacedetector.dll libkmsfaceoverlay.dll \
+	libkmsimageoverlay.dll libkmslogooverlay.dll libkmsmovementdetector.dll libkmsopencvfilter.dll
+do
+	if [ -f $KURENTO_GST_PLUGINS/$plugin ]; then
+		mv -f $KURENTO_GST_PLUGINS/$plugin $KURENTO_GST_DISABLED/
+	fi
+done
+# remove disabled - not needed
+rm -rf $KURENTO_GST_DISABLED
+}
+
 # kurentoall\kmswindows\bin
 copy_bin_files()
 {
 if [ ! -d $TARGET_DIRECTORY/bin ]; then
 	mkdir -p $TARGET_DIRECTORY/bin
 fi
-cp $MINGW64_BIN_DIR/libavcodec-58.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libavcodec-58.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libavdevice-58.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libavfilter-7.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libavformat-58.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libavresample-4.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libavutil-56.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libavcodec-58.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libavcodec-58.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libavdevice-58.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libavfilter-7.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libavformat-58.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libavresample-4.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libavutil-56.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libboost_atomic-mt.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libboost_filesystem-mt.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libboost_log-mt.dll -t $TARGET_DIRECTORY/bin/
@@ -80,7 +126,10 @@ cp $MINGW64_BIN_DIR/libcairo-2.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libcairo-gobject-2.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libcairo-script-interpreter-2.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libcrypto-3-x64.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libdv-4.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libcurl-4.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libdatrie-1.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libdv-4.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libexpat-1.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libffi-8.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libfontconfig-1.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libfreetype-6.dll -t $TARGET_DIRECTORY/bin/
@@ -92,7 +141,7 @@ cp $MINGW64_BIN_DIR/libglib-2.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libglibmm-2.4-1.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgmodule-2.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgobject-2.0-0.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libgraphene-1.0-0.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libgraphene-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstadaptivedemux-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstallocators-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstapp-1.0-0.dll -t $TARGET_DIRECTORY/bin/
@@ -106,6 +155,8 @@ cp $MINGW64_BIN_DIR/libgstcodecs-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstcontroller-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstcuda-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstd3d11-1.0-0.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libgstd3dshader-1.0-0.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libgstdxva-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstfft-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstgl-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstinsertbin-1.0-0.dll -t $TARGET_DIRECTORY/bin/
@@ -130,16 +181,21 @@ cp $MINGW64_BIN_DIR/libgstvalidate-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstvalidate-default-overrides-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstvideo-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgstwebrtc-1.0-0.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libgstwebrtcnice-1.0-0.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libgstwebrtcnice-1.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libgthread-2.0-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libiconv-2.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libidn2-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libintl-8.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libjpeg-8.2.2.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libjpeg-8.3.2.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libjson-glib-1.0-0.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libjsoncpp-25.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libjsoncpp-26.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/liblzma-5.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libmp3lame-0.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libnettle-8.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libnghttp2-14.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libnghttp3-9.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libngtcp2-16.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libngtcp2_crypto_ossl-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libnice-10.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libopenh264-7.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libopus-0.dll -t $TARGET_DIRECTORY/bin/
@@ -155,22 +211,24 @@ cp $MINGW64_BIN_DIR/libpcre2-8-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libpcre2-posix-3.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libpixman-1-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libpng16-16.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libpostproc-55.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libpostproc-55.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libpsl-5.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libsigc-2.0-0.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libsoup-2.4-1.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libsoup-gnome-2.4-1.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libsoup-3.0-0.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libsoup-gnome-2.4-1.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libsqlite3-0.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libssh2-1.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libssl-3-x64.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libstdc++-6.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libswresample-3.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libswscale-5.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libswresample-3.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libswscale-5.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libunistring-5.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libvorbis-0.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libvorbisenc-2.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libvorbisfile-3.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libvorbis-0.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libvorbisenc-2.dll -t $TARGET_DIRECTORY/bin/
+#cp $MINGW64_BIN_DIR/libvorbisfile-3.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libwinpthread-1.dll -t $TARGET_DIRECTORY/bin/
-cp $MINGW64_BIN_DIR/libxml2-2.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libxml2-16.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libzstd.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/zlib1.dll -t $TARGET_DIRECTORY/bin/
 }
 
@@ -180,23 +238,15 @@ copy_gstreamer_files()
 if [ ! -d $TARGET_DIRECTORY/lib/gstreamer-1.0 ]; then
 	mkdir -p $TARGET_DIRECTORY/lib/gstreamer-1.0
 fi
-# kurent files
-cp $TARGET_DIRECTORY/bin/libkmscore.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $TARGET_DIRECTORY/bin/libkmselements.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+# Kurento MODULE plugins: lib/gstreamer-1.0/kurento/ (see install_kurento_gst_plugins).
+# Shared libs (libkmswebrtcendpoint.dll, libcairo-*.dll, …) stay in bin/ — not in GST_PLUGIN_PATH.
+# MSYS plugins: lib/gstreamer-1.0/ (see below).
 #load error libkmsfacedetector.dll
 #load error libkmsfaceoverlay.dll
-cp $TARGET_DIRECTORY/bin/libkmsgstcommons.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #load error libkmsimageoverlay.dll
 #load error libkmslogooverlay.dll
 #load error libkmsmovementdetector.dll
 #load error libkmsopencvfilter.dll
-#load error libwebrtcendpoint.dll
-cp $TARGET_DIRECTORY/bin/libkmsrecorderendpoint.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $TARGET_DIRECTORY/bin/libkmsrtpendpointlib.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $TARGET_DIRECTORY/bin/libkmswebrtcendpoint.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $TARGET_DIRECTORY/bin/librtcpdemux.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $TARGET_DIRECTORY/bin/librtpendpoint.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $TARGET_DIRECTORY/bin/libwebrtcdataproto.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 
 #load error libgstogg.dll
 #load error libgstvalidatessim.dll
@@ -206,7 +256,8 @@ cp $TARGET_DIRECTORY/bin/libwebrtcdataproto.dll -t $TARGET_DIRECTORY/lib/gstream
 #dont need? cp $MINGW64_BIN_DIR/libgioenvironmentproxy.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #dont need? cp $MINGW64_DIR/lib/gio/modules/libgioopenssl.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 
-cp $MINGW64_BIN_DIR/libfdk_aac.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+cp $MINGW64_BIN_DIR/libfdk-aac-2.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libfdk-aac-2.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstaccurip.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstadaptivedemux2.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstadder.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
@@ -261,8 +312,10 @@ cp $MINGW64_LIB_GSTREAMER_DIR/libgstdeinterlace.dll -t $TARGET_DIRECTORY/lib/gst
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstdirectsound.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstdirectsoundsrc.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstdtls.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+cp $MINGW64_LIB_GSTREAMER_DIR/libgstsrtp.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+cp $MINGW64_BIN_DIR/libsrtp2-1.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstdtmf.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $MINGW64_LIB_GSTREAMER_DIR/libgstdv.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+#cp $MINGW64_LIB_GSTREAMER_DIR/libgstdv.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstdvbsubenc.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstdvbsuboverlay.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstdvdlpcmdec.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
@@ -306,7 +359,7 @@ cp $MINGW64_LIB_GSTREAMER_DIR/libgstlegacyrawparse.dll -t $TARGET_DIRECTORY/lib/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstlevel.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstlibav.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstmatroska.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $MINGW64_LIB_GSTREAMER_DIR/libgstmicrodns.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+#cp $MINGW64_LIB_GSTREAMER_DIR/libgstmicrodns.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstmidi.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstmonoscope.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstmpegpsdemux.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
@@ -387,27 +440,34 @@ cp $MINGW64_LIB_GSTREAMER_DIR/libgstwasapi.dll -t $TARGET_DIRECTORY/lib/gstreame
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstwaveform.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstwavenc.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstwavparse.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $MINGW64_LIB_GSTREAMER_DIR/libgstwebrtc.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+#cp $MINGW64_LIB_GSTREAMER_DIR/libgstwebrtc.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstwin32ipc.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstwinks.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstwinscreencap.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_LIB_GSTREAMER_DIR/libgstxingmux.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $MINGW64_LIB_GSTREAMER_DIR/libgsty4mdec.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $MINGW64_LIB_GSTREAMER_DIR/libgsty4menc.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+#cp $MINGW64_LIB_GSTREAMER_DIR/libgsty4mdec.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+#cp $MINGW64_LIB_GSTREAMER_DIR/libgsty4menc.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+cp $MINGW64_LIB_GSTREAMER_DIR/libgsty4m.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+# Pango/Cairo/Freetype load HarfBuzz from bin/ (not plugin dir); keep versions consistent.
+cp $MINGW64_BIN_DIR/libharfbuzz-0.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libharfbuzz-gobject-0.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libharfbuzz-subset-0.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libgraphite2.dll -t $TARGET_DIRECTORY/bin/
+cp $MINGW64_BIN_DIR/libthai-0.dll -t $TARGET_DIRECTORY/bin/
 cp $MINGW64_BIN_DIR/libharfbuzz-0.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_BIN_DIR/libharfbuzz-gobject-0.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 cp $MINGW64_BIN_DIR/libharfbuzz-subset-0.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $MINGW64_BIN_DIR/libmicrodns.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+#cp $MINGW64_BIN_DIR/libmicrodns.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #cp $MINGW64_LIB_GSTREAMER_DIR/libmoduletestplugin_a_library.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #cp $MINGW64_LIB_GSTREAMER_DIR/libmoduletestplugin_a_plugin.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #cp $MINGW64_LIB_GSTREAMER_DIR/libmoduletestplugin_b_library.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #cp $MINGW64_LIB_GSTREAMER_DIR/libmoduletestplugin_b_plugin.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $MINGW64_BIN_DIR/libogg.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+#cp $MINGW64_BIN_DIR/libogg.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #cp $MINGW64_LIB_GSTREAMER_DIR/libresourceplugin.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #cp $MINGW64_LIB_GSTREAMER_DIR/libtest-utils.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #cp $MINGW64_LIB_GSTREAMER_DIR/libtestmodulea.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 #cp $MINGW64_LIB_GSTREAMER_DIR/libtestmoduleb.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
-cp $MINGW64_BIN_DIR/libxml2-2.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
+cp $MINGW64_BIN_DIR/libxml2-16.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 }
 
 case "$1" in

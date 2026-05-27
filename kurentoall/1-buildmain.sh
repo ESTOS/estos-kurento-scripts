@@ -1,7 +1,7 @@
 #! /bin/sh
 
-BUILDTYPE=RELEASE
-#BUILDTYPE=DEBUG
+#BUILDTYPE=RELEASE
+BUILDTYPE=DEBUG
 
 set -e #stop on error
 set -x #print all executed command
@@ -40,13 +40,13 @@ fi
 repos ()
 {
 cat <<EOF
-https://github.com/ESTOS/glib.git						2.78.0
-https://github.com/ESTOS/libnice.git					0.1.21
-https://github.com/ESTOS/gstreamer.git					1.22.5
-https://github.com/ESTOS/opencv.git						4.8.0
-https://github.com/ESTOS/openssl.git					openssl-3.0.2
-https://github.com/ESTOS/websocketpp.git				0.8.2
-https://github.com/ESTOS/kurento.git					PROCALL-3103-msys-build
+https://github.com/ESTOS/glib.git						2.89.0
+https://github.com/ESTOS/libnice.git					0.1.23
+https://github.com/ESTOS/gstreamer.git					1.28.3
+https://github.com/ESTOS/opencv.git						4.13.0
+https://github.com/ESTOS/openssl.git					openssl-3.0.20
+https://github.com/ESTOS/websocketpp.git				bce258674b2d544f981da4bf149244a76e8126c9
+https://github.com/ESTOS/kurento.git					PROCALL-3103-msys-build-main
 EOF
 }
 #https://github.com/ESTOS/kurento.git					7.0.1 -> needs cairo-float.patch
@@ -81,7 +81,12 @@ build_glib()
 build_libnice()
 {
 	pushd "libnice"
-	meson setup --buildtype $build_type build-$BUILD_TYPE
+	# meson setup --buildtype $build_type build-$BUILD_TYPE
+	# tests/meson.build links libdl for a GStreamer test (LD_PRELOAD) — not available on Windows/MinGW.
+	meson setup --buildtype $build_type \
+		-Dtests=disabled \
+		-Dexamples=disabled \
+		build-$BUILD_TYPE
 	ninja -C build-$BUILD_TYPE
 	ninja -C build-$BUILD_TYPE install
 	popd
@@ -99,7 +104,17 @@ build_cairo()
 build_gstreamer()
 {
 	pushd "gstreamer"
-	meson setup --buildtype $build_type build-$BUILD_TYPE
+	# meson setup --buildtype $build_type build-$BUILD_TYPE
+	# gst-devtools/gst-validate introspection fails on Windows (GstValidate-1.0.exe exit 0xC0000135).
+	# Not needed for Kurento; use -Ddevtools=disabled.
+	# d3d12 WGC: MinGW g++ + WRL ComPtr fails on gstd3d12graphicscapture.cpp (incomplete type).
+	#meson setup --buildtype $build_type \
+	#	-Ddevtools=disabled \
+	#	-Dgst-plugins-bad:d3d12=disabled \
+	#	build-$BUILD_TYPE
+	meson setup --buildtype $build_type \
+		-Dgst-plugins-bad:d3d12=disabled \
+		build-$BUILD_TYPE
 	#builderror:
 	# diff -up hb-subset-threads.cc.old hb-subset-threads.cc > harfbuzz-5.2.0-1-hb-subset-threads.patch
 #set +e
@@ -159,6 +174,7 @@ build_websocketpp()
 	mkdir -p websocketpp-build-$BUILD_TYPE
 	pushd "websocketpp-build-$BUILD_TYPE"
 	cmake  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+		-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 		-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX ../websocketpp
 	cmake --build .
 	cmake --install .
@@ -176,9 +192,9 @@ build_kurento()
 	export PKG_CONFIG_PATH=$MY_PKG_CONFIG_PATH
 	
 	if [ $BUILDTYPE = RELEASE ]; then
-	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
 	else
-	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
+	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
 	fi
 	
 	export JAVA_HOME=$SAV_JAVA_HOME
@@ -199,6 +215,8 @@ set +e #dont stop on error
 	
 	pushd "kmswindows"
 	rm /c/Users/$USERNAME/AppData/Local/Microsoft/Windows/INetCache/gstreamer-1.0/registry.x86_64-mingw.bin
+	export PATH="$ROOT_DIRECTORY/kmswindows/bin:$PATH"
+	export GST_PLUGIN_PATH="$ROOT_DIRECTORY/kmswindows/lib/gstreamer-1.0/kurento:$ROOT_DIRECTORY/kmswindows/lib/gstreamer-1.0"
 	export NICE_DEBUG="stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"
 	export G_MESSAGES_DEBUG="libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose,udpsrcrxrtp,rtpsessiontxrtp"
 	export G_MESSAGES_DEBUG="rtpsessiontxrtp"

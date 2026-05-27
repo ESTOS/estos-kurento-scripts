@@ -2,7 +2,7 @@
 
 #extract msys2-base-x86_64-20230718.tar.xz/msys64 to x:/dev/tools/mingw/msys64
 #- msys64\msys2_shell.cmd
-#'./.bashrc' -> '/home/user/.bashrc'
+#'./.bashrc' -> '/home/user/.bashrc' cd /x/dev/estos-kurento-scripts/kurentoall
 #'./.bash_logout' -> '/home/user/.bash_logout'
 #'./.bash_profile' -> '/home/user/.bash_profile'
 #'./.profile' -> '/home/user/.profile'
@@ -40,7 +40,8 @@ pacman -S --noconfirm mingw-w64-x86_64-libvpx
 pacman -S --noconfirm mingw-w64-x86_64-libevent
 pacman -S --noconfirm make
 pacman -S --noconfirm mingw-w64-x86_64-gdb
-pacman -S --noconfirm mingw-w64-x86_64-libsoup
+#war pacman -S --noconfirm mingw-w64-x86_64-libsoup
+pacman -S --noconfirm mingw-w64-x86_64-libsoup3
 
 #cd /c/lwx/dev/estos-kurento-scripts/kurentoall
 cd /x/dev/estos-kurento-scripts/kurentoall
@@ -59,5 +60,7 @@ cd /x/dev/estos-kurento-scripts/kurentoall
 #./1-buildmain.sh setup
 #./1-buildmain.sh buildlog
 
-
+#pacman usage:
+#pacman -Ss git -> suchen
+#pacman -Q mingw-w64-x86_64-boost mingw-w64-x86_64-boost-libs -> Status
 
