@@ -56,7 +56,7 @@ pacman -S --noconfirm make
 pacman -S --noconfirm mingw-w64-x86_64-gdb
 pacman -S --noconfirm mingw-w64-x86_64-libsoup3
 
-cd /x/dev/estos-kurento-scripts/kurentoall
+#cd /x/dev/estos-kurento-scripts/kurentoall
 
 # maven and jdk are installed in 1-buildmain.sh in build_tools()
 #if [ ! -d kurentoall ]; then

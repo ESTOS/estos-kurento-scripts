@@ -1,7 +1,11 @@
 #! /bin/sh
 set -e #stop on error
 #set -x #print all executed command
+if [ -d /c/lwx/dev ]; then
+ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
+else
 ROOT_DIRECTORY=/x/dev/estos-kurento-scripts/kurentoall
+fi
 TARGET_DIRECTORY=$ROOT_DIRECTORY/kmswindows
 MINGW64_DIR=/mingw64
 MINGW64_BIN_DIR=$MINGW64_DIR/bin

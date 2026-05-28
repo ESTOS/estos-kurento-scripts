@@ -7,7 +7,6 @@ set -e #stop on error
 set -x #print all executed command
 
 if [ -d /c/lwx/dev ]; then
-#meine
 ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
 export MAKEFLAGS="-j8"
 else
