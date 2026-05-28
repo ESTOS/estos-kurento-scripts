@@ -4,6 +4,7 @@ rem MSYS2 mingw64 prefix (Python/GStreamer are linked against this tree)
 rem set MSYS_MINGW64=x:\dev\tools\mingw\msys64\mingw64
 
 del "%LOCALAPPDATA%\gstreamer-1.0\registry.x86_64-mingw.bin" 2>nul
+del "%LOCALAPPDATA%\Microsoft\Windows\INetCache\gstreamer-1.0\registry.x86_64.bin" 2>nul
 rem set NICE_DEBUG="stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"
 rem set G_MESSAGES_DEBUG="libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose,udpsrcrxrtp,rtpsessiontxrtp"
 rem set G_MESSAGES_DEBUG="rtpsessiontxrtp"
