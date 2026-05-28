@@ -46,7 +46,7 @@ https://github.com/ESTOS/gstreamer.git					1.28.3
 https://github.com/ESTOS/opencv.git						4.13.0
 https://github.com/ESTOS/openssl.git					openssl-3.0.20
 https://github.com/ESTOS/websocketpp.git				bce258674b2d544f981da4bf149244a76e8126c9
-https://github.com/ESTOS/kurento.git					PROCALL-3103-msys-build-main
+https://github.com/ESTOS/kurento.git					msys-estos-main
 EOF
 }
 #https://github.com/ESTOS/kurento.git					7.0.1 -> needs cairo-float.patch
