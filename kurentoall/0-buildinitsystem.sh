@@ -17,10 +17,12 @@
 #close the shell
 #open msys64\msys2_shell.cmd again
 #call pacman -Syuu again
-# now it has all basic tools updated
-#to pack msys64.zip remove all paths in /home and empty /etc/hosts
+###### now it has all basic tools updated
+#call /x/dev/estos-kurento-scripts/kurentoall/0-buildinitsystem.sh to install the basic tools for Kurento
+#pack msys64.zip -> remove all paths in /home and empty /etc/hosts
 ###### with existing prepared msys64.zip from the tools repository x:\dev\tools\mingw\
 #"C:\Program Files\7-Zip\7z.exe" x -y msys64.zip -> extract in x:/dev/tools/mingw
+#call pacman -Syuu
 ######
 #in './.bashrc' -> '/home/user/.bashrc' add cd /x/dev/estos-kurento-scripts/kurentoall
 ###### END of prepare msys64 buildenvironment #####
