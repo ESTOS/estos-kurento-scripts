@@ -153,6 +153,186 @@ done
 rm -rf $KURENTO_GST_DISABLED
 }
 
+# Like install_kurento_gst_plugins, but keeps filter/OpenCV MODULE plugins in kurento/.
+# (Used by minimal-estos; "all" still omits them — load errors at registry scan.)
+install_kurento_gst_plugins_with_filters()
+{
+KURENTO_GST_PLUGINS=$TARGET_DIRECTORY/lib/gstreamer-1.0/kurento
+mkdir -p $KURENTO_GST_PLUGINS
+for plugin in \
+	libwebrtcendpoint.dll \
+	librtpendpoint.dll \
+	librtcpdemux.dll \
+	libkmscore.dll \
+	libkmselements.dll \
+	libkmsrecorderendpoint.dll \
+	libkmsfacedetector.dll \
+	libkmsfaceoverlay.dll \
+	libkmsimageoverlay.dll \
+	libkmslogooverlay.dll \
+	libkmsmovementdetector.dll \
+	libkmsopencvfilter.dll
+do
+	if [ -f $TARGET_DIRECTORY/bin/$plugin ]; then
+		mv -f $TARGET_DIRECTORY/bin/$plugin $KURENTO_GST_PLUGINS/
+	fi
+done
+}
+
+copy_opencv_runtime_dlls()
+{
+for dir in \
+	"$MINGW64_BIN_DIR" \
+	"$MINGW64_DIR/x64/mingw/bin" \
+	"$ROOT_DIRECTORY/opencv-build-Debug/install/bin" \
+	"$ROOT_DIRECTORY/opencv-build-Debug/install/x64/mingw/bin" \
+	"$ROOT_DIRECTORY/opencv-build-Debug/x64/mingw/bin"
+do
+	if [ ! -d "$dir" ]; then
+		continue
+	fi
+	for f in "$dir"/libopencv*.dll; do
+		if [ -f "$f" ]; then
+			cp -f "$f" -t "$TARGET_DIRECTORY/bin/"
+		fi
+	done
+done
+find "$ROOT_DIRECTORY/opencv-build-Debug" -name "libopencv*.dll" 2>/dev/null \
+	| while read -r f; do
+	cp -f "$f" -t "$TARGET_DIRECTORY/bin/"
+done
+}
+
+# GStreamer plugin scanner subprocess (avoids "Couldn't create helper process").
+copy_gstreamer_plugin_scanner()
+{
+for scanner in \
+	"$MINGW64_DIR/libexec/gstreamer-1.0/gst-plugin-scanner.exe" \
+	"$MINGW64_BIN_DIR/gst-plugin-scanner.exe"
+do
+	if [ -f "$scanner" ]; then
+		cp -f "$scanner" -t "$TARGET_DIRECTORY/bin/"
+		return 0
+	fi
+done
+echo "WARNING: gst-plugin-scanner.exe not found under $MINGW64_DIR" >&2
+}
+
+_resolve_mingw_dll()
+{
+_name=$1
+for _dir in "$MINGW64_BIN_DIR" "$MINGW64_DIR/x64/mingw/bin"; do
+	if [ -f "$_dir/$_name" ]; then
+		echo "$_dir/$_name"
+		return 0
+	fi
+done
+return 1
+}
+
+_skip_pe_dependency()
+{
+	case "$(echo "$1" | tr '[:upper:]' '[:lower:]')" in
+	kernel32.dll|ntdll.dll|msvcrt.dll|msvcrt\ *|api-ms-*.dll|\
+	libgcc_s_seh-1.dll|libwinpthread-1.dll|libstdc++-6.dll)
+		return 0
+		;;
+	esac
+	return 1
+}
+
+# Copy transitive PE dependencies of deployed DLLs into kmswindows/bin (from MSYS2).
+sync_mingw_dll_deps()
+{
+	_objdump=$MINGW64_BIN_DIR/objdump.exe
+	if [ ! -x "$_objdump" ]; then
+		echo "WARNING: objdump not found, skipping sync_mingw_dll_deps" >&2
+		return 0
+	fi
+
+	_sync_one()
+	{
+		_dll=$1
+		_depth=$2
+		if [ ! -f "$_dll" ] || [ "$_depth" -gt 5 ]; then
+			return 0
+		fi
+		_deps=$("$_objdump" -p "$_dll" 2>/dev/null | sed -n 's/^[[:space:]]*DLL Name:[[:space:]]*//p' | tr -d '\r')
+		for _dep in $_deps; do
+			if _skip_pe_dependency "$_dep"; then
+				continue
+			fi
+			if [ -f "$TARGET_DIRECTORY/bin/$_dep" ]; then
+				continue
+			fi
+			_src=$(_resolve_mingw_dll "$_dep")
+			if [ -n "$_src" ]; then
+				cp -f "$_src" -t "$TARGET_DIRECTORY/bin/"
+				_sync_one "$TARGET_DIRECTORY/bin/$_dep" $(($_depth + 1))
+			fi
+		done
+	}
+
+	for _dll in "$TARGET_DIRECTORY/lib/gstreamer-1.0"/*.dll \
+		"$TARGET_DIRECTORY/lib/gstreamer-1.0/kurento"/*.dll \
+		"$TARGET_DIRECTORY/bin"/libkms*.dll \
+		"$TARGET_DIRECTORY/bin"/libkmsgstcommons.dll \
+		"$TARGET_DIRECTORY/bin"/libkmssdpagent.dll \
+		"$TARGET_DIRECTORY/bin"/libjsonrpc.dll
+	do
+		if [ -f "$_dll" ]; then
+			_sync_one "$_dll" 0
+		fi
+	done
+}
+
+copy_estos_extra_bin_dlls()
+{
+for dll in \
+	libogg-0.dll \
+	libtiff-6.dll \
+	libopenjp2-7.dll \
+	libdeflate.dll \
+	libLerc.dll \
+	libjbig-0.dll \
+	liblz4.dll \
+	libwebp-7.dll \
+	libsharpyuv-0.dll \
+	libzimg-2.dll
+do
+	cp_mingw_bin "$dll"
+done
+for _dir in "$MINGW64_BIN_DIR" "$MINGW64_DIR/x64/mingw/bin"; do
+	for f in "$_dir"/libtbb*.dll "$_dir"/libtbbmalloc*.dll; do
+		if [ -f "$f" ]; then
+			cp -f "$f" -t "$TARGET_DIRECTORY/bin/"
+		fi
+	done
+done
+}
+
+# Some Windows/GStreamer builds resolve deps from the plugin directory.
+copy_opencv_beside_kurento_plugins()
+{
+if [ ! -d "$TARGET_DIRECTORY/lib/gstreamer-1.0/kurento" ]; then
+	return 0
+fi
+for f in "$TARGET_DIRECTORY/bin"/libopencv*.dll; do
+	if [ -f "$f" ]; then
+		cp -f "$f" -t "$TARGET_DIRECTORY/lib/gstreamer-1.0/kurento/"
+	fi
+done
+}
+
+sync_minimal_estos_runtime_deps()
+{
+copy_opencv_runtime_dlls
+copy_estos_extra_bin_dlls
+copy_gstreamer_plugin_scanner
+sync_mingw_dll_deps
+copy_opencv_beside_kurento_plugins
+}
+
 # kurentoall\kmswindows\bin
 copy_bin_files()
 {
@@ -523,7 +703,7 @@ cp $MINGW64_BIN_DIR/libxml2-16.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 }
 
 # estos minimal: MediaPipeline, Rtp/WebRtc, Player, Recorder, DispatcherOneToMany, Composite
-# No filters module, no OpenCV filter plugins, no libkmsfilters*.
+# + module-filters (libkmsfiltersmodule, filter plugins, OpenCV runtime in bin/).
 copy_kurento_files_minimal_estos()
 {
 if [ ! -d $TARGET_DIRECTORY/bin ]; then
@@ -533,6 +713,7 @@ for dll in \
 	libjsonrpc.dll \
 	libkmscoreimpl.dll \
 	libkmselementsimpl.dll \
+	libkmsfiltersimpl.dll \
 	libkmsgstcommons.dll \
 	libkmssdpagent.dll \
 	libkmswebrtcendpoint.dll \
@@ -543,7 +724,13 @@ for dll in \
 	libwebrtcendpoint.dll \
 	librtpendpoint.dll \
 	librtcpdemux.dll \
-	libkmsrecorderendpoint.dll
+	libkmsrecorderendpoint.dll \
+	libkmsfacedetector.dll \
+	libkmsfaceoverlay.dll \
+	libkmsimageoverlay.dll \
+	libkmslogooverlay.dll \
+	libkmsmovementdetector.dll \
+	libkmsopencvfilter.dll
 do
 	copy_kurento_build_dll "$dll"
 done
@@ -552,7 +739,7 @@ cp $ROOT_DIRECTORY/kurento/server/build-Debug/media-server/server/kurento-media-
 if [ ! -d $TARGET_DIRECTORY/lib/kurento/modules ]; then
 	mkdir -p $TARGET_DIRECTORY/lib/kurento/modules
 fi
-for dll in libkmscoremodule.dll libkmselementsmodule.dll
+for dll in libkmscoremodule.dll libkmselementsmodule.dll libkmsfiltersmodule.dll
 do
 	copy_kurento_build_dll "$dll"
 	if [ -f $TARGET_DIRECTORY/bin/$dll ]; then
@@ -560,7 +747,7 @@ do
 	fi
 done
 
-install_kurento_gst_plugins
+install_kurento_gst_plugins_with_filters
 }
 
 copy_bin_files_minimal_estos()
@@ -577,11 +764,16 @@ for dll in \
 	libbrotlicommon.dll \
 	libbrotlidec.dll \
 	libbz2-1.dll \
+	libcairo-2.dll \
+	libcairo-gobject-2.dll \
 	libcrypto-3-x64.dll \
 	libcurl-4.dll \
 	libexpat-1.dll \
 	libffi-8.dll \
+	libfontconfig-1.dll \
+	libfreetype-6.dll \
 	libgcc_s_seh-1.dll \
+	libgraphite2.dll \
 	libgio-2.0-0.dll \
 	libglib-2.0-0.dll \
 	libglibmm-2.4-1.dll \
@@ -611,6 +803,7 @@ for dll in \
 	libgstvideo-1.0-0.dll \
 	libgstwebrtc-1.0-0.dll \
 	libgthread-2.0-0.dll \
+	libharfbuzz-0.dll \
 	libiconv-2.dll \
 	libidn2-0.dll \
 	libintl-8.dll \
@@ -628,6 +821,7 @@ for dll in \
 	libopus-0.dll \
 	liborc-0.4-0.dll \
 	libpcre2-8-0.dll \
+	libpixman-1-0.dll \
 	libpng16-16.dll \
 	libpsl-5.dll \
 	libsigc-2.0-0.dll \
@@ -661,6 +855,7 @@ for plugin in \
 	libgstaudiorate.dll \
 	libgstaudioresample.dll \
 	libgstavi.dll \
+	libgstcairo.dll \
 	libgstcompositor.dll \
 	libgstcoreelements.dll \
 	libgstdtls.dll \
@@ -706,6 +901,7 @@ clean_kmswindows_runtime_dlls
 copy_kurento_files_minimal_estos
 copy_bin_files_minimal_estos
 copy_gstreamer_files_minimal_estos
+sync_minimal_estos_runtime_deps
 }
 
 case "$1" in
@@ -740,7 +936,7 @@ set +x
 		echo "  bin              -> copy bin files"		
 		echo "  gstreamer        -> copy gstreamer files"
 		echo "  all              -> copy all files"
-		echo "  minimal-estos    -> estos subset (WebRTC/RTP/Player/Recorder/Composite/Dispatcher)"
+		echo "  minimal-estos    -> estos subset (+ module-filters / OpenCV plugins)"
 		echo ""
 		;;
 esac
