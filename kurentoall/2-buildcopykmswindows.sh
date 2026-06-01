@@ -11,6 +11,54 @@ MINGW64_DIR=/mingw64
 MINGW64_BIN_DIR=$MINGW64_DIR/bin
 MINGW64_LIB_GSTREAMER_DIR=$MINGW64_DIR/lib/gstreamer-1.0
 
+cp_if_exists()
+{
+	src=$1
+	dest=$2
+	if [ -f "$src" ]; then
+		cp -f "$src" -t "$dest"
+	else
+		echo "WARNING: missing $src" >&2
+	fi
+}
+
+cp_mingw_bin()
+{
+	cp_if_exists "$MINGW64_BIN_DIR/$1" "$TARGET_DIRECTORY/bin"
+}
+
+cp_gst_plugin()
+{
+	cp_if_exists "$MINGW64_LIB_GSTREAMER_DIR/$1" "$TARGET_DIRECTORY/lib/gstreamer-1.0"
+}
+
+copy_kurento_build_dll()
+{
+	f=$(find "$ROOT_DIRECTORY/kurento/server/build-Debug" -name "$1" -print -quit 2>/dev/null || true)
+	if [ -n "$f" ]; then
+		cp -f "$f" -t "$TARGET_DIRECTORY/bin/"
+	else
+		echo "WARNING: Kurento build DLL not found: $1" >&2
+	fi
+}
+
+# Remove runtime DLLs from a previous "all" deploy (exe and etc/ are kept).
+clean_kmswindows_runtime_dlls()
+{
+	if [ -d "$TARGET_DIRECTORY/bin" ]; then
+		find "$TARGET_DIRECTORY/bin" -maxdepth 1 -name '*.dll' -delete
+	fi
+	if [ -d "$TARGET_DIRECTORY/lib/kurento/modules" ]; then
+		find "$TARGET_DIRECTORY/lib/kurento/modules" -maxdepth 1 -name '*.dll' -delete
+	fi
+	if [ -d "$TARGET_DIRECTORY/lib/gstreamer-1.0/kurento" ]; then
+		find "$TARGET_DIRECTORY/lib/gstreamer-1.0/kurento" -maxdepth 1 -name '*.dll' -delete
+	fi
+	if [ -d "$TARGET_DIRECTORY/lib/gstreamer-1.0" ]; then
+		find "$TARGET_DIRECTORY/lib/gstreamer-1.0" -maxdepth 1 -name '*.dll' -delete
+	fi
+}
+
 copy_kurento_files()
 {
 if [ ! -d $TARGET_DIRECTORY/bin ]; then
@@ -474,6 +522,192 @@ cp $MINGW64_BIN_DIR/libharfbuzz-subset-0.dll -t $TARGET_DIRECTORY/lib/gstreamer-
 cp $MINGW64_BIN_DIR/libxml2-16.dll -t $TARGET_DIRECTORY/lib/gstreamer-1.0/
 }
 
+# estos minimal: MediaPipeline, Rtp/WebRtc, Player, Recorder, DispatcherOneToMany, Composite
+# No filters module, no OpenCV filter plugins, no libkmsfilters*.
+copy_kurento_files_minimal_estos()
+{
+if [ ! -d $TARGET_DIRECTORY/bin ]; then
+	mkdir -p $TARGET_DIRECTORY/bin
+fi
+for dll in \
+	libjsonrpc.dll \
+	libkmscoreimpl.dll \
+	libkmselementsimpl.dll \
+	libkmsgstcommons.dll \
+	libkmssdpagent.dll \
+	libkmswebrtcendpoint.dll \
+	libkmsrtpendpointlib.dll \
+	libwebrtcdataproto.dll \
+	libkmscore.dll \
+	libkmselements.dll \
+	libwebrtcendpoint.dll \
+	librtpendpoint.dll \
+	librtcpdemux.dll \
+	libkmsrecorderendpoint.dll
+do
+	copy_kurento_build_dll "$dll"
+done
+cp $ROOT_DIRECTORY/kurento/server/build-Debug/media-server/server/kurento-media-server.exe $TARGET_DIRECTORY/bin/uc-media-server.exe
+
+if [ ! -d $TARGET_DIRECTORY/lib/kurento/modules ]; then
+	mkdir -p $TARGET_DIRECTORY/lib/kurento/modules
+fi
+for dll in libkmscoremodule.dll libkmselementsmodule.dll
+do
+	copy_kurento_build_dll "$dll"
+	if [ -f $TARGET_DIRECTORY/bin/$dll ]; then
+		mv -f $TARGET_DIRECTORY/bin/$dll $TARGET_DIRECTORY/lib/kurento/modules/
+	fi
+done
+
+install_kurento_gst_plugins
+}
+
+copy_bin_files_minimal_estos()
+{
+if [ ! -d $TARGET_DIRECTORY/bin ]; then
+	mkdir -p $TARGET_DIRECTORY/bin
+fi
+for dll in \
+	libboost_atomic-mt.dll \
+	libboost_filesystem-mt.dll \
+	libboost_log-mt.dll \
+	libboost_program_options-mt.dll \
+	libboost_thread-mt.dll \
+	libbrotlicommon.dll \
+	libbrotlidec.dll \
+	libbz2-1.dll \
+	libcrypto-3-x64.dll \
+	libcurl-4.dll \
+	libexpat-1.dll \
+	libffi-8.dll \
+	libgcc_s_seh-1.dll \
+	libgio-2.0-0.dll \
+	libglib-2.0-0.dll \
+	libglibmm-2.4-1.dll \
+	libgmodule-2.0-0.dll \
+	libgobject-2.0-0.dll \
+	libgstadaptivedemux-1.0-0.dll \
+	libgstallocators-1.0-0.dll \
+	libgstapp-1.0-0.dll \
+	libgstaudio-1.0-0.dll \
+	libgstbadaudio-1.0-0.dll \
+	libgstbase-1.0-0.dll \
+	libgstcodecparsers-1.0-0.dll \
+	libgstcontroller-1.0-0.dll \
+	libgstfft-1.0-0.dll \
+	libgstinsertbin-1.0-0.dll \
+	libgstisoff-1.0-0.dll \
+	libgstmpegts-1.0-0.dll \
+	libgstnet-1.0-0.dll \
+	libgstpbutils-1.0-0.dll \
+	libgstreamer-1.0-0.dll \
+	libgstrtp-1.0-0.dll \
+	libgstrtsp-1.0-0.dll \
+	libgstsctp-1.0-0.dll \
+	libgstsdp-1.0-0.dll \
+	libgsttag-1.0-0.dll \
+	libgsturidownloader-1.0-0.dll \
+	libgstvideo-1.0-0.dll \
+	libgstwebrtc-1.0-0.dll \
+	libgthread-2.0-0.dll \
+	libiconv-2.dll \
+	libidn2-0.dll \
+	libintl-8.dll \
+	libjpeg-8.3.2.dll \
+	libjson-glib-1.0-0.dll \
+	libjsoncpp-26.dll \
+	liblzma-5.dll \
+	libnettle-8.dll \
+	libnghttp2-14.dll \
+	libnghttp3-9.dll \
+	libngtcp2-16.dll \
+	libngtcp2_crypto_ossl-0.dll \
+	libnice-10.dll \
+	libopenh264-7.dll \
+	libopus-0.dll \
+	liborc-0.4-0.dll \
+	libpcre2-8-0.dll \
+	libpng16-16.dll \
+	libpsl-5.dll \
+	libsigc-2.0-0.dll \
+	libsoup-3.0-0.dll \
+	libsqlite3-0.dll \
+	libssh2-1.dll \
+	libssl-3-x64.dll \
+	libstdc++-6.dll \
+	libsrtp2-1.dll \
+	libunistring-5.dll \
+	libwinpthread-1.dll \
+	libxml2-16.dll \
+	libzstd.dll \
+	zlib1.dll
+do
+	cp_mingw_bin "$dll"
+done
+}
+
+copy_gstreamer_files_minimal_estos()
+{
+if [ ! -d $TARGET_DIRECTORY/lib/gstreamer-1.0 ]; then
+	mkdir -p $TARGET_DIRECTORY/lib/gstreamer-1.0
+fi
+for plugin in \
+	libgstapp.dll \
+	libgstalaw.dll \
+	libgstaudioconvert.dll \
+	libgstaudiomixer.dll \
+	libgstaudioparsers.dll \
+	libgstaudiorate.dll \
+	libgstaudioresample.dll \
+	libgstavi.dll \
+	libgstcompositor.dll \
+	libgstcoreelements.dll \
+	libgstdtls.dll \
+	libgstflv.dll \
+	libgsthls.dll \
+	libgsticydemux.dll \
+	libgstid3demux.dll \
+	libgstisomp4.dll \
+	libgstjpeg.dll \
+	libgstlibav.dll \
+	libgstmatroska.dll \
+	libgstmulaw.dll \
+	libgstnice.dll \
+	libgstopenh264.dll \
+	libgstopus.dll \
+	libgstopusparse.dll \
+	libgstplayback.dll \
+	libgstpng.dll \
+	libgstrtp.dll \
+	libgstrtpmanager.dll \
+	libgstrtpmanagerbad.dll \
+	libgstrtmp2.dll \
+	libgstsctp.dll \
+	libgstsdpelem.dll \
+	libgstsoup.dll \
+	libgstsrtp.dll \
+	libgsttypefindfunctions.dll \
+	libgstudp.dll \
+	libgstvideobox.dll \
+	libgstvideoconvertscale.dll \
+	libgstvideoparsersbad.dll \
+	libgstvideorate.dll \
+	libgstvolume.dll \
+	libgstwavparse.dll
+do
+	cp_gst_plugin "$plugin"
+done
+}
+
+copy_minimal_estos()
+{
+clean_kmswindows_runtime_dlls
+copy_kurento_files_minimal_estos
+copy_bin_files_minimal_estos
+copy_gstreamer_files_minimal_estos
+}
+
 case "$1" in
 	kurento)
 		set -x #print all executed command
@@ -494,6 +728,10 @@ case "$1" in
 		copy_bin_files
 		copy_gstreamer_files
 		;;
+	minimal-estos)
+		set -x #print all executed command
+		copy_minimal_estos
+		;;
 	*)
 set +x
 		echo ""
@@ -502,6 +740,7 @@ set +x
 		echo "  bin              -> copy bin files"		
 		echo "  gstreamer        -> copy gstreamer files"
 		echo "  all              -> copy all files"
+		echo "  minimal-estos    -> estos subset (WebRTC/RTP/Player/Recorder/Composite/Dispatcher)"
 		echo ""
 		;;
 esac

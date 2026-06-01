@@ -14,8 +14,8 @@
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4"
                        //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5,libnice:9,glib:9,nice*:9,GST_PADS:4,rtpsession:9"
                        //"--gst-debug=Kurento*:5,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5"
-                       "--gst-debug=Kurento*:7,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5,GST_REGISTRY:7"
-                       //"--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5"
+                       //"--gst-debug=Kurento*:7,kmsiceniceagent:6,libnice:6,glib:6,nice*:5,kmswebrtcsession:5,webrtcendpoint:5,GST_REGISTRY:7"
+                       "--gst-debug=kms*:5,Kurento*:5,GST_ELEMENT_FACTORY:5"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,udpsrc:9"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9" //-> rtp-daten
                        //"--gst-debug=kms*:9,Kurento*:9,GST_ELEMENT_FACTORY:5,rtp*:9,audioencoder:9,kmsutils:9,GST_PADS:3,udpsrc:9,dtlsenc:3,rtpsession:9"
@@ -25,9 +25,12 @@
                        //"--gst-debug=donttouchenv:1,kms*:6,Kurento*:5,rtp*:5,rtpsession:9,rtpjitterbuffer:7,GST_CLOCK:3,GST_PADS:9,basesrc:3,GST_SCHEDULING:6,GST_ELEMENT_FACTORY:5,basertpendpoint:5,sdpagent:5,gst*:6,GST_CAPS:6,base_sdp_endpoint:5"
                        //"--gst-debug=donttouchenv:1,Kurento*:5,rtp*:5,rtpsession:9,GST_CAPS:6"
                     ],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "x:/dev/estos-kurento-scripts/kurentoall/kmswindows/bin/",
             "environment":[
+                {"name":"KMS_DIRECTORY", "value":"x:/dev/estos-kurento-scripts/kurentoall/kmswindows"},
+                {"name":"PATH", "value":"x:/dev/estos-kurento-scripts/kurentoall/kmswindows/bin;${env:PATH}"},
+                {"name":"GST_PLUGIN_PATH", "value":"x:/dev/estos-kurento-scripts/kurentoall/kmswindows/lib/gstreamer-1.0/kurento;x:/dev/estos-kurento-scripts/kurentoall/kmswindows/lib/gstreamer-1.0"},
                 //{"name":"GST_PLUGIN_PATH", "value":"x:/dev/tools/mingw/msys64/mingw64/lib/gstreamer-1.0:x:/dev/tools/mingw/msys64/mingw64/bin"},
                 //{"name":"GST_PLUGIN_PATH", "value":"x:/dev/estos-kurento-scripts/kurentoall/kmswindows/bin-all"},
                 //{"name":"G_SLICE", "value":"always-malloc,debug-blocks"},
@@ -38,7 +41,7 @@
                 //{"name":"G_MESSAGES_DEBUG", "value": "rtpsessiontxrtp"}
                ],
             //"environment": [],
-            "externalConsole": false,
+            "externalConsole": true,
             "MIMode": "gdb",
             //"miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-6.3.0-posix-seh-rt_v5-rev1/mingw64/bin/gdb.exe",
             "miDebuggerPath": "x:/dev/tools/mingw/msys64/mingw64/bin/gdb.exe",
