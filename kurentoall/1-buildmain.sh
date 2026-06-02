@@ -1,10 +1,10 @@
 #! /bin/sh
 
-#BUILDTYPE=RELEASE
-BUILDTYPE=DEBUG
-
 set -e #stop on error
 set -x #print all executed command
+
+BUILDTYPE=RELEASE
+#BUILDTYPE=DEBUG
 
 if [ -d /c/lwx/dev ]; then
 ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
@@ -48,11 +48,6 @@ https://github.com/ESTOS/websocketpp.git				msys-estos-develop
 https://github.com/ESTOS/kurento.git					msys-estos-main
 EOF
 }
-#https://github.com/ESTOS/kurento.git					7.0.1 -> needs cairo-float.patch
-#ssh://rolf.burkhardt@leonas1/git/kurento/kurento.git	msys-build-test
-#https://github.com/ESTOS/cairo.git						1.18.0 -> ok without cairo-float.patch
-#https://gitlab.freedesktop.org/cairo/cairo.git			1.17.6 -> problem with d2d1_3.h
-#https://github.com/ESTOS/glib.git						2.74.1
 
 build_tools ()
 {
@@ -91,41 +86,14 @@ build_libnice()
 	popd
 }
 
-build_cairo()
-{
-	pushd "cairo"
-	meson setup --buildtype $build_type build-$BUILD_TYPE
-	ninja -C build-$BUILD_TYPE
-	ninja -C build-$BUILD_TYPE install
-	popd
-}
-
 build_gstreamer()
 {
 	pushd "gstreamer"
 	# meson setup --buildtype $build_type build-$BUILD_TYPE
-	# gst-devtools/gst-validate introspection fails on Windows (GstValidate-1.0.exe exit 0xC0000135).
-	# Not needed for Kurento; use -Ddevtools=disabled.
 	# d3d12 WGC: MinGW g++ + WRL ComPtr fails on gstd3d12graphicscapture.cpp (incomplete type).
-	#meson setup --buildtype $build_type \
-	#	-Ddevtools=disabled \
-	#	-Dgst-plugins-bad:d3d12=disabled \
-	#	build-$BUILD_TYPE
 	meson setup --buildtype $build_type \
 		-Dgst-plugins-bad:d3d12=disabled \
 		build-$BUILD_TYPE
-	#builderror:
-	# diff -up hb-subset-threads.cc.old hb-subset-threads.cc > harfbuzz-5.2.0-1-hb-subset-threads.patch
-#set +e
-	#harfbuzz-5.2.0 1.22.5 -> pango installs harfbuzz and cairo
-	#patch -N $ROOT_DIRECTORY/gstreamer/subprojects/harfbuzz-5.2.0/test/threads/hb-subset-threads.cc $ROOT_DIRECTORY/harfbuzz-5.2.0-1-hb-subset-threads.patch
-	#Cairo 1.17.6 -> 1.18.0 is ok
-	#/mingw64/include/d2d1_3.h must not exist else we get a build error	ID2D1DeviceContext4
-	#../subprojects/cairo/src/win32/cairo-dwrite-font.cpp:729:50: error: 'MCW_PC' was not declared in this scope
-	#- solution: add line: "#define	MCW_PC		0x00030000	/* Precision */" -> to /mingw64/include/float.h
-	# diff -up /mingw64/include/float.h.old /mingw64/include/float.h > cairo-float.patch
-	#patch -N /mingw64/include/float.h $ROOT_DIRECTORY/cairo-float.patch
-#set -e
 	ninja -C build-$BUILD_TYPE
 	# -> /mingw64/
 	ninja -C build-$BUILD_TYPE install
@@ -266,8 +234,6 @@ build()
 set -e #stop on error
 set -x #print all executed command
 	build_glib
-	#cairo is installed with mingw-w64-x86_64-pango
-	#build_cairo
 	build_gstreamer
 	#gstreamer is building libnice anyway so build the newer version after it
 	build_libnice
@@ -282,24 +248,54 @@ case "$1" in
 		kurento_run
 		;;
 	setup)
+		start=$(date +%s)
+		date
 		setup_workspace
+		end=$(date +%s)
+		date
+		echo "Time: $((end - start)) Seconds"
 		;;
 	build)
+		start=$(date +%s)
+		date
 		build
+		end=$(date +%s)
+		date
+		echo "Time: $((end - start)) Seconds"
 		;;
 	buildlog)
-		build > logbuildmain.txt 2>&1
+		start=$(date +%s)
+		echo "Start: $(date)" > logbuildmain.txt 2>&1
+		build >> logbuildmain.txt 2>&1
+		end=$(date +%s)
+		echo "End: $(date)" >> logbuildmain.txt 2>&1
+		echo "Time: $((end - start)) Seconds" >> logbuildmain.txt 2>&1
 		;;
 	buildkurentolog)
-		build_kurento > logbuildmainkurento.txt 2>&1
+		start=$(date +%s)
+		echo "Start: $(date)" > logbuildmainkurento.txt
+		build_kurento >> logbuildmainkurento.txt 2>&1
+		end=$(date +%s)
+		echo "End: $(date)" >> logbuildmainkurento.txt 2>&1
+		echo "Time: $((end - start)) Seconds" >> logbuildmainkurento.txt 2>&1
 		;;
 	buildalllog)
-		setup_workspace > logbuildmain.txt 2>&1
+		start=$(date +%s)
+		echo "Start: $(date)" > logbuildmain.txt 2>&1
+		setup_workspace >> logbuildmain.txt 2>&1
 		build >> logbuildmain.txt 2>&1
+		end=$(date +%s)
+		echo "End: $(date)" >> logbuildmain.txt 2>&1
+		echo "Time: $((end - start)) Seconds" >> logbuildmain.txt 2>&1
 		;;
 	build_*)
+		start=$(date +%s)
+		echo "Start: $(date)" > logbuildmain.txt 2>&1
 		set -x #print all executed command
 		$1
+		end=$(date +%s)
+		echo "End: $(date)" >> logbuildmain.txt 2>&1
+		echo "Time: $((end - start)) Seconds" >> logbuildmain.txt 2>&1
 		;;
 	all)
 		build

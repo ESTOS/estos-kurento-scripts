@@ -1,6 +1,10 @@
 #! /bin/sh
 set -e #stop on error
-#set -x #print all executed command
+set -x #print all executed command
+
+BUILDTYPE=RELEASE
+#BUILDTYPE=DEBUG
+
 if [ -d /c/lwx/dev ]; then
 ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
 else
@@ -10,6 +14,15 @@ TARGET_DIRECTORY=$ROOT_DIRECTORY/kmswindows
 MINGW64_DIR=/mingw64
 MINGW64_BIN_DIR=$MINGW64_DIR/bin
 MINGW64_LIB_GSTREAMER_DIR=$MINGW64_DIR/lib/gstreamer-1.0
+
+if [ $BUILDTYPE = RELEASE ]; then
+BUILDPATH=build-RelWithDebInfo
+BUILDPATHOPENCV=opencv-build-Release
+else
+BUILDPATH=build-Debug
+BUILDPATHOPENCV=opencv-build-Debug
+fi
+
 
 cp_if_exists()
 {
@@ -34,7 +47,7 @@ cp_gst_plugin()
 
 copy_kurento_build_dll()
 {
-	f=$(find "$ROOT_DIRECTORY/kurento/server/build-Debug" -name "$1" -print -quit 2>/dev/null || true)
+	f=$(find "$ROOT_DIRECTORY/kurento/server/$BUILDPATH" -name "$1" -print -quit 2>/dev/null || true)
 	if [ -n "$f" ]; then
 		cp -f "$f" -t "$TARGET_DIRECTORY/bin/"
 	else
@@ -102,9 +115,9 @@ copy_opencv_runtime_dlls()
 for dir in \
 	"$MINGW64_BIN_DIR" \
 	"$MINGW64_DIR/x64/mingw/bin" \
-	"$ROOT_DIRECTORY/opencv-build-Debug/install/bin" \
-	"$ROOT_DIRECTORY/opencv-build-Debug/install/x64/mingw/bin" \
-	"$ROOT_DIRECTORY/opencv-build-Debug/x64/mingw/bin"
+	"$ROOT_DIRECTORY/$BUILDPATHOPENCV/install/bin" \
+	"$ROOT_DIRECTORY/$BUILDPATHOPENCV/install/x64/mingw/bin" \
+	"$ROOT_DIRECTORY/$BUILDPATHOPENCV/x64/mingw/bin"
 do
 	if [ ! -d "$dir" ]; then
 		continue
@@ -115,7 +128,7 @@ do
 		fi
 	done
 done
-find "$ROOT_DIRECTORY/opencv-build-Debug" -name "libopencv*.dll" 2>/dev/null \
+find "$ROOT_DIRECTORY/$BUILDPATHOPENCV" -name "libopencv*.dll" 2>/dev/null \
 	| while read -r f; do
 	cp -f "$f" -t "$TARGET_DIRECTORY/bin/"
 done
@@ -280,7 +293,7 @@ for dll in \
 do
 	copy_kurento_build_dll "$dll"
 done
-cp $ROOT_DIRECTORY/kurento/server/build-Debug/media-server/server/kurento-media-server.exe $TARGET_DIRECTORY/bin/uc-media-server.exe
+cp $ROOT_DIRECTORY/kurento/server/$BUILDPATH/media-server/server/kurento-media-server.exe $TARGET_DIRECTORY/bin/uc-media-server.exe
 
 if [ ! -d $TARGET_DIRECTORY/lib/kurento/modules ]; then
 	mkdir -p $TARGET_DIRECTORY/lib/kurento/modules
