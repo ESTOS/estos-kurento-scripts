@@ -50,6 +50,10 @@
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
+                },
+                {
+                    "description": "Pass SIGINT signals to the program",
+                    "text": "handle SIGINT pass nostop noprint"
                 }
             ]
         }

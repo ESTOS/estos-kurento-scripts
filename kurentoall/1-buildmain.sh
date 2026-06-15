@@ -45,7 +45,7 @@ https://github.com/ESTOS/gstreamer.git					1.28.3
 https://github.com/ESTOS/opencv.git						4.13.0
 https://github.com/ESTOS/openssl.git					openssl-3.0.20
 https://github.com/ESTOS/websocketpp.git				msys-estos-develop
-https://github.com/ESTOS/kurento.git					msys-estos-main
+https://github.com/ESTOS/kurento.git					estos-common-main
 EOF
 }
 
@@ -161,7 +161,8 @@ build_kurento()
 	if [ $BUILDTYPE = RELEASE ]; then
 	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
 	else
-	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
+	#bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
+	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
 	fi
 	
 	export JAVA_HOME=$SAV_JAVA_HOME
