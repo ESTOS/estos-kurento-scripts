@@ -160,10 +160,16 @@ build_kurento()
 	
 	if [ $BUILDTYPE = RELEASE ]; then
 	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	KURENTO_SERVER_BUILD_TYPE=RelWithDebInfo
 	else
 	#bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
 	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	KURENTO_SERVER_BUILD_TYPE=Debug
 	fi
+
+	# kurento-client-(core|elements|filters) from .kmd.json (jsonrpc + kurento-client are hand-written in clients/javascript/)
+	# .js-Files landen in module-core/build/js/ module-elements/build/js/ module-filters/build/js/
+	bin/generate-js-clients.sh "$KURENTO_SERVER_BUILD_TYPE"
 	
 	export JAVA_HOME=$SAV_JAVA_HOME
 	export PATH=$SAV_PATH

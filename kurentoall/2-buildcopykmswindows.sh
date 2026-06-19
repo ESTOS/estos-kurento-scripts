@@ -424,6 +424,7 @@ for plugin in \
 	libgstcompositor.dll \
 	libgstcoreelements.dll \
 	libgstdtls.dll \
+	libgstdtmf.dll \
 	libgstflv.dll \
 	libgsthls.dll \
 	libgsticydemux.dll \
