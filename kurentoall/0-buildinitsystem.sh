@@ -36,6 +36,8 @@ pacman -S --noconfirm git
 pacman -S --noconfirm mingw-w64-x86_64-meson
 pacman -S --noconfirm mingw-w64-x86_64-gcc
 pacman -S --noconfirm mingw-w64-x86_64-cmake
+# pacman -S --noconfirm mingw-w64-x86_64-indent
+# pacman -S --noconfirm mingw-w64-x86_64-astyle -> braucht astyl 6.2
 pacman -S --noconfirm diffutils
 pacman -S --noconfirm patch
 pacman -S --noconfirm unzip

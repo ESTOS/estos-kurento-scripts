@@ -40,11 +40,7 @@
                 "x:\\home\\builder\\work\\estos\\kurento\\estos-kurento-scripts\\**",
                 "x:\\dev\\procall\\estos\\tools\\kurentodebug\\mingwincludes\\**"
             ],
-            "compilerArgs": [],
-            "intelliSenseModeIsExplicit": true,
-            "cStandardIsExplicit": true,
-            "cppStandardIsExplicit": true,
-            "compilerPathIsExplicit": true
+            "compilerArgs": []
         }
     ],
     "version": 4
