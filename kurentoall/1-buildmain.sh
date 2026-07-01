@@ -45,7 +45,7 @@ https://github.com/ESTOS/gstreamer.git					3447c72ce2556f7992efced1f608da16f2c85
 https://github.com/ESTOS/opencv.git						4.13.0
 https://github.com/ESTOS/openssl.git					openssl-3.0.20
 https://github.com/ESTOS/websocketpp.git				37c48feaa6ad6746fd9df68aa674f0377579a705
-https://github.com/ESTOS/kurento.git					4f82aa4d502d0e561093598e99071a2c80a1de60
+https://github.com/ESTOS/kurento.git					8dfad3783b7d368bd3ded15764f6933a272d46ec
 EOF
 }
 #https://github.com/ESTOS/libnice.git					0.1.23

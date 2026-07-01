@@ -41,6 +41,7 @@ pacman -S --noconfirm mingw-w64-x86_64-cmake
 pacman -S --noconfirm diffutils
 pacman -S --noconfirm patch
 pacman -S --noconfirm unzip
+pacman -S --noconfirm zip
 
 #for gstreamer -> pango installs harfbuzz and cairo
 pacman -S --noconfirm mingw-w64-x86_64-pango
