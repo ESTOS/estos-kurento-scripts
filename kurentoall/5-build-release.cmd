@@ -3,6 +3,7 @@ call :main > build-release.log 2>&1
 goto :eof
 
 :main
+echo %DATE% %TIME%
 rem git archive --remote="ssh://git@gitlab.estos.de/estos/windows-global/tools.git" --format=zip feature/PROCALL-3103-msys-build mingw/msys64.zip > msys64.zip
 rem get it from remote with a tag or branch
 rem git archive --remote="ssh://git@gitlab.estos.de/estos/windows-global/tools.git" --format=tar a7bc6893 mingw/msys64.zip | tar -xO > msys64.zip
@@ -19,6 +20,7 @@ set SCRIPTPATH=/x/dev/estos-kurento-scripts/kurentoall
 
 rem %BASH% -lc "ls -la"
 %BASH% -lc "%SCRIPTPATH%/1-buildmain.sh buildalllog"
-%BASH% -lc "%SCRIPTPATH%/2.0-buildcopykmswindows.sh"
+%BASH% -lc "%SCRIPTPATH%/2.0-buildcopykmswindows.sh minimal"
 %BASH% -lc "%SCRIPTPATH%/2.1-builddist.sh"
 
+echo %DATE% %TIME%
