@@ -420,6 +420,7 @@ for plugin in \
 	libgstaudioparsers.dll \
 	libgstaudiorate.dll \
 	libgstaudioresample.dll \
+	libgstaudiotestsrc.dll \
 	libgstavi.dll \
 	libgstcompositor.dll \
 	libgstcoreelements.dll \
