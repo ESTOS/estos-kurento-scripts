@@ -37,7 +37,7 @@ pacman -S --noconfirm mingw-w64-x86_64-meson
 pacman -S --noconfirm mingw-w64-x86_64-gcc
 pacman -S --noconfirm mingw-w64-x86_64-cmake
 # pacman -S --noconfirm mingw-w64-x86_64-indent
-# pacman -S --noconfirm mingw-w64-x86_64-astyle -> braucht astyl 6.2
+# pacman -S --noconfirm mingw-w64-x86_64-astyle -> braucht astyle 2.06
 pacman -S --noconfirm diffutils
 pacman -S --noconfirm patch
 pacman -S --noconfirm unzip
@@ -80,4 +80,9 @@ pacman -S --noconfirm mingw-w64-x86_64-libsoup3
 #pacman usage:
 #pacman -Ss git -> suchen
 #pacman -Q mingw-w64-x86_64-boost mingw-w64-x86_64-boost-libs -> Status
+#pacman -R mingw-w64-x86_64-astyle
+
+#kurento commit in msys64:
+#- install astyle 2.06 from cygwin
+#- PATH="/x/tools/cygwin64/bin:${PATH}"
 

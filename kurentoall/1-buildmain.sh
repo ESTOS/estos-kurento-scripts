@@ -41,11 +41,11 @@ repos ()
 cat <<EOF
 https://github.com/ESTOS/glib.git						2.89.0
 https://github.com/ESTOS/libnice.git					aca0b1fce62e776c88af9dad63bbb3cfccf7dc2f
-https://github.com/ESTOS/gstreamer.git					3447c72ce2556f7992efced1f608da16f2c850e3
+https://github.com/ESTOS/gstreamer.git					6c64ff972a9a2910c27901d9da046f19ef746009
 https://github.com/ESTOS/opencv.git						4.13.0
 https://github.com/ESTOS/openssl.git					openssl-3.0.20
 https://github.com/ESTOS/websocketpp.git				37c48feaa6ad6746fd9df68aa674f0377579a705
-https://github.com/ESTOS/kurento.git					8dfad3783b7d368bd3ded15764f6933a272d46ec
+https://github.com/ESTOS/kurento.git					0b739b6c2ffd829551e135c2d52aeb1bf2a181a8
 EOF
 }
 #https://github.com/ESTOS/libnice.git					0.1.23
