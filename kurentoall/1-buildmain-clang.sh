@@ -1,10 +1,15 @@
 #! /bin/sh
+#
+#   ./1-buildmain-clang.sh
+#
 
 set -e #stop on error
 set -x #print all executed command
 
+# --- build type ---
 BUILDTYPE=RELEASE
 #BUILDTYPE=DEBUG
+
 
 if [ -d /c/lwx/dev ]; then
 ROOT_DIRECTORY=/c/lwx/dev/estos-kurento-scripts/kurentoall
@@ -14,6 +19,16 @@ ROOT_DIRECTORY=/x/dev/estos-kurento-scripts/kurentoall
 fi
 
 cd $ROOT_DIRECTORY
+
+if [ "$MSYSTEM" != "CLANG64" ]; then
+	echo "ERROR: start only from msys64\\clang64.exe (MSYSTEM=$MSYSTEM)"
+	exit 1
+fi
+
+if [ -z "$MINGW_PREFIX" ]; then
+	echo "ERROR: MINGW_PREFIX is not set (MSYSTEM=$MSYSTEM)"
+	exit 1
+fi
 
 SAV_JAVA_HOME=$JAVA_HOME
 SAV_PATH=$PATH
@@ -33,6 +48,10 @@ else
 BUILD_TYPE=Debug
 build_type=debug
 DEBUGOPENSSL=--debug
+
+#export CFLAGS="-fsanitize=address -g -O1 -fno-omit-frame-pointer"
+#export CXXFLAGS="$CFLAGS"
+#export LDFLAGS="-fsanitize=address -shared-libsan"
 fi
 
 # array of repo URL's and related tags
@@ -41,19 +60,17 @@ repos ()
 cat <<EOF
 https://github.com/ESTOS/glib.git           2.89.0
 https://github.com/ESTOS/libnice.git        aca0b1fce62e776c88af9dad63bbb3cfccf7dc2f
-https://github.com/ESTOS/gstreamer.git      6c64ff972a9a2910c27901d9da046f19ef746009
+https://github.com/ESTOS/gstreamer.git      580f27eedcbeea36ff5637f86c0980c4d1758330
 https://github.com/ESTOS/opencv.git         4.13.0
 https://github.com/ESTOS/openssl.git        openssl-3.0.20
 https://github.com/ESTOS/websocketpp.git    37c48feaa6ad6746fd9df68aa674f0377579a705
-https://github.com/ESTOS/kurento.git        0b739b6c2ffd829551e135c2d52aeb1bf2a181a8
+https://github.com/ESTOS/kurento.git        adb64d104026de06c3adf5224eac852c03808047
 EOF
 }
-#https://github.com/ESTOS/libnice.git        0.1.23
-#https://github.com/ESTOS/libnice.git        estos-common-main
-#https://github.com/ESTOS/gstreamer.git      1.28.3
-#https://github.com/ESTOS/gstreamer.git      estos-common-main
-#https://github.com/ESTOS/websocketpp.git    msys-estos-develop
-#https://github.com/ESTOS/kurento.git        estos-common-main
+#https://github.com/ESTOS/libnice.git        estos-common-main 0.1.23
+#https://github.com/ESTOS/gstreamer.git      estos-common-main-clang 1.28.5
+#https://github.com/ESTOS/websocketpp.git    msys-estos-develop WebSocket++/0.8.3-dev
+#https://github.com/ESTOS/kurento.git        estos-common-main-clang main-2e4bf552
 
 build_tools ()
 {
@@ -101,7 +118,6 @@ build_gstreamer()
 		-Dgst-plugins-bad:d3d12=disabled \
 		build-$BUILD_TYPE
 	ninja -C build-$BUILD_TYPE
-	# -> /mingw64/
 	ninja -C build-$BUILD_TYPE install
 	popd
 }
@@ -112,7 +128,7 @@ build_opencv()
 	pushd "opencv-build-$BUILD_TYPE"
 	echo $PATH
 	PATH=
-	export PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin
+	export PATH=/clang64/bin:/usr/local/bin:/usr/bin:/bin
 	unset JAVA_HOME
 	cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
 		-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX \
@@ -136,9 +152,13 @@ build_opencv()
 build_openssl()
 {
 	pushd "openssl"
-	./config shared no-sse2 $DEBUGOPENSSL
+	#./config shared no-sse2 $DEBUGOPENSSL
+	CC=clang CXX=clang++ ./Configure mingw64 \
+	--prefix="$MINGW_PREFIX" \
+	--openssldir="$MINGW_PREFIX/etc/ssl" \
+	shared no-sse2 $DEBUGOPENSSL
 	make
-	make install
+	make install_sw
 	popd
 }
 
@@ -146,11 +166,17 @@ build_websocketpp()
 {
 	mkdir -p websocketpp-build-$BUILD_TYPE
 	pushd "websocketpp-build-$BUILD_TYPE"
+	echo $PATH
+	PATH=
+	export PATH=/c/Program\ Files/CMake/bin
 	cmake  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
 		-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
 		-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX ../websocketpp
+	#cmake  -DCMAKE_BUILD_TYPE=Debug -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=/clang64 --log-level=VERBOSE ../websocketpp
 	cmake --build .
 	cmake --install .
+	export PATH=$SAV_PATH
+	echo $PATH
 	popd
 }
 
@@ -160,16 +186,17 @@ build_kurento()
 	git submodule update --init --recursive --force
 	pushd "server"
 	export JAVA_HOME=$MY_JAVA_HOME
-	export PATH=$MY_PATH
+	export PATH=/c/Program\ Files/CMake/bin:$MY_PATH
 	export PKG_CONFIG_SYSTEM_INCLUDE_PATH=$MY_PKG_CONFIG_SYSTEM_INCLUDE_PATH
 	export PKG_CONFIG_PATH=$MY_PKG_CONFIG_PATH
 	
 	if [ $BUILDTYPE = RELEASE ]; then
-	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	bin/build-run.sh --msys --clang --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
 	KURENTO_SERVER_BUILD_TYPE=RelWithDebInfo
 	else
-	#bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
-	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	#bin/build-run.sh --msys --clang --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
+	bin/build-run.sh --msys --clang --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	#bin/build-run.sh --msys --clang --address-sanitizer --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
 	KURENTO_SERVER_BUILD_TYPE=Debug
 	fi
 
