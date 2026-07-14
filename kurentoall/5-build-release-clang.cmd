@@ -6,9 +6,9 @@ goto :eof
 echo %DATE% %TIME%
 rem git archive --remote="ssh://git@gitlab.estos.de/estos/windows-global/tools.git" --format=zip feature/PROCALL-3103-msys-build mingw/msys64.zip > msys64.zip
 rem get it from remote with a tag or branch
-rem git archive --remote="ssh://git@gitlab.estos.de/estos/windows-global/tools.git" --format=tar ee8c3ae4 mingw/msys64.zip | tar -xO > msys64.zip
+rem git archive --remote="ssh://git@gitlab.estos.de/estos/windows-global/tools.git" --format=tar 00d0986f mingw/msys64.zip | tar -xO > msys64.zip
 rem get it from local with a hash
-git -C x:\dev\tools show ee8c3ae442a7e38b73246d71f0893b525e8d9967:mingw/msys64-clang.zip > msys64-clang.zip
+git -C x:\dev\tools show 00d0986ffc133a20adf4a1df3555389c4e5f8dca:mingw/msys64-clang.zip > msys64-clang.zip
 if exist msys64 rmdir /s /q msys64
 unzip msys64-clang.zip
 rem x:\dev\tools\mingw\msys64\usr\bin\bash.exe -lc "/x/dev/estos-kurento-scripts/kurentoall/1-buildmain.sh build_kurento"
