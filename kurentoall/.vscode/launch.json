@@ -43,7 +43,8 @@
             "externalConsole": true,
             "MIMode": "gdb",
             //"miDebuggerPath": "C:/Program Files/mingw-w64/x86_64-6.3.0-posix-seh-rt_v5-rev1/mingw64/bin/gdb.exe",
-            "miDebuggerPath": "x:/dev/tools/mingw/msys64/mingw64/bin/gdb.exe",
+            //"miDebuggerPath": "x:/dev/tools/mingw/msys64/mingw64/bin/gdb.exe",
+            "miDebuggerPath": "x:/dev/estos-kurento-scripts/kurentoall/msys64/clang64/bin/gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

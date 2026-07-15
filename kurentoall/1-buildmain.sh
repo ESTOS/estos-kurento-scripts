@@ -27,12 +27,19 @@ MY_PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH:/usr/lib/pkgconfi
 
 if [ $BUILDTYPE = RELEASE ]; then
 BUILD_TYPE=Release
-build_type=release
+# Release with debug symbols (like old mingw64-configure: -O2 -g)
+MESON_BUILD_TYPE=debugoptimized
+OPENCV_CMAKE_BUILD_TYPE=RelWithDebInfo
+OPENSSL_EXTRA_CFLAGS=-g
 DEBUGOPENSSL=
+KURENTO_BUILD_FLAG=release
 else
 BUILD_TYPE=Debug
-build_type=debug
+MESON_BUILD_TYPE=debug
+OPENCV_CMAKE_BUILD_TYPE=Debug
+OPENSSL_EXTRA_CFLAGS=
 DEBUGOPENSSL=--debug
+KURENTO_BUILD_FLAG=debug
 fi
 
 # array of repo URL's and related tags
@@ -72,7 +79,7 @@ build_tools ()
 build_glib()
 {
 	pushd "glib"
-	meson setup --buildtype $build_type build-$BUILD_TYPE
+	meson setup --buildtype $MESON_BUILD_TYPE build-$BUILD_TYPE
 	ninja -C build-$BUILD_TYPE
 	ninja -C build-$BUILD_TYPE install
 	popd
@@ -83,7 +90,7 @@ build_libnice()
 	pushd "libnice"
 	# meson setup --buildtype $build_type build-$BUILD_TYPE
 	# tests/meson.build links libdl for a GStreamer test (LD_PRELOAD) — not available on Windows/MinGW.
-	meson setup --buildtype $build_type \
+	meson setup --buildtype $MESON_BUILD_TYPE \
 		-Dtests=disabled \
 		-Dexamples=disabled \
 		build-$BUILD_TYPE
@@ -97,7 +104,7 @@ build_gstreamer()
 	pushd "gstreamer"
 	# meson setup --buildtype $build_type build-$BUILD_TYPE
 	# d3d12 WGC: MinGW g++ + WRL ComPtr fails on gstd3d12graphicscapture.cpp (incomplete type).
-	meson setup --buildtype $build_type \
+	meson setup --buildtype $MESON_BUILD_TYPE \
 		-Dgst-plugins-bad:d3d12=disabled \
 		build-$BUILD_TYPE
 	ninja -C build-$BUILD_TYPE
@@ -114,7 +121,7 @@ build_opencv()
 	PATH=
 	export PATH=/mingw64/bin:/usr/local/bin:/usr/bin:/bin
 	unset JAVA_HOME
-	cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+	cmake -DCMAKE_BUILD_TYPE=$OPENCV_CMAKE_BUILD_TYPE \
 		-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX \
 		-DBUILD_opencv_videoio=OFF \
 		-DOPENCV_BIN_INSTALL_PATH=$MINGW_PACKAGE_PREFIX/bin \
@@ -136,7 +143,7 @@ build_opencv()
 build_openssl()
 {
 	pushd "openssl"
-	./config shared no-sse2 $DEBUGOPENSSL
+	CFLAGS="${OPENSSL_EXTRA_CFLAGS:+$OPENSSL_EXTRA_CFLAGS }${CFLAGS:-}" ./config shared no-sse2 $DEBUGOPENSSL
 	make
 	make install
 	popd
@@ -165,11 +172,11 @@ build_kurento()
 	export PKG_CONFIG_PATH=$MY_PKG_CONFIG_PATH
 	
 	if [ $BUILDTYPE = RELEASE ]; then
-	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$KURENTO_BUILD_FLAG
 	KURENTO_SERVER_BUILD_TYPE=RelWithDebInfo
 	else
-	#bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$build_type
-	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$build_type
+	#bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$KURENTO_BUILD_FLAG
+	bin/build-run.sh --msys --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$KURENTO_BUILD_FLAG
 	KURENTO_SERVER_BUILD_TYPE=Debug
 	fi
 
