@@ -32,6 +32,7 @@ touch emswindows64_$actualbuilddate
 
 # zip filename
 zipfilename=emswindows64_$actualbuilddate.zip
+zipsymfilename=emswindows64sym_$actualbuilddate.zip
 
 # if zip is not installed
 if ! pacman -Q zip >/dev/null 2>&1; then
@@ -40,6 +41,8 @@ fi
 echo "zip -r ../$zipfilename *"
 zip -r ../$zipfilename *
 cd ..
+echo "zip -r ../$zipfilename *"
+zip -r $zipsymfilename kmswindows-symbols/*
 
 # upload to buildserver if available
 if [ -f  localupload ]; then

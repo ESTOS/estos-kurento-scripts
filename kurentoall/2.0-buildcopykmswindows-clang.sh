@@ -11,16 +11,21 @@ else
 ROOT_DIRECTORY=/x/dev/estos-kurento-scripts/kurentoall
 fi
 TARGET_DIRECTORY=$ROOT_DIRECTORY/kmswindows
+SYMBOLS_DIRECTORY=$ROOT_DIRECTORY/kmswindows-symbols
 MINGW64_DIR=$ROOT_DIRECTORY/msys64/clang64
 MINGW64_BIN_DIR=$MINGW64_DIR/bin
+OPENSSL_INSTALL_PREFIX=$ROOT_DIRECTORY/install-clang64
+OPENSSL_BIN_DIR=$OPENSSL_INSTALL_PREFIX/bin
 MINGW64_LIB_GSTREAMER_DIR=$MINGW64_DIR/lib/gstreamer-1.0
 
 if [ $BUILDTYPE = RELEASE ]; then
 BUILDPATH=build-RelWithDebInfo-clang
 BUILDPATHOPENCV=opencv-build-Release
+BUILD_TYPE=Release
 else
 BUILDPATH=build-Debug-clang
 BUILDPATHOPENCV=opencv-build-Debug
+BUILD_TYPE=Debug
 fi
 
 
@@ -38,6 +43,11 @@ cp_if_exists()
 cp_mingw_bin()
 {
 	cp_if_exists "$MINGW64_BIN_DIR/$1" "$TARGET_DIRECTORY/bin"
+}
+
+cp_openssl_bin()
+{
+	cp_if_exists "$OPENSSL_BIN_DIR/$1" "$TARGET_DIRECTORY/bin"
 }
 
 cp_gst_plugin()
@@ -136,20 +146,24 @@ done
 
 _resolve_mingw_dll()
 {
-_name=$1
-for _dir in "$MINGW64_BIN_DIR" "$MINGW64_DIR/x64/mingw/bin"; do
-	if [ -f "$_dir/$_name" ]; then
-		echo "$_dir/$_name"
-		return 0
-	fi
-done
-return 1
+	_name=$1
+	for _dir in "$OPENSSL_BIN_DIR" "$MINGW64_BIN_DIR" "$MINGW64_DIR/x64/mingw/bin"; do
+		if [ -f "$_dir/$_name" ]; then
+			echo "$_dir/$_name"
+			return 0
+		fi
+	done
+	return 1
 }
 
 _skip_pe_dependency()
 {
 	case "$(echo "$1" | tr '[:upper:]' '[:lower:]')" in
-	kernel32.dll|ntdll.dll|msvcrt.dll|msvcrt\ *|api-ms-*.dll|\
+	kernel32.dll|ntdll.dll|msvcrt.dll|msvcrt\ *|ucrtbase.dll|vcruntime*.dll|msvcp*.dll|\
+	api-ms-*.dll|ext-ms-*.dll|\
+	advapi32.dll|bcrypt.dll|crypt32.dll|gdi32.dll|imm32.dll|iphlpapi.dll|\
+	ole32.dll|oleaut32.dll|rpcrt4.dll|secur32.dll|shell32.dll|shlwapi.dll|\
+	user32.dll|ws2_32.dll|wsock32.dll|winmm.dll|combase.dll|sechost.dll|\
 	libgcc_s_seh-1.dll|libwinpthread-1.dll)
 		return 0
 		;;
@@ -181,7 +195,9 @@ sync_mingw_dll_deps()
 			if [ -f "$TARGET_DIRECTORY/bin/$_dep" ]; then
 				continue
 			fi
-			_src=$(_resolve_mingw_dll "$_dep")
+			# || true: missing deps must not abort the script under set -e
+			# (otherwise strip_and_collect_release_symbols never runs).
+			_src=$(_resolve_mingw_dll "$_dep" || true)
 			if [ -n "$_src" ]; then
 				cp -f "$_src" -t "$TARGET_DIRECTORY/bin/"
 				_sync_one "$TARGET_DIRECTORY/bin/$_dep" $(($_depth + 1))
@@ -268,6 +284,103 @@ sync_mingw_dll_deps
 copy_opencv_beside_kurento_plugins
 }
 
+# Release only: split DWARF / collect PDBs, strip deployed PE.
+# Layout:
+#   kmswindows/bin/foo.dll
+#     -> kmswindows-symbols/bin/.debug/foo.dll.debug
+#   kmswindows/lib/.../bar.dll
+#     -> kmswindows-symbols/lib/.../.debug/bar.dll.debug
+#   all PDBs -> kmswindows-symbols/pdb/<stem>.pdb
+# Debug builds keep DWARF in-binary (no-op here).
+strip_and_collect_release_symbols()
+{
+	if [ "$BUILDTYPE" != RELEASE ]; then
+		echo "strip_and_collect_release_symbols: skip (BUILDTYPE=$BUILDTYPE)"
+		return 0
+	fi
+
+	_objcopy=$MINGW64_BIN_DIR/llvm-objcopy.exe
+	_strip=$MINGW64_BIN_DIR/llvm-strip.exe
+	if [ ! -x "$_objcopy" ] || [ ! -x "$_strip" ]; then
+		echo "ERROR: llvm-objcopy/llvm-strip not found under $MINGW64_BIN_DIR" >&2
+		return 1
+	fi
+
+	echo "strip_and_collect_release_symbols: writing $SYMBOLS_DIRECTORY"
+	rm -rf "$SYMBOLS_DIRECTORY"
+	mkdir -p "$SYMBOLS_DIRECTORY/pdb"
+
+	_pdb_list=$(mktemp)
+	for _root in \
+		"$ROOT_DIRECTORY/glib/build-$BUILD_TYPE" \
+		"$ROOT_DIRECTORY/gstreamer/build-$BUILD_TYPE" \
+		"$ROOT_DIRECTORY/libnice/build-$BUILD_TYPE" \
+		"$ROOT_DIRECTORY/$BUILDPATHOPENCV" \
+		"$ROOT_DIRECTORY/kurento/server/$BUILDPATH" \
+		"$ROOT_DIRECTORY/openssl" \
+		"$OPENSSL_INSTALL_PREFIX"
+	do
+		if [ -d "$_root" ]; then
+			find "$_root" -type f -name '*.pdb' 2>/dev/null || true
+		fi
+	done > "$_pdb_list"
+
+	_lookup_pdb()
+	{
+		_stem=$1
+		_match=
+		while IFS= read -r _p; do
+			case "$_p" in
+			*/"$_stem".pdb)
+				_match=$_p
+				break
+				;;
+			esac
+		done < "$_pdb_list"
+		if [ -n "$_match" ]; then
+			echo "$_match"
+			return 0
+		fi
+		return 1
+	}
+
+	_count=0
+	_pdb_count=0
+	# Avoid find|while pipeline (subshell + set -e quirks); use for-loop instead.
+	for _pe in $(find "$TARGET_DIRECTORY" \( -name '*.dll' -o -name '*.exe' \) -type f | sort); do
+		_rel=${_pe#"$TARGET_DIRECTORY"/}
+		_reldir=$(dirname "$_rel")
+		_dbgdir=$SYMBOLS_DIRECTORY/$_reldir/.debug
+		mkdir -p "$_dbgdir"
+		_base=$(basename "$_pe")
+		_stem=${_base%.*}
+		_dbgfile=$_dbgdir/$_base.debug
+
+		"$_objcopy" --only-keep-debug "$_pe" "$_dbgfile"
+		"$_strip" --strip-debug "$_pe"
+		"$_objcopy" --add-gnu-debuglink="$_dbgfile" "$_pe"
+
+		# WinDbg matches the PDB name from the PE CodeView record (link output
+		# name), not the deployed rename uc-media-server.exe.
+		_pdb_stem=$_stem
+		_pdb=$(_lookup_pdb "$_stem" || true)
+		if [ "$_stem" = "uc-media-server" ]; then
+			_pdb_stem=kurento-media-server
+			if [ -z "$_pdb" ]; then
+				_pdb=$(_lookup_pdb "kurento-media-server" || true)
+			fi
+		fi
+		if [ -n "$_pdb" ]; then
+			cp -f "$_pdb" "$SYMBOLS_DIRECTORY/pdb/$_pdb_stem.pdb"
+			_pdb_count=$((_pdb_count + 1))
+		fi
+		_count=$((_count + 1))
+	done
+
+	rm -f "$_pdb_list"
+	echo "strip_and_collect_release_symbols: $_count binaries, $_pdb_count PDBs -> $SYMBOLS_DIRECTORY"
+}
+
 # --- minimal deploy ---
 
 copy_kurento_files_minimal()
@@ -324,6 +437,14 @@ done
 install_opencv_filter_gst_plugins
 }
 
+copy_openssl_runtime_dlls()
+{
+for dll in libcrypto-3.dll libssl-3.dll libcrypto-3-x64.dll libssl-3-x64.dll
+do
+	cp_openssl_bin "$dll"
+done
+}
+
 copy_bin_files_minimal()
 {
 if [ ! -d $TARGET_DIRECTORY/bin ]; then
@@ -338,7 +459,6 @@ for dll in \
 	libbrotlicommon.dll \
 	libbrotlidec.dll \
 	libbz2-1.dll \
-	libcrypto-3-x64.dll \
 	libcurl-4.dll \
 	libexpat-1.dll \
 	libffi-8.dll \
@@ -395,7 +515,6 @@ for dll in \
 	libsoup-3.0-0.dll \
 	libsqlite3-0.dll \
 	libssh2-1.dll \
-	libssl-3-x64.dll \
 	libc++.dll \
 	libsrtp2-1.dll \
 	libunistring-5.dll \
@@ -406,6 +525,7 @@ for dll in \
 do
 	cp_mingw_bin "$dll"
 done
+copy_openssl_runtime_dlls
 }
 
 copy_gstreamer_files_minimal()
@@ -488,11 +608,13 @@ case "$1" in
 	minimal)
 		set -x #print all executed command
 		copy_minimal
+		strip_and_collect_release_symbols
 		;;
 	minimal-opencv)
 		set -x #print all executed command
 		copy_minimal
 		copy_minimal_opencv
+		strip_and_collect_release_symbols
 		;;
 	*)
 set +x
@@ -500,6 +622,7 @@ set +x
 		echo "Usage:"
 		echo "  minimal          -> deploy kmswindows (core + filters module, no OpenCV plugins)"
 		echo "  minimal-opencv   -> minimal + OpenCV filter GST plugins and runtime"
+		echo "  (RELEASE only)   -> .debug under kmswindows-symbols/<path>/.debug/, PDBs in kmswindows-symbols/pdb/"
 		echo ""
 		;;
 esac

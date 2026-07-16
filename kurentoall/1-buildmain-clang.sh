@@ -20,6 +20,9 @@ fi
 
 cd $ROOT_DIRECTORY
 
+# Custom OpenSSL install — must not overwrite $MINGW_PREFIX (breaks pacman Python ssl).
+OPENSSL_INSTALL_PREFIX=$ROOT_DIRECTORY/install-clang64
+
 if [ "$MSYSTEM" != "CLANG64" ]; then
 	echo "ERROR: start only from msys64\\clang64.exe (MSYSTEM=$MSYSTEM)"
 	exit 1
@@ -38,27 +41,37 @@ SAV_PKG_CONFIG_PATH=$PKG_CONFIG_PATH
 MY_JAVA_HOME=$ROOT_DIRECTORY/jdk-11
 MY_PATH=$PATH:$ROOT_DIRECTORY/maven/bin
 MY_PKG_CONFIG_SYSTEM_INCLUDE_PATH=$PKG_CONFIG_SYSTEM_INCLUDE_PATH:/usr/include
-MY_PKG_CONFIG_PATH=/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH:/usr/lib/pkgconfig
+MY_PKG_CONFIG_PATH=$OPENSSL_INSTALL_PREFIX/lib/pkgconfig:/usr/local/lib64/pkgconfig:$PKG_CONFIG_PATH:/usr/lib/pkgconfig
+MY_OPENSSL_CMAKE_ARGS="-DOPENSSL_ROOT_DIR=$OPENSSL_INSTALL_PREFIX -DCMAKE_PREFIX_PATH=$OPENSSL_INSTALL_PREFIX"
 
 if [ $BUILDTYPE = RELEASE ]; then
 BUILD_TYPE=Release
-# Release with debug symbols (like old mingw64-configure: -O2 -g)
+# Release with dual debug info: DWARF (gdb) + CodeView/PDB (WinDbg).
+# Meson debugoptimized / CMake RelWithDebInfo still add -O2 -g; -gdwarf keeps
+# DWARF when -gcodeview is present (plain -g -gcodeview would drop DWARF).
+# LLD --pdb= writes <out>.pdb next to each linked PE (empty value = implicit name).
 MESON_BUILD_TYPE=debugoptimized
 OPENCV_CMAKE_BUILD_TYPE=RelWithDebInfo
-OPENSSL_EXTRA_CFLAGS=-g
+OPENSSL_EXTRA_CFLAGS="-gdwarf -gcodeview"
+OPENSSL_EXTRA_LDFLAGS="-Wl,--pdb="
 DEBUGOPENSSL=
 KURENTO_BUILD_FLAG=release
+export CFLAGS="-gdwarf -gcodeview"
+export CXXFLAGS="$CFLAGS"
+export LDFLAGS="-Wl,--pdb="
 else
 BUILD_TYPE=Debug
 MESON_BUILD_TYPE=debug
 OPENCV_CMAKE_BUILD_TYPE=Debug
 OPENSSL_EXTRA_CFLAGS=
+OPENSSL_EXTRA_LDFLAGS=
 DEBUGOPENSSL=--debug
 KURENTO_BUILD_FLAG=debug
-
+# with sanitizer begin
 #export CFLAGS="-fsanitize=address -g -O1 -fno-omit-frame-pointer"
 #export CXXFLAGS="$CFLAGS"
 #export LDFLAGS="-fsanitize=address -shared-libsan"
+# with sanitizer end
 fi
 
 # array of repo URL's and related tags
@@ -159,11 +172,15 @@ build_opencv()
 build_openssl()
 {
 	pushd "openssl"
-	#./config shared no-sse2 $DEBUGOPENSSL
-	CC=clang CXX=clang++ CFLAGS="${OPENSSL_EXTRA_CFLAGS:+$OPENSSL_EXTRA_CFLAGS }${CFLAGS:-}" ./Configure mingw64 \
-	--prefix="$MINGW_PREFIX" \
-	--openssldir="$MINGW_PREFIX/etc/ssl" \
-	shared no-sse2 $DEBUGOPENSSL
+	# Do not use global CFLAGS/LDFLAGS (e.g. ASAN) — breaks DLL ABI vs pacman Python.
+	# Release: OPENSSL_EXTRA_* carry -gdwarf/-gcodeview and -Wl,--pdb= instead.
+	CC=clang CXX=clang++ \
+		CFLAGS="${OPENSSL_EXTRA_CFLAGS:+$OPENSSL_EXTRA_CFLAGS }" \
+		LDFLAGS="${OPENSSL_EXTRA_LDFLAGS:+$OPENSSL_EXTRA_LDFLAGS }" \
+		./Configure mingw64 \
+		--prefix="$OPENSSL_INSTALL_PREFIX" \
+		--openssldir="$OPENSSL_INSTALL_PREFIX/etc/ssl" \
+		shared no-sse2 $DEBUGOPENSSL
 	make
 	make install_sw
 	popd
@@ -178,7 +195,9 @@ build_websocketpp()
 	export PATH=/c/Program\ Files/CMake/bin
 	cmake  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
 		-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-		-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX ../websocketpp
+		-DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX \
+		$MY_OPENSSL_CMAKE_ARGS \
+		../websocketpp
 	#cmake  -DCMAKE_BUILD_TYPE=Debug -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=/clang64 --log-level=VERBOSE ../websocketpp
 	cmake --build .
 	cmake --install .
@@ -197,13 +216,14 @@ build_kurento()
 	export PKG_CONFIG_SYSTEM_INCLUDE_PATH=$MY_PKG_CONFIG_SYSTEM_INCLUDE_PATH
 	export PKG_CONFIG_PATH=$MY_PKG_CONFIG_PATH
 	
+	KURENTO_CMAKE_ARGS="-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX $MY_OPENSSL_CMAKE_ARGS"
 	if [ $BUILDTYPE = RELEASE ]; then
-	bin/build-run.sh --msys --clang --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$KURENTO_BUILD_FLAG
+	bin/build-run.sh --msys --clang --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --$KURENTO_BUILD_FLAG
 	KURENTO_SERVER_BUILD_TYPE=RelWithDebInfo
 	else
-	#bin/build-run.sh --msys --clang --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --verbose --$KURENTO_BUILD_FLAG
-	bin/build-run.sh --msys --clang --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$KURENTO_BUILD_FLAG
-	#bin/build-run.sh --msys --clang --address-sanitizer --addcmakeargs "-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX" --build-only --$KURENTO_BUILD_FLAG
+	#bin/build-run.sh --msys --clang --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --verbose --$KURENTO_BUILD_FLAG
+	bin/build-run.sh --msys --clang --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --$KURENTO_BUILD_FLAG
+	#bin/build-run.sh --msys --clang --address-sanitizer --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --$KURENTO_BUILD_FLAG
 	KURENTO_SERVER_BUILD_TYPE=Debug
 	fi
 
@@ -229,7 +249,7 @@ set +e #dont stop on error
 	
 	pushd "kmswindows"
 	rm /c/Users/$USERNAME/AppData/Local/Microsoft/Windows/INetCache/gstreamer-1.0/registry.x86_64-mingw.bin
-	export PATH="$ROOT_DIRECTORY/kmswindows/bin:$PATH"
+	export PATH="$ROOT_DIRECTORY/kmswindows/bin:$OPENSSL_INSTALL_PREFIX/bin:$PATH"
 	export GST_PLUGIN_PATH="$ROOT_DIRECTORY/kmswindows/lib/gstreamer-1.0/kurento:$ROOT_DIRECTORY/kmswindows/lib/gstreamer-1.0"
 	export NICE_DEBUG="stun,nice,pseudotcp,pseudotcp-verbose,nice-verbose"
 	export G_MESSAGES_DEBUG="libnice-stun,libnice,libnice-pseudotcp,libnice-pseudotcp-verbose,libnice-verbose,libnice-timer-verbose,udpsrcrxrtp,rtpsessiontxrtp"
