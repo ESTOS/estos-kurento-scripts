@@ -84,7 +84,7 @@ https://github.com/ESTOS/gstreamer.git      580f27eedcbeea36ff5637f86c0980c4d175
 https://github.com/ESTOS/opencv.git         4.13.0
 https://github.com/ESTOS/openssl.git        openssl-3.0.20
 https://github.com/ESTOS/websocketpp.git    37c48feaa6ad6746fd9df68aa674f0377579a705
-https://github.com/ESTOS/kurento.git        adb64d104026de06c3adf5224eac852c03808047
+https://github.com/ESTOS/kurento.git        17f6620fea955874b9a9fac39ed63e61d8d61761
 EOF
 }
 #https://github.com/ESTOS/libnice.git        estos-common-main 0.1.23
@@ -217,12 +217,15 @@ build_kurento()
 	export PKG_CONFIG_PATH=$MY_PKG_CONFIG_PATH
 	
 	KURENTO_CMAKE_ARGS="-DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DOpenCV_DIR=$MINGW_PREFIX/x64/mingw/lib -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX $MY_OPENSSL_CMAKE_ARGS"
+	# Short hash of estos-kurento-scripts (parent of kurentoall), used in the
+	# Kurento version string instead of kurento.git HEAD.
+	ESTOS_GIT_HASH=$(git -C "$ROOT_DIRECTORY/.." rev-parse --short HEAD)
 	if [ $BUILDTYPE = RELEASE ]; then
-	bin/build-run.sh --msys --clang --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --$KURENTO_BUILD_FLAG
+	bin/build-run.sh --msys --clang --git-hash "$ESTOS_GIT_HASH" --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --$KURENTO_BUILD_FLAG
 	KURENTO_SERVER_BUILD_TYPE=RelWithDebInfo
 	else
 	#bin/build-run.sh --msys --clang --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --verbose --$KURENTO_BUILD_FLAG
-	bin/build-run.sh --msys --clang --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --$KURENTO_BUILD_FLAG
+	bin/build-run.sh --msys --clang --git-hash "$ESTOS_GIT_HASH" --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --$KURENTO_BUILD_FLAG
 	#bin/build-run.sh --msys --clang --address-sanitizer --addcmakeargs "$KURENTO_CMAKE_ARGS" --build-only --$KURENTO_BUILD_FLAG
 	KURENTO_SERVER_BUILD_TYPE=Debug
 	fi

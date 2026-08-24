@@ -1,0 +1,12 @@
+{
+  "name": "cursor-ai",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "HOST_UID": "502",
+      "HOST_GID": "20"
+    }
+  },
+  "remoteUser": "dev",
+  "runArgs": ["--userns=keep-id"]
+}
